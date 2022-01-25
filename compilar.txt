@@ -1,0 +1,3 @@
+flex --header-file=lexico.h -o lexico.cpp lexico.l
+bison sintactico.y -o sintactico.cpp --defines=sintactico.h
+c++ *.cpp -o P1_201709282

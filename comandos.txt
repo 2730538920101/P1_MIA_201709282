@@ -1,0 +1,1 @@
+rmdisk -path=/home/var/arch.txt
