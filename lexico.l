@@ -67,7 +67,7 @@ ruta            {cadena}|([/][^\n\" ]+)+
 tipo            "P"|"E"|"L"
 capacidad       "FAST"|"FULL"
 sistema         "2FS"|"3FS"
-nombre          [a-zA-Z0-9._-]{1,10}
+nombre          [\*\?a-zA-Z0-9._-]{1,10}
 igual           [=]
 
 
@@ -92,6 +92,7 @@ igual           [=]
 {mkdir}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKDIR;}
 {rmusr}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMUSR;}
 {chmod}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHMOD;}
+{touch}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TOUCH;}
 {cat}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAT;}
 {rm}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RM;}
 {edit}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EDIT;}

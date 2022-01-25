@@ -768,7 +768,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                     {//Parametros permitidos: path, p
                                         return!(
                                             name != NULL ||
-                                            path != NULL ||
                                             id != NULL ||
                                             usr != NULL ||
                                             pwd != NULL ||

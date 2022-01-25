@@ -534,7 +534,7 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  32
+#define YYFINAL  33
 /* YYLAST -- Last index in YYTABLE.  */
 #define YYLAST   87
 
@@ -543,9 +543,9 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  55
+#define YYNRULES  56
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  92
+#define YYNSTATES  93
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   315
@@ -601,9 +601,9 @@ static const yytype_int16 yyrline[] =
        0,   116,   116,   121,   139,   144,   148,   151,   156,   159,
      162,   165,   168,   171,   174,   177,   180,   183,   186,   189,
      192,   195,   198,   201,   204,   207,   210,   213,   216,   219,
-     222,   225,   228,   233,   241,   246,   250,   254,   273,   292,
-     296,   315,   331,   335,   339,   355,   372,   376,   380,   384,
-     388,   392,   396,   400,   404,   408
+     222,   225,   228,   231,   236,   244,   249,   253,   257,   276,
+     295,   299,   318,   334,   338,   342,   358,   375,   379,   383,
+     387,   391,   395,   399,   403,   407,   411
 };
 #endif
 
@@ -643,7 +643,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-25)
+#define YYPACT_NINF (-31)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -657,16 +657,16 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -12,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,
-     -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,
-     -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,    26,   -12,
-     -25,   -11,   -25,   -25,   -24,    -9,    -7,    -6,    -5,    -4,
-      -3,    -2,    -1,   -25,     0,     1,     2,     3,     4,     5,
-       6,     7,   -25,   -25,   -11,   -25,    64,    63,    61,    59,
-      65,    66,    67,    68,    71,    72,    73,    75,    74,    42,
-      76,    69,    77,   -25,   -25,   -25,   -25,   -25,   -25,   -25,
-     -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,   -25,
-     -25,   -25
+     -12,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,    27,
+     -12,   -31,     2,   -31,   -31,   -30,   -29,   -28,   -27,   -26,
+     -24,   -23,   -22,   -21,   -31,   -20,     3,     4,     5,     6,
+       7,     8,     9,   -31,   -31,     2,   -31,    58,    64,    62,
+      60,    65,    66,    67,    69,    71,    72,    73,    75,    74,
+      19,    76,    78,    77,   -31,   -31,   -31,   -31,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,
+     -31,   -31,   -31
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -675,27 +675,27 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        0,     8,     9,    10,    11,    12,    13,    14,     7,    15,
-      16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
-      26,    27,    28,    29,    30,    31,    32,     6,     0,     2,
-       4,     0,     1,     3,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    52,     0,     0,     0,     0,     0,     0,
-       0,     0,    50,    51,     5,    34,     0,     0,     0,     0,
+      16,    17,    18,    19,    20,    22,    23,    24,    25,    26,
+      27,    28,    29,    30,    31,    32,    33,    21,     6,     0,
+       2,     4,     0,     1,     3,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    53,     0,     0,     0,     0,     0,
+       0,     0,     0,    51,    52,     5,    35,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    33,    36,    35,    39,    43,    46,    47,
-      48,    49,    55,    53,    54,    38,    37,    40,    44,    41,
-      42,    45
+       0,     0,     0,     0,    34,    37,    36,    40,    44,    47,
+      48,    49,    50,    56,    54,    55,    39,    38,    41,    45,
+      42,    43,    46
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -25,   -25,   -25,    52,   -25,   -25,    28
+     -31,   -31,   -31,    52,   -31,   -31,    28
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,    28,    29,    30,    31,    54,    55
+      -1,    29,    30,    31,    32,    55,    56
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -705,26 +705,26 @@ static const yytype_int8 yytable[] =
 {
        1,     2,     3,     4,     5,     6,     7,     8,     9,    10,
       11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
-      21,    22,    23,    24,    25,    26,    32,    34,    35,    36,
-      37,    38,    39,    40,    41,    56,    42,    43,    44,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    27,    87,
-      57,    88,    58,    59,    60,    61,    62,    63,    64,    65,
-      66,    67,    68,    69,    70,    71,    72,    74,    75,    76,
-      77,    81,    90,    78,    79,    80,    82,    83,    84,    85,
-      86,    33,    73,     0,     0,    89,     0,    91
+      21,    22,    23,    24,    25,    26,    88,    33,    89,    57,
+      58,    59,    60,    61,    27,    62,    63,    64,    65,    66,
+      35,    36,    37,    38,    39,    40,    41,    42,    28,    43,
+      44,    45,    46,    47,    48,    49,    50,    51,    52,    53,
+      54,    75,    67,    68,    69,    70,    71,    72,    73,    76,
+      77,    78,    82,    79,    80,    81,    83,    84,    85,    86,
+      87,    91,    34,    74,     0,    90,     0,    92
 };
 
 static const yytype_int8 yycheck[] =
 {
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21,
       22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
-      32,    33,    34,    35,    36,    37,     0,    38,    39,    40,
-      41,    42,    43,    44,    45,    59,    47,    48,    49,    50,
-      51,    52,    53,    54,    55,    56,    57,    58,    60,     7,
-      59,     9,    59,    59,    59,    59,    59,    59,    59,    59,
-      59,    59,    59,    59,    59,    59,    59,     3,     5,     8,
-      11,     3,     3,     8,     8,     8,     5,     5,     5,     4,
-       6,    29,    54,    -1,    -1,     9,    -1,    10
+      32,    33,    34,    35,    36,    37,     7,     0,     9,    59,
+      59,    59,    59,    59,    46,    59,    59,    59,    59,    59,
+      38,    39,    40,    41,    42,    43,    44,    45,    60,    47,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,     3,    59,    59,    59,    59,    59,    59,    59,     5,
+       8,    11,     3,     8,     8,     8,     5,     5,     5,     4,
+       6,     3,    30,    55,    -1,     9,    -1,    10
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -733,14 +733,14 @@ static const yytype_int8 yystos[] =
 {
        0,    12,    13,    14,    15,    16,    17,    18,    19,    20,
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      31,    32,    33,    34,    35,    36,    37,    60,    62,    63,
-      64,    65,     0,    64,    38,    39,    40,    41,    42,    43,
-      44,    45,    47,    48,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,    66,    67,    59,    59,    59,    59,
+      31,    32,    33,    34,    35,    36,    37,    46,    60,    62,
+      63,    64,    65,     0,    64,    38,    39,    40,    41,    42,
+      43,    44,    45,    47,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    58,    66,    67,    59,    59,    59,
       59,    59,    59,    59,    59,    59,    59,    59,    59,    59,
-      59,    59,    59,    67,     3,     5,     8,    11,     8,     8,
-       8,     3,     5,     5,     5,     4,     6,     7,     9,     9,
-       3,    10
+      59,    59,    59,    59,    67,     3,     5,     8,    11,     8,
+       8,     8,     3,     5,     5,     5,     4,     6,     7,     9,
+       9,     3,    10
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -749,9 +749,9 @@ static const yytype_int8 yyr1[] =
        0,    61,    62,    63,    63,    64,    64,    64,    65,    65,
       65,    65,    65,    65,    65,    65,    65,    65,    65,    65,
       65,    65,    65,    65,    65,    65,    65,    65,    65,    65,
-      65,    65,    65,    66,    66,    67,    67,    67,    67,    67,
+      65,    65,    65,    65,    66,    66,    67,    67,    67,    67,
       67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
-      67,    67,    67,    67,    67,    67
+      67,    67,    67,    67,    67,    67,    67
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -760,9 +760,9 @@ static const yytype_int8 yyr2[] =
        0,     2,     1,     2,     1,     2,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     2,     1,     3,     3,     3,     3,     3,
+       1,     1,     1,     1,     2,     1,     3,     3,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       1,     1,     1,     3,     3,     3
+       3,     1,     1,     1,     3,     3,     3
 };
 
 
@@ -1627,40 +1627,40 @@ yyreduce:
 
   case 21:
 #line 195 "sintactico.y"
-                                  {
-                            (yyval.tipocomando)=MKDIR;
+                                {
+                            (yyval.tipocomando)=CAT;
                         }
 #line 1634 "sintactico.cpp"
     break;
 
   case 22:
 #line 198 "sintactico.y"
-                               {
-                            (yyval.tipocomando)=RM;
+                                  {
+                            (yyval.tipocomando)=MKDIR;
                         }
 #line 1642 "sintactico.cpp"
     break;
 
   case 23:
 #line 201 "sintactico.y"
-                                 {
-                            (yyval.tipocomando)=EDIT;
+                               {
+                            (yyval.tipocomando)=RM;
                         }
 #line 1650 "sintactico.cpp"
     break;
 
   case 24:
 #line 204 "sintactico.y"
-                                {
-                            (yyval.tipocomando)=REN;
+                                 {
+                            (yyval.tipocomando)=EDIT;
                         }
 #line 1658 "sintactico.cpp"
     break;
 
   case 25:
 #line 207 "sintactico.y"
-                               {
-                            (yyval.tipocomando)=CP;
+                                {
+                            (yyval.tipocomando)=REN;
                         }
 #line 1666 "sintactico.cpp"
     break;
@@ -1668,23 +1668,23 @@ yyreduce:
   case 26:
 #line 210 "sintactico.y"
                                {
-                            (yyval.tipocomando)=MV;
+                            (yyval.tipocomando)=CP;
                         }
 #line 1674 "sintactico.cpp"
     break;
 
   case 27:
 #line 213 "sintactico.y"
-                                 {
-                            (yyval.tipocomando)=FIND;
+                               {
+                            (yyval.tipocomando)=MV;
                         }
 #line 1682 "sintactico.cpp"
     break;
 
   case 28:
 #line 216 "sintactico.y"
-                                  {
-                            (yyval.tipocomando)=CHOWN;
+                                 {
+                            (yyval.tipocomando)=FIND;
                         }
 #line 1690 "sintactico.cpp"
     break;
@@ -1692,23 +1692,23 @@ yyreduce:
   case 29:
 #line 219 "sintactico.y"
                                   {
-                            (yyval.tipocomando)=CHGRP;
+                            (yyval.tipocomando)=CHOWN;
                         }
 #line 1698 "sintactico.cpp"
     break;
 
   case 30:
 #line 222 "sintactico.y"
-                                     {
-                            (yyval.tipocomando)=RECOVERY;
+                                  {
+                            (yyval.tipocomando)=CHGRP;
                         }
 #line 1706 "sintactico.cpp"
     break;
 
   case 31:
 #line 225 "sintactico.y"
-                                 {
-                            (yyval.tipocomando)=LOSS;
+                                     {
+                            (yyval.tipocomando)=RECOVERY;
                         }
 #line 1714 "sintactico.cpp"
     break;
@@ -1716,13 +1716,21 @@ yyreduce:
   case 32:
 #line 228 "sintactico.y"
                                  {
-                            (yyval.tipocomando)=EXEC;
+                            (yyval.tipocomando)=LOSS;
                         }
 #line 1722 "sintactico.cpp"
     break;
 
   case 33:
-#line 233 "sintactico.y"
+#line 231 "sintactico.y"
+                                 {
+                            (yyval.tipocomando)=EXEC;
+                        }
+#line 1730 "sintactico.cpp"
+    break;
+
+  case 34:
+#line 236 "sintactico.y"
                                          {
                             Parametro *aux_param = (yyvsp[-1].PARAM);
                             while(aux_param->siguiente != NULL){
@@ -1731,37 +1739,37 @@ yyreduce:
                             aux_param->siguiente = (yyvsp[0].PARAM);
                             (yyval.PARAM) = (yyvsp[-1].PARAM);
                         }
-#line 1735 "sintactico.cpp"
-    break;
-
-  case 34:
-#line 241 "sintactico.y"
-                              {
-                            (yyval.PARAM) = (yyvsp[0].PARAM);
-                        }
 #line 1743 "sintactico.cpp"
     break;
 
   case 35:
-#line 246 "sintactico.y"
+#line 244 "sintactico.y"
+                              {
+                            (yyval.PARAM) = (yyvsp[0].PARAM);
+                        }
+#line 1751 "sintactico.cpp"
+    break;
+
+  case 36:
+#line 249 "sintactico.y"
                                                    {
                             (yyval.PARAM) = new Parametro(PATH);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1752 "sintactico.cpp"
+#line 1760 "sintactico.cpp"
     break;
 
-  case 36:
-#line 250 "sintactico.y"
+  case 37:
+#line 253 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(SIZE);
                             (yyval.PARAM)->num = getNumero((yyvsp[0].entrada));
                         }
-#line 1761 "sintactico.cpp"
+#line 1769 "sintactico.cpp"
     break;
 
-  case 37:
-#line 254 "sintactico.y"
+  case 38:
+#line 257 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(U);
                             for(int i=0; i < strlen((yyvsp[0].entrada)); i++){
@@ -1781,11 +1789,11 @@ yyreduce:
                                 (yyval.PARAM)->unit = UNIT_ERROR;
                             }
                         }
-#line 1785 "sintactico.cpp"
+#line 1793 "sintactico.cpp"
     break;
 
-  case 38:
-#line 273 "sintactico.y"
+  case 39:
+#line 276 "sintactico.y"
                                                    {
                             (yyval.PARAM) = new Parametro(F);
                             for(int i=0; i < strlen((yyvsp[0].entrada)); i++){
@@ -1805,20 +1813,20 @@ yyreduce:
                                 (yyval.PARAM)->fit = FIT_ERROR;
                             }
                         }
-#line 1809 "sintactico.cpp"
+#line 1817 "sintactico.cpp"
     break;
 
-  case 39:
-#line 292 "sintactico.y"
+  case 40:
+#line 295 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(NAME);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1818 "sintactico.cpp"
+#line 1826 "sintactico.cpp"
     break;
 
-  case 40:
-#line 296 "sintactico.y"
+  case 41:
+#line 299 "sintactico.y"
                                                     {
                             (yyval.PARAM) = new Parametro(TYPE);
                             for(int i=0; i < strlen((yyvsp[0].entrada)); i++){
@@ -1838,11 +1846,11 @@ yyreduce:
                                 (yyval.PARAM)->type = TIPO_ERROR;
                             }
                         }
-#line 1842 "sintactico.cpp"
+#line 1850 "sintactico.cpp"
     break;
 
-  case 41:
-#line 315 "sintactico.y"
+  case 42:
+#line 318 "sintactico.y"
                                                            {
                             (yyval.PARAM) = new Parametro(DELETE);
                             for(int i=0; i < strlen((yyvsp[0].entrada)); i++){
@@ -1859,29 +1867,29 @@ yyreduce:
                                 (yyval.PARAM)->capacidad = CAPACIDAD_ERROR;
                             }
                         }
-#line 1863 "sintactico.cpp"
+#line 1871 "sintactico.cpp"
     break;
 
-  case 42:
-#line 331 "sintactico.y"
+  case 43:
+#line 334 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(ADD);
                             (yyval.PARAM)->num = getNumero((yyvsp[0].entrada));
                         }
-#line 1872 "sintactico.cpp"
+#line 1880 "sintactico.cpp"
     break;
 
-  case 43:
-#line 335 "sintactico.y"
+  case 44:
+#line 338 "sintactico.y"
                                                            {
                             (yyval.PARAM) = new Parametro(ID);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1881 "sintactico.cpp"
+#line 1889 "sintactico.cpp"
     break;
 
-  case 44:
-#line 339 "sintactico.y"
+  case 45:
+#line 342 "sintactico.y"
                                                          {
                             (yyval.PARAM) = new Parametro(TYPE);
                             for(int i=0; i < strlen((yyvsp[0].entrada)); i++){
@@ -1898,11 +1906,11 @@ yyreduce:
                                 (yyval.PARAM)->capacidad = CAPACIDAD_ERROR;
                             }
                         }
-#line 1902 "sintactico.cpp"
+#line 1910 "sintactico.cpp"
     break;
 
-  case 45:
-#line 355 "sintactico.y"
+  case 46:
+#line 358 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(FS);
                             (yyval.PARAM) = new Parametro(TYPE);
@@ -1920,101 +1928,101 @@ yyreduce:
                                 (yyval.PARAM)->sistema = FS_EXT_ERROR;
                             }
                         }
-#line 1924 "sintactico.cpp"
+#line 1932 "sintactico.cpp"
     break;
 
-  case 46:
-#line 372 "sintactico.y"
+  case 47:
+#line 375 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(USR);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1933 "sintactico.cpp"
+#line 1941 "sintactico.cpp"
     break;
 
-  case 47:
-#line 376 "sintactico.y"
+  case 48:
+#line 379 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(PWD);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1942 "sintactico.cpp"
+#line 1950 "sintactico.cpp"
     break;
 
-  case 48:
-#line 380 "sintactico.y"
+  case 49:
+#line 383 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(GRP);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1951 "sintactico.cpp"
+#line 1959 "sintactico.cpp"
     break;
 
-  case 49:
-#line 384 "sintactico.y"
+  case 50:
+#line 387 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(UGO);
                             (yyval.PARAM)->num = getNumero((yyvsp[0].entrada));
                         }
-#line 1960 "sintactico.cpp"
+#line 1968 "sintactico.cpp"
     break;
 
-  case 50:
-#line 388 "sintactico.y"
+  case 51:
+#line 391 "sintactico.y"
                               {
                             (yyval.PARAM) = new Parametro(R);
                             (yyval.PARAM)->r_flag = true;
                         }
-#line 1969 "sintactico.cpp"
+#line 1977 "sintactico.cpp"
     break;
 
-  case 51:
-#line 392 "sintactico.y"
+  case 52:
+#line 395 "sintactico.y"
                               {
                             (yyval.PARAM) = new Parametro(PP);
                             (yyval.PARAM)->p_flag = true;
                         }
-#line 1978 "sintactico.cpp"
+#line 1986 "sintactico.cpp"
     break;
 
-  case 52:
-#line 396 "sintactico.y"
+  case 53:
+#line 399 "sintactico.y"
                                   {
                             (yyval.PARAM) = new Parametro(STDIN);
                             (yyval.PARAM)->stdin_flag = true;
                         }
-#line 1987 "sintactico.cpp"
+#line 1995 "sintactico.cpp"
     break;
 
-  case 53:
-#line 400 "sintactico.y"
+  case 54:
+#line 403 "sintactico.y"
                                                     {
                             (yyval.PARAM) = new Parametro(CONT);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1996 "sintactico.cpp"
+#line 2004 "sintactico.cpp"
     break;
 
-  case 54:
-#line 404 "sintactico.y"
+  case 55:
+#line 407 "sintactico.y"
                                                     {
                             (yyval.PARAM) = new Parametro(DEST);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2005 "sintactico.cpp"
+#line 2013 "sintactico.cpp"
     break;
 
-  case 55:
-#line 408 "sintactico.y"
+  case 56:
+#line 411 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(FILEN);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2014 "sintactico.cpp"
+#line 2022 "sintactico.cpp"
     break;
 
 
-#line 2018 "sintactico.cpp"
+#line 2026 "sintactico.cpp"
 
       default: break;
     }

@@ -11,7 +11,8 @@ using namespace std;
 
 int main(){
     std::string comando_entrada;
-
+    std::cout<<"BIENVENIDO AL SISTEMA DE ARCHIVOS, PROYECTO 1 MIA 1S2022\n";
+    std::cout<<"CARLOS JAVIER MARTINEZ POLANCO 201709282\n\n";
     while(true){
         std::cout<< "Ingresa un comando: ";
         getline(std::cin, comando_entrada);

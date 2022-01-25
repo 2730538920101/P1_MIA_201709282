@@ -192,6 +192,9 @@ comando_estado:         TOK_MKDISK{
                         |TOK_TOUCH{
                             $$=TOUCH;
                         }
+                        |TOK_CAT{
+                            $$=CAT;
+                        }
                         |TOK_MKDIR{
                             $$=MKDIR;
                         }
