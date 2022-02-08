@@ -1,1 +1,0 @@
-Cat -file1="/home/a.txt" -file2="/home/b.txt" -file3="/home/c.txt"

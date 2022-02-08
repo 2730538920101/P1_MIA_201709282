@@ -7,7 +7,7 @@ Mkdisk -size=10 -path="/home/mis discos/Disco4.dk"
 rmDisk -path="/home/mis discos/Disco4.dk"
 
 //FDISK
-fdisk -Size=300 -path=/home/Disco1.disk -name=Particion1
+fdisk -Size=300 -path=/home/Disco1.disk -name="Particion1"
 fdisk -type=E -path=/home/Disco2.disk -U=K -name=Particion2 -size=300
 fdisk -size=1 -type=L -u=M -f=BF -path="/mis discos/Disco3.disk" -name=Particion3
 fdisk -type=E -path=/home/Disco2.disk -name=Part3 -U=K -size=200
@@ -28,8 +28,7 @@ mkfs -type=fast -id=581A
 mkfs -id=582A
 
 //LOGIN
-login -usr=root -pwd=123 -id= 582A
-login -usr=miusuario -pwd=mipwd -id= 582A
+login -usr="mi usuario" -pwd="mi pwd" -id= 582A
 
 //LOGOUT
 logout
@@ -48,7 +47,7 @@ mkusr -usr=user1 -pwd=usuario -grp=usuarios2
 
 //RMUSR
 rmusr -usr=user1
-rmusr -usr=user1
+rmusr -usr="mi user"
 
 //CHMOD
 chmod -path=/home -R -ugo=764
@@ -58,7 +57,7 @@ chmod -path=/home -ugo=777
 touch -SIZE=15 -PatH=/home/user/docs/a.txt -r
 touch -stdin -path=/etc/systemd/system/prometheus.service
 touch -path="/home/mis documentos/archivo 1.txt"
-touch -id=vda1 -path=/home/user/docs/b.txt -r -cont=/home/Documents/b.txt
+touch -path="/home/user/docs/b.txt" -r -cont=/home/Documents/b.txt
 
 //CAT
 Cat -file1=/home/user/docs/a.txt

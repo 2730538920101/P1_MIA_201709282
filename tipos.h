@@ -6,6 +6,22 @@ enum Tipounit {K, M, B, UNIT_ERROR};
 enum Tipoparticion {P, E, L, TIPO_ERROR};
 enum Tipocapacidad {FAST, FULL, CAPACIDAD_ERROR};
 enum Tiposistema {EXT2, EXT3, FS_EXT_ERROR};
+
+enum Tiporeporte {
+    MBR,
+    DISK,
+    INODE,
+    JOURNALING,
+    BLOCK,
+    BM_INODE,
+    BM_BLOCK,
+    TREE,
+    SB,
+    FILE_REP,
+    LS,
+    REPORTE_ERROR
+};
+
 enum Respuesta { 
     CORRECTO
 };
@@ -24,45 +40,47 @@ enum TipoComando{
     MKUSR,
     RMUSR,
     CHMOD,
-    TOUCH,
+    MKFILE,
     CAT,
-    RM,
+    REMOVE,
     EDIT,
-    REN,
+    RENAME,
     MKDIR,
-    CP,
-    MV,
+    COPY,
+    MOVE,
     FIND,
     CHOWN,
     CHGRP,
     RECOVERY,
     LOSS,
     EXEC,
-    PAUSE
+    PAUSE,
+    REP
 };
 
 enum Tipoparametro{
     SIZE,
     PATH,
     ID,
-    F,
-    U,
+    FIT,
+    UNIT,
     TYPE,
     DELETE,
     ADD,
     NAME,
     FS,
-    USR,
+    USUARIO,
+    PASSWORD,
     PWD,
     R,
     CONT, 
-    STDIN,
+    CONTENIDO,
     GRP, 
     UGO, 
     FILEN, 
     PP,
-    DEST
-
+    DESTINO,
+    RUTA
 };
 
 

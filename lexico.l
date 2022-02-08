@@ -23,14 +23,14 @@ rmgrp           "RMGRP"
 mkusr           "MKUSR"
 rmusr           "RMUSR"
 chmod           "CHMOD"
-touch           "TOUCH"
+mkfile          "MKFILE"
 cat             "CAT"
-rm              "RM"
+remove          "REMOVE"
 edit            "EDIT"
-ren             "REN"
+rename          "RENANE"
 mkdir           "MKDIR"
-cp              "CP"
-mv              "MV"
+copy            "COPY"
+move            "MOVE"
 find            "FIND"
 chown           "CHOWN"
 chgrp           "CHGRP"
@@ -38,42 +38,45 @@ recovery        "RECOVERY"
 loss            "LOSS"
 exec            "EXEC"
 pause           "PAUSE"
+rep             "REP"
 size            "-size"
 path            "-path"
 name            "-name"
 id              "-id"
-usr             "-usr"
+usuario         "-usuario"
 pwd             "-pwd"
+password        "-password"
 grp             "-grp"
 ugo             "-ugo"
 filen           "-file"[0-9]+
 cont            "-cont"
-stdin           "-stdin"
-dest            "-dest"
-f               "-f"
-u               "-u"
+contenido       "-contenido"
+destino         "-destino"
+unit            "-unit"
 type            "-type"
 delete          "-delete"
 add             "-add"
 fs              "-fs"
 r               "-r"
 p               "-p"
+fit             "-fit"
+ruta            "-ruta"
 identificador   [0-9]{3}[Aa-zZ]
 numero          [0-9]+
 ajuste          "BF"|"FF"|"WF"
 unidades        "B"|"K"|"M"
 cadena          [\"][^\"\n]*[\"]
-ruta            {cadena}|([/][^\n\" ]+)+
+ruta_r          ([/][^\n\" ]+)+
+nombre          [\*\?a-zA-Z0-9._-]+
 tipo            "P"|"E"|"L"
 capacidad       "FAST"|"FULL"
 sistema         "2FS"|"3FS"
-nombre          [\*\?a-zA-Z0-9._-]{1,10}
 igual           [=]
 
 
 
 %%
-
+{cadena}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CADENA;}
 {numero}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NUMERO;}
 {identificador}         {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IDENTIFICADOR;}
 {pause}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PAUSE;}
@@ -85,48 +88,51 @@ igual           [=]
 {mkfs}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKFS;}
 {login}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGIN;}
 {logout}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGOUT;}
-{stdin}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_STDIN;}
 {mkgrp}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKGRP;}
 {rmgrp}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMGRP;}
 {mkusr}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKUSR;}
 {mkdir}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKDIR;}
 {rmusr}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMUSR;}
 {chmod}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHMOD;}
-{touch}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TOUCH;}
+{mkfile}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKFILE;}
 {cat}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAT;}
-{rm}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RM;}
+{remove}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REMOVE;}
 {edit}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EDIT;}
-{ren}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REN;}
-{cp}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CP;}
-{mv}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MV;}
+{rename}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RENAME;}
+{copy}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_COPY;}
+{move}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MOVE;}
 {find}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIND;}
 {chown}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHOWN;}
 {chgrp}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHGRP;}
 {recovery}              {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RECOVERY;}
 {loss}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOSS;}
 {exec}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXEC;}
+{rep}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REP;}
 {size}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SIZE;}
 {path}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PATH;}
 {name}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NAME;}
 {id}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_ID;}
-{usr}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_USR;}
+{usuario}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_USUARIO;}
+{password}              {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PASSWORD;}
 {pwd}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PWD;}
 {grp}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_GRP;}
 {ugo}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UGO;}
 {filen}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FILEN;}
+{contenido}             {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CONTENIDO;}
 {cont}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CONT;}
-{dest}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_DEST;}
-{f}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_F;}
-{u}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_U;}
+{destino}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_DESTINO;}
+{unit}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNIT;}
 {type}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TYPE;}
 {delete}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_DELETE;}
 {add}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_ADD;}
 {fs}                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FS;}
+{fit}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIT;}
 {r}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_R;}
 {p}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_P;}
+{ruta}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA;}
 {ajuste}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_AJUSTE;}
 {unidades}              {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNIDADES;}
-{ruta}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA;}
+{ruta_r}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA_R;}
 {tipo}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TIPO;}
 {capacidad}             {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAPACIDAD;}
 {sistema}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SISTEMA;}

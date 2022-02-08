@@ -3,6 +3,7 @@
 #include <iostream>
 #include "tipos.h"
 #include <string.h>
+#include <strings.h>
 #include "clases_comandos.h"
 #include "sintactico.h"
 #include "lexico.h"
@@ -95,11 +96,11 @@ class C_mkfs:public Comando{
 //Clase para generar el comando login, hereda de la clase Comando
 class C_login:public Comando{
     public:
-        char *usr;
-        char *pwd;
+        char *usuario;
+        char *password;
         char *id;
         //constructor con los parametros obligatorios
-        C_login(char usr[], char pwd[], char id[]);
+        C_login(char usuario[], char password[], char id[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -139,11 +140,11 @@ class C_rmgrp:public Comando{
 //Clase para generar el comando mkusr, hereda de la clase Comando
 class C_mkusr:public Comando{
     public:
-        char *usr;
+        char *usuario;
         char *pwd;
         char *grp;
         //constructor con los parametros obligatorios
-        C_mkusr(char usr[], char pwd[], char gro[]);
+        C_mkusr(char usuario[], char pwd[], char grp[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -151,9 +152,9 @@ class C_mkusr:public Comando{
 //Clase para generar el comando rmusr, hereda de la clase Comando
 class C_rmusr:public Comando{
     public:
-        char *usr;
+        char *usuario;
         //constructor con los parametros obligatorios
-        C_rmusr(char usr[]);
+        C_rmusr(char usuario[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -171,15 +172,14 @@ class C_chmod:public Comando{
 };
 
 //Clase para generar el comando touch, hereda de la clase Comando
-class C_touch:public Comando{
+class C_mkfile:public Comando{
     public:
         char *path;
         int size;
         char *cont;
         bool r_flag;
-        bool stdin_flag;
         //constructor con los parametros obligatorios
-        C_touch(char path[]);
+        C_mkfile(char path[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -195,11 +195,11 @@ class C_cat:public Comando{
 };
 
 //Clase para generar el comando rm, hereda de la clase Comando
-class C_rm:public Comando{
+class C_remove:public Comando{
     public:
         char *path;
         //constructor con los parametros obligatorios
-        C_rm(char path[]);
+        C_remove(char path[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -209,21 +209,20 @@ class C_rm:public Comando{
 class C_edit:public Comando{
     public:
         char *path;
-        char *cont;
-        bool stdin_flag;
+        char *contenido;
         //constructor con los parametros obligatorios
-        C_edit(char path[], char cont[]);
+        C_edit(char path[], char contenido[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
 
 //Clase para generar el comando ren, hereda de la clase Comando
-class C_ren:public Comando{
+class C_rename:public Comando{
     public:
         char *path;
         char *name;
         //constructor con los parametros obligatorios
-        C_ren(char path[], char name[]);
+        C_rename(char path[], char name[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -240,23 +239,23 @@ class C_mkdir:public Comando{
 };
 
 //Clase para generar el comando cp, hereda de la clase Comando
-class C_cp:public Comando{
+class C_copy:public Comando{
     public:
         char *path;
-        char *dest;
+        char *destino;
         //constructor con los parametros obligatorios
-        C_cp(char path[], char dest[]);
+        C_copy(char path[], char destino[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
 
 //Clase para generar el comando mv, hereda de la clase Comando
-class C_mv:public Comando{
+class C_move:public Comando{
     public:
         char *path;
-        char *dest;
+        char *destino;
         //constructor con los parametros obligatorios
-        C_mv(char path[], char dest[]);
+        C_move(char path[], char destino[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -276,10 +275,10 @@ class C_find:public Comando{
 class C_chown:public Comando{
     public:
         char *path;
-        char *usr;
+        char *usuario;
         bool r_flag;
         //constructor con los parametros obligatorios
-        C_chown(char path[], char usr[]);
+        C_chown(char path[], char usuario[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -287,10 +286,10 @@ class C_chown:public Comando{
 //Clase para generar el comando chgrp, hereda de la clase Comando
 class C_chgrp:public Comando{
     public:
-        char *usr;
+        char *usuario;
         char *grp;
         //constructor con los parametros obligatorios
-        C_chgrp(char usr[], char grp[]);
+        C_chgrp(char usuario[], char grp[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
@@ -326,6 +325,21 @@ class C_exec:public Comando{
         void Ejecutar();
 };
 
+//Clase para generar el comando rep, hereda de la clase Comando
+class C_rep:public Comando{
+    public:
+        char *name;
+        char *path;
+        char *id;
+        char *ruta;
+        //constructor con los parametros obligatorios
+        C_rep(char name[], char path[], char id[]);
+        //funcion ejecutar, heredada de la clase Comando
+        void Ejecutar();
+};
+
+
+
 //Clase abstracta para formar parametros y enlistarlos
 class Parametro{
     public:
@@ -338,10 +352,10 @@ class Parametro{
         Tipoparticion type;
         Tipocapacidad capacidad;
         Tiposistema sistema;
+        Tiporeporte reporte;
         //bandera, indicador de presencia de parametros sin retorno
         bool r_flag;
         bool p_flag;
-        bool stdin_flag;
         //variable apuntador que dara funcion de lista a la clase Parametro
         Parametro *siguiente;
         //constructor
@@ -367,9 +381,9 @@ Comando* getComando(TipoComando commandtype, Parametro *param);
 Comando* ListarComando(Comando *command, bool flag);
 
 //Funcion booleana que valida que los parametros ingresados sean los permitidos en cada comando
-bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, char *grp, 
-                        char *cont, char *filen, char *dest, char *ruta, Tipofit fit,
+bool ValidarParametros(char *name, char *path, char *id, char *usuario, char *password, char *pwd, char *grp, 
+                        char *cont, char *contenido, char *filen, char *destino, char *ruta, Tipofit fit,
                         Tipounit unit, Tipoparticion type, Tipocapacidad capacidad, Tiposistema sistema,
-                        bool sizeEx, bool addEx, bool ugoEx, TipoComando commandtype);
+                        bool sizeEx, bool addEx, bool ugoEx, bool r_flag, bool p_flag, TipoComando commandtype);
 
 #endif //CLASES_COMANDOS_H

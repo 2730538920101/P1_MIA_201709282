@@ -34,6 +34,7 @@ Tipounit unit;
 Tipocapacidad capacidad;
 Tiposistema sistema;
 TipoComando tipocomando;
+Tiporeporte tiporeporte;
 Tipoparametro parametro;
 struct Parametro *PARAM;
 class Comando *COMMAND;
@@ -42,13 +43,15 @@ int INT;
 
 %token <entrada> TOK_NUMERO
 %token <entrada> TOK_AJUSTE
-%token <entrada> TOK_RUTA
+%token <entrada> TOK_RUTA_R
 %token <entrada> TOK_UNIDADES
 %token <entrada> TOK_TIPO
 %token <entrada> TOK_NOMBRE
 %token <entrada> TOK_CAPACIDAD
 %token <entrada> TOK_SISTEMA
 %token <entrada> TOK_IDENTIFICADOR
+%token <entrada> TOK_REPORTES
+%token <entrada> TOK_CADENA
 
 %token <entrada> TOK_MKDISK
 %token <entrada> TOK_RMDISK
@@ -63,34 +66,37 @@ int INT;
 %token <entrada> TOK_MKUSR
 %token <entrada> TOK_RMUSR
 %token <entrada> TOK_CHMOD
-%token <entrada> TOK_TOUCH
+%token <entrada> TOK_MKFILE
 %token <entrada> TOK_MKDIR
-%token <entrada> TOK_RM
+%token <entrada> TOK_REMOVE
 %token <entrada> TOK_EDIT
-%token <entrada> TOK_REN
-%token <entrada> TOK_CP
-%token <entrada> TOK_MV
+%token <entrada> TOK_RENAME
+%token <entrada> TOK_COPY
+%token <entrada> TOK_MOVE
 %token <entrada> TOK_FIND
 %token <entrada> TOK_CHOWN
 %token <entrada> TOK_CHGRP
 %token <entrada> TOK_RECOVERY
 %token <entrada> TOK_LOSS
 %token <entrada> TOK_EXEC
+%token <entrada> TOK_PAUSE
+%token <entrada> TOK_REP
 %token <entrada> TOK_SIZE
 %token <entrada> TOK_PATH
 %token <entrada> TOK_NAME
 %token <entrada> TOK_ID
-%token <entrada> TOK_USR
+%token <entrada> TOK_USUARIO
+%token <entrada> TOK_PASSWORD
 %token <entrada> TOK_PWD
 %token <entrada> TOK_GRP
 %token <entrada> TOK_UGO
 %token <entrada> TOK_CAT
 %token <entrada> TOK_FILEN
-%token <entrada> TOK_STDIN
+%token <entrada> TOK_CONTENIDO
 %token <entrada> TOK_CONT
-%token <entrada> TOK_DEST
-%token <entrada> TOK_F
-%token <entrada> TOK_U
+%token <entrada> TOK_DESTINO
+%token <entrada> TOK_FIT
+%token <entrada> TOK_UNIT
 %token <entrada> TOK_TYPE
 %token <entrada> TOK_DELETE
 %token <entrada> TOK_ADD
@@ -98,7 +104,9 @@ int INT;
 %token <entrada> TOK_R
 %token <entrada> TOK_P
 %token <entrada> TOK_IGUAL
-%token <entrada> TOK_PAUSE
+%token <entrada> TOK_RUTA
+
+
 
 
 %type <entrada> inicio
@@ -189,8 +197,8 @@ comando_estado:         TOK_MKDISK{
                         |TOK_CHMOD{
                             $$=CHMOD;
                         }
-                        |TOK_TOUCH{
-                            $$=TOUCH;
+                        |TOK_MKFILE{
+                            $$=MKFS;
                         }
                         |TOK_CAT{
                             $$=CAT;
@@ -198,20 +206,20 @@ comando_estado:         TOK_MKDISK{
                         |TOK_MKDIR{
                             $$=MKDIR;
                         }
-                        |TOK_RM{
-                            $$=RM;
+                        |TOK_REMOVE{
+                            $$=REMOVE;
                         }
                         |TOK_EDIT{
                             $$=EDIT;
                         }
-                        |TOK_REN{
-                            $$=REN;
+                        |TOK_RENAME{
+                            $$=RENAME;
                         }
-                        |TOK_CP{
-                            $$=CP;
+                        |TOK_COPY{
+                            $$=COPY;
                         }
-                        |TOK_MV{
-                            $$=MV;
+                        |TOK_MOVE{
+                            $$=MOVE;
                         }
                         |TOK_FIND{
                             $$=FIND;
@@ -231,6 +239,9 @@ comando_estado:         TOK_MKDISK{
                         |TOK_EXEC{
                             $$=EXEC;
                         }
+                        |TOK_REP{
+                            $$=REP;
+                        }
 ;
 
 params_list:            params_list param{
@@ -246,7 +257,11 @@ params_list:            params_list param{
                         }
 ;
 
-param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
+param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
+                            $$ = new Parametro(PATH);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_PATH TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(PATH);
                             strcpy($$->text, $3);
                         }
@@ -254,8 +269,8 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
                             $$ = new Parametro(SIZE);
                             $$->num = getNumero($3);
                         }
-                        |TOK_U TOK_IGUAL TOK_UNIDADES{
-                            $$ = new Parametro(U);
+                        |TOK_UNIT TOK_IGUAL TOK_UNIDADES{
+                            $$ = new Parametro(UNIT);
                             for(int i=0; i < strlen($3); i++){
                                 $3[i] = toupper($3[i]);
                             }
@@ -273,8 +288,8 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
                                 $$->unit = UNIT_ERROR;
                             }
                         }
-                        |TOK_F TOK_IGUAL TOK_AJUSTE{
-                            $$ = new Parametro(F);
+                        |TOK_FIT TOK_IGUAL TOK_AJUSTE{
+                            $$ = new Parametro(FIT);
                             for(int i=0; i < strlen($3); i++){
                                 $3[i] = toupper($3[i]);
                             }
@@ -293,6 +308,10 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
                             }
                         }
                         |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                            $$ = new Parametro(NAME);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_NAME TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(NAME);
                             strcpy($$->text, $3);
                         }
@@ -372,15 +391,35 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
                                 $$->sistema = FS_EXT_ERROR;
                             }
                         }
-                        |TOK_USR TOK_IGUAL TOK_NOMBRE{
-                            $$ = new Parametro(USR);
+                        |TOK_USUARIO TOK_IGUAL TOK_NOMBRE{
+                            $$ = new Parametro(USUARIO);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_USUARIO TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(USUARIO);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_PASSWORD TOK_IGUAL TOK_NOMBRE{
+                            $$ = new Parametro(PASSWORD);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_PASSWORD TOK_IGUAL TOK_NUMERO{
+                            $$ = new Parametro(PASSWORD);
                             strcpy($$->text, $3);
                         }
                         |TOK_PWD TOK_IGUAL TOK_NOMBRE{
                             $$ = new Parametro(PWD);
                             strcpy($$->text, $3);
-                        }  
+                        }
+                        |TOK_PWD TOK_IGUAL TOK_NUMERO{
+                            $$ = new Parametro(PWD);
+                            strcpy($$->text, $3);
+                        }      
                         |TOK_GRP TOK_IGUAL TOK_NOMBRE{
+                            $$ = new Parametro(GRP);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_GRP TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(GRP);
                             strcpy($$->text, $3);
                         }
@@ -396,20 +435,44 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA{
                             $$ = new Parametro(PP);
                             $$->p_flag = true;
                         }
-                        |TOK_STDIN{
-                            $$ = new Parametro(STDIN);
-                            $$->stdin_flag = true;
-                        }
-                        |TOK_CONT TOK_IGUAL TOK_RUTA{
+                        |TOK_CONT TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(CONT);
                             strcpy($$->text, $3);
                         }
-                        |TOK_DEST TOK_IGUAL TOK_RUTA{
-                            $$ = new Parametro(DEST);
+                        |TOK_CONTENIDO TOK_IGUAL TOK_RUTA_R{
+                            $$ = new Parametro(CONTENIDO);
                             strcpy($$->text, $3);
                         }
-                        |TOK_FILEN TOK_IGUAL TOK_RUTA{
+                        |TOK_CONTENIDO TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(CONTENIDO);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_CONT TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(CONT);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_DESTINO TOK_IGUAL TOK_RUTA_R{
+                            $$ = new Parametro(DESTINO);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_DESTINO TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(DESTINO);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_FILEN TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(FILEN);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_FILEN TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(FILEN);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_RUTA TOK_IGUAL TOK_CADENA{
+                            $$ = new Parametro(RUTA);
+                            strcpy($$->text, $3);
+                        }
+                        |TOK_RUTA TOK_IGUAL TOK_RUTA_R{
+                            $$ = new Parametro(RUTA);
                             strcpy($$->text, $3);
                         }
 ;

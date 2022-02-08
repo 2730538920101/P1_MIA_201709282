@@ -34,8 +34,10 @@ C_fdisk::C_fdisk(int size, char path[], char name[]){
     this->path = path;
     this->name = name;
     //parametros opcionales con valor por defecto
+    this->tipo = P;
     this->unit = K;
     this->fit = WF;
+    this->add = 0;
 }
 
 //FUNCION EJECUTAR FDISK
@@ -81,10 +83,10 @@ void C_mkfs::Ejecutar(){
 }
 
 //CREAR LOGIN
-C_login::C_login(char usr[], char pwd[], char id[]){
+C_login::C_login(char usuario[], char password[], char id[]){
     //parametros obligatorios
-    this->usr = usr;
-    this->pwd = pwd;
+    this->usuario = usuario;
+    this->password = password;
     this->id = id;
 }
 
@@ -116,9 +118,9 @@ void C_rmgrp::Ejecutar(){
 }
 
 //CREAR MKUSER
-C_mkusr::C_mkusr(char usr[], char pwd[], char grp[]){
+C_mkusr::C_mkusr(char usuario[], char pwd[], char grp[]){
     //parametros obligatorios
-    this->usr = usr;
+    this->usuario = usuario;
     this->pwd = pwd;
     this->grp = grp;
 }
@@ -129,9 +131,9 @@ void C_mkusr::Ejecutar(){
 }
 
 //CREAR RMUSR
-C_rmusr::C_rmusr(char usr[]){
+C_rmusr::C_rmusr(char usuario[]){
     //parametros obligatorios
-    this->usr = usr;
+    this->usuario = usuario;
 }
 
 //FUNCION EJECUTAR RMUSR
@@ -153,20 +155,19 @@ void C_chmod::Ejecutar(){
     cout<<"Ejecutando comando CHMOD... \n ";
 }
 
-//CREAR TOUCH
-C_touch::C_touch(char path[]){
+//CREAR MKFILE
+C_mkfile::C_mkfile(char path[]){
     //paramtros obligatorios
     this->path = path;
     //parametros opcionales con valor por defecto
     this->r_flag = false;
     this->size = 0;
     this->cont = NULL;
-    this->stdin_flag = false;
 }
 
-//FUNCION EJECUTAR TOUCH
-void C_touch::Ejecutar(){
-    cout<<"Ejecutando comando TOUCH... \n ";
+//FUNCION EJECUTAR MKFILE
+void C_mkfile::Ejecutar(){
+    cout<<"Ejecutando comando MKFILE... \n ";
 }
 
 //CREAR CAT
@@ -180,24 +181,22 @@ void C_cat::Ejecutar(){
     cout<<"Ejecutando comando CAT... \n ";
 }
 
-//CREAR RM
-C_rm::C_rm(char path[]){
+//CREAR REMOVE
+C_remove::C_remove(char path[]){
     //parametros obligatorios
     this->path = path;
 }
 
-//FUNCION EJECUTAR RM
-void C_rm::Ejecutar(){
-    cout<<"Ejecutando comando RM... \n ";
+//FUNCION EJECUTAR REMOVE
+void C_remove::Ejecutar(){
+    cout<<"Ejecutando comando REMOVE... \n ";
 }
 
 //CREAR EDIT
-C_edit::C_edit(char path[], char cont[]){
+C_edit::C_edit(char path[], char contenido[]){
     //parametros obligatorios
     this->path = path;
-    this->cont = cont;
-    //parametros opcionales con su valor por defecto
-    this->stdin_flag = false;
+    this->contenido = contenido;
 }
 
 //FUNCION EJECUTAR EDIT
@@ -205,16 +204,16 @@ void C_edit::Ejecutar(){
     cout<<"Ejecutando comando EDIT... \n ";
 }
 
-//CREAR REN
-C_ren::C_ren(char path[], char name[]){
+//CREAR RENAME
+C_rename::C_rename(char path[], char name[]){
     //parametros obligatorios
     this->path = path;
     this->name = name;
 }
 
-//FUNCION EJECUTAR REN
-void C_ren::Ejecutar(){
-    cout<<"Ejecutando comando REN... \n ";
+//FUNCION EJECUTAR RENAME
+void C_rename::Ejecutar(){
+    cout<<"Ejecutando comando RENAME... \n ";
 }
 
 //CREAR MKDIR
@@ -230,28 +229,28 @@ void C_mkdir::Ejecutar(){
     cout<<"Ejecutando comando MKDIR... \n ";
 }
 
-//CREAR CP
-C_cp::C_cp(char path[], char dest[]){
+//CREAR COPY
+C_copy::C_copy(char path[], char destino[]){
     //parametros obligatorios
     this->path = path;
-    this->dest = dest;
+    this->destino = destino;
 }
 
-//FUNCION EJECUTAR CP
-void C_cp::Ejecutar(){
-    cout<<"Ejecutando comando CP... \n ";
+//FUNCION EJECUTAR COPY
+void C_copy::Ejecutar(){
+    cout<<"Ejecutando comando COPY... \n ";
 }
 
-//CREAR MV
-C_mv::C_mv(char path[], char dest[]){
+//CREAR MOVE
+C_move::C_move(char path[], char dest[]){
     //parametros obligatorios
     this->path = path;
-    this->dest = dest;
+    this->destino = destino;
 }
 
-//FUNCION EJECUTAR MV
-void C_mv::Ejecutar(){
-    cout<<"Ejecutando comando MV... \n ";
+//FUNCION EJECUTAR MOVE
+void C_move::Ejecutar(){
+    cout<<"Ejecutando comando MOVE... \n ";
 }
 
 
@@ -269,10 +268,10 @@ void C_find::Ejecutar(){
 
 
 //CREAR CHOWN
-C_chown::C_chown(char path[], char usr[]){
+C_chown::C_chown(char path[], char usuario[]){
     //parametros obligatorios
     this->path = path;
-    this->usr = usr;
+    this->usuario = usuario;
     //parametros opcionales con valor por defecto
     this->r_flag = false;
 }
@@ -284,9 +283,9 @@ void C_chown::Ejecutar(){
 
 
 //CREAR CHGRP
-C_chgrp::C_chgrp(char usr[], char grp[]){
+C_chgrp::C_chgrp(char usuario[], char grp[]){
     //parametros obligatorios
-    this->usr = usr;
+    this->usuario = usuario;
     this->grp = grp;
 }
 
@@ -329,6 +328,21 @@ void C_exec::Ejecutar(){
     cout<<"Ejecutando comando EXEC... \n ";
 }
 
+//CREAR REP
+C_rep::C_rep(char name[], char path[], char id[]){
+    //parametros obligatorios
+    this->name = name;
+    this->path = path;
+    this->id = id;
+    //parametros opcionales con valor por defecto
+    this->ruta = NULL;
+}
+
+//FUNCION EJECUTAR REP
+void C_rep::Ejecutar(){
+    cout<<"Ejecutando comando REP... \n";
+}
+
 //FUNCION EJECUTAR LOGOUT
 void C_logout::Ejecutar(){
     cout<<"Ejecutando comando LOGOUT... \n ";
@@ -341,32 +355,32 @@ void C_pause::Ejecutar(){
 
 
 //FUNCION ValidarParametros HACE UN ANALISIS SEMANTICO VALIDANDO LOS PARAMETROS QUE VIENEN EN CADA COMANDO
-bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, char *grp, 
-                        char *cont, char *filen, char *dest, char *ruta, Tipofit fit,
+bool ValidarParametros(char *name, char *path, char *id, char *usuario, char *password, char *pwd, char *grp, 
+                        char *cont, char *contenido, char *filen, char *destino, char *ruta, Tipofit fit,
                         Tipounit unit, Tipoparticion type, Tipocapacidad capacidad, Tiposistema sistema,
-                        bool sizeEx, bool addEx, bool ugoEx, bool r_flag, bool p_flag, bool stdin_flag,
-                        TipoComando commandtype){
+                        bool sizeEx, bool addEx, bool ugoEx, bool r_flag, bool p_flag, TipoComando commandtype){
                             //VALIDA QUE VENGAN UNICAMENTE LOS PARAMETREOS ACEPTADOS POR CADA COMANDO
                             switch(commandtype){
                                 case MKDISK:
-                                    {//Parametros permitidos: size, path , f, u
+                                    {//Parametros permitidos: size, path , fit, unit
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
+                                            contenido != NULL||
                                             cont != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             type != TIPO_ERROR ||
                                             capacidad != CAPACIDAD_ERROR ||
                                             sistema != FS_EXT_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx 
                                         );
@@ -376,13 +390,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -391,28 +407,29 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );                      
                                     }break;
                                 case FDISK:
-                                    {//Parametros permitidos: path, size, name, u, type, f, delete, add 
+                                    {//Parametros permitidos: path, size, name, unit, type, fit, delete, add 
                                         return!(
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             sistema != FS_EXT_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
+                                            addEx ||
                                             ugoEx 
                                         );                   
                                     }break;
@@ -420,13 +437,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                     {//Parametros permitidos: path, name 
                                         return!(
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -435,7 +454,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -446,13 +464,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             path != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -461,7 +481,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -472,35 +491,38 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             path != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             capacidad != CAPACIDAD_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case LOGIN:
-                                    {//Parametros permitidos: usr, pwd, id 
+                                    {//Parametros permitidos: usuario, password, id 
                                         return!(
                                             name != NULL ||
                                             path != NULL ||
+                                            pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -509,7 +531,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -520,13 +541,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             path != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -535,7 +558,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -546,13 +568,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             path != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -561,22 +585,23 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case MKUSR:
-                                    {//Parametros permitidos: usr, pwd, grp 
+                                    {//Parametros permitidos: usuario, pwd, grp 
                                         return!(
                                             name != NULL ||
-                                            path != NULL ||
                                             id != NULL ||
+                                            path != NULL ||
+                                            password != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -585,24 +610,25 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case RMUSR:
-                                    {//Parametros permitidos: usr 
+                                    {//Parametros permitidos: usuario 
                                         return!(
                                             name != NULL ||
-                                            path != NULL ||
                                             id != NULL ||
+                                            path != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -611,7 +637,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -622,13 +647,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -636,22 +663,23 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             sistema != FS_EXT_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             sizeEx
                                         );
                                     }break;
-                                case TOUCH:
-                                    {//Parametros permitidos: path, r, size, cont, stdin
+                                case MKFILE:
+                                    {//Parametros permitidos: path, r, size, cont
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -660,21 +688,22 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             p_flag ||
                                             addEx ||
-                                            ugoEx 
+                                            ugoEx
                                         );
                                     }break;
                                 case CAT:
                                     {//Parametros permitidos: filen
                                         return!(
                                             name != NULL ||
-                                            path != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -683,24 +712,25 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
-                                case RM:
+                                case REMOVE:
                                     {//Parametros permitidos: path 
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -709,23 +739,24 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case EDIT:
-                                    {//Parametros permitidos: path, cont, stdin 
+                                    {//Parametros permitidos: path, contenido 
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
+                                            cont != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -739,17 +770,19 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             sizeEx
                                         );
                                     }break;
-                                case REN:
+                                case RENAME:
                                     {//Parametros permitidos: path, name 
                                         return!(
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -758,7 +791,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -769,13 +801,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -783,21 +817,22 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             sistema != FS_EXT_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
-                                case CP:
-                                    {//Parametros permitidos: path, dest 
+                                case COPY:
+                                    {//Parametros permitidos: path, destino 
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
                                             fit != FIT_ERROR ||
@@ -808,21 +843,22 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
-                                case MV:
-                                    {//Parametros permitidos: path, dest 
+                                case MOVE:
+                                    {//Parametros permitidos: path, destino 
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
                                             fit != FIT_ERROR ||
@@ -833,7 +869,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -843,13 +878,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                     {//Parametros permitidos: path, name
                                         return!(
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -858,23 +895,24 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case CHOWN:
-                                    {//Parametros permitidos: path, usr, r
+                                    {//Parametros permitidos: path, usuario, r
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -882,23 +920,24 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             sistema != FS_EXT_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
                                         );
                                     }break;
                                 case CHGRP:
-                                    {//Parametros permitidos: usr, grp
+                                    {//Parametros permitidos: usuario, grp
                                         return!(
                                             name != NULL ||
-                                            path != NULL ||
                                             id != NULL ||
+                                            path != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -907,7 +946,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -918,13 +956,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             path != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -933,7 +973,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -944,13 +983,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             path != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -959,7 +1000,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -970,13 +1010,15 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                         return!(
                                             name != NULL ||
                                             id != NULL ||
-                                            usr != NULL ||
+                                            usuario != NULL ||
+                                            password != NULL ||
                                             pwd != NULL ||
                                             grp != NULL ||
                                             cont != NULL ||
+                                            contenido != NULL ||
                                             filen != NULL ||
                                             ruta != NULL ||
-                                            dest != NULL ||
+                                            destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
                                             type != TIPO_ERROR ||
@@ -985,7 +1027,30 @@ bool ValidarParametros(char *name, char *path, char *id, char *usr, char *pwd, c
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            stdin_flag ||
+                                            addEx ||
+                                            ugoEx ||
+                                            sizeEx
+                                        );
+                                    }break;
+                                case REP:
+                                    {//Parametros permitidos: path, name, id , ruta
+                                        return!(
+                                            usuario != NULL ||
+                                            password != NULL ||
+                                            pwd != NULL ||
+                                            grp != NULL ||
+                                            cont != NULL ||
+                                            contenido != NULL ||
+                                            filen != NULL ||
+                                            destino != NULL ||
+                                            fit != FIT_ERROR ||
+                                            unit != UNIT_ERROR ||
+                                            type != TIPO_ERROR ||
+                                            capacidad != CAPACIDAD_ERROR ||
+                                            sistema != FS_EXT_ERROR ||
+                                            //banderas para verificar el tipo de dato
+                                            r_flag ||
+                                            p_flag ||
                                             addEx ||
                                             ugoEx ||
                                             sizeEx
@@ -1007,12 +1072,14 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
     char *name = NULL;
     char *path = NULL;
     char *id = NULL;
-    char *usr = NULL;
+    char *usuario = NULL;
+    char *password = NULL;
     char *pwd = NULL;
     char *grp = NULL;
     char *cont = NULL;
+    char *contenido = NULL;
     char *filen = NULL;
-    char *dest = NULL;
+    char *destino = NULL;
     char *ruta = NULL;
     Tipofit fit = FIT_ERROR;
     Tipounit unit = UNIT_ERROR;
@@ -1024,9 +1091,9 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
     bool ugoEx = false;
     bool r_flag = false;
     bool p_flag = false;
-    bool stdin_flag = false;
     int size = -1;
     int ugo = -1;
+    int add = -1;
 
     //CICLO WHILE QUE RECORRE LOS PARAMETROS Y DEVUELVE SU VALOR DE RETORNO
     while(auxparam != NULL){
@@ -1045,11 +1112,11 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 {
                     id = auxparam->text;
                 }break;
-            case F:
+            case FIT:
                 {
                     fit = auxparam->fit;
                 }break;
-            case U:
+            case UNIT:
                 {
                     unit = auxparam->unit;
                 }break;
@@ -1068,15 +1135,19 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 }break;
             case NAME:
                 {
-                    name = auxparam->text;
+                    name = auxparam->text; 
                 }break;
             case FS:
                 {
                     sistema = auxparam->sistema;
                 }break;
-            case USR:
+            case USUARIO:
                 {
-                    usr = auxparam->text;
+                    usuario = auxparam->text;
+                }break;
+            case PASSWORD:
+                {
+                    password = auxparam->text;
                 }break;
             case PWD:
                 {
@@ -1086,13 +1157,13 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 {
                     r_flag = auxparam->r_flag;
                 }break;
+            case CONTENIDO:
+                {
+                    contenido = auxparam->text;
+                }break;
             case CONT:
                 {
                     cont = auxparam->text;
-                }break;
-            case STDIN:
-                {
-                    stdin_flag = auxparam->stdin_flag;
                 }break;
             case GRP:
                 {
@@ -1111,9 +1182,13 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 {
                     p_flag = auxparam->p_flag;
                 }break;
-            case DEST:
+            case DESTINO:
                 {
-                    dest = auxparam->text;
+                    destino = auxparam->text;
+                }break;
+            case RUTA:
+                {
+                    ruta = auxparam->text;
                 }break;
             default:
                 {
@@ -1124,8 +1199,10 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
         auxparam = auxparam->siguiente;
     }
     //SE VALIDA QUE LOS PARAMETROS INGRESADOS PERTENEZCAN AL COMANDO 
-    if(!ValidarParametros(name,path,id,usr,pwd,grp,cont,filen,dest,ruta,fit,unit,type,capacidad,sistema,
-                        sizeEx,addEx,ugoEx,r_flag,p_flag,stdin_flag,commandtype)){
+    if(!ValidarParametros(name, path, id, usuario, password, pwd, grp, 
+                        cont, contenido, filen, destino, ruta, fit,
+                        unit, type, capacidad, sistema, sizeEx, addEx,
+                        ugoEx, r_flag, p_flag, commandtype)){
                             cout<<"El comando ingresado tiene parametros no permitidos \n";
                             return NULL;
                         }
@@ -1195,6 +1272,12 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 if(fit != FIT_ERROR){
                     aux_fdisk->fit = fit;
                 }
+                if(capacidad != CAPACIDAD_ERROR){
+                    aux_fdisk->capacidad = capacidad;
+                }
+                if(addEx){
+                    aux_fdisk->add = add;
+                }
                 //retornar el objeto de la clase C_fdisk y castearlo a la clase Comando
                 return (Comando*)aux_fdisk;
             }break;
@@ -1247,12 +1330,12 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
         case LOGIN:
             {
                 //verificar los parametros obligatorios
-                if(usr == NULL){
-                    cout<<"El parametro usr es obligatorio en esta comando LOGIN \n";
+                if(usuario == NULL){
+                    cout<<"El parametro usuario es obligatorio en esta comando LOGIN \n";
                     return NULL;
                 }
-                if(pwd == NULL){
-                    cout<<"El parametro pwd es obligatorio en este comando LOGIN \n";
+                if(password == NULL){
+                    cout<<"El parametro password es obligatorio en este comando LOGIN \n";
                     return NULL;
                 }
                 if(id == NULL){
@@ -1260,7 +1343,7 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     return NULL;
                 }
                 //crear objeto auxiliar de la clase C_login
-                C_login *aux_login = new C_login(usr,pwd,id);
+                C_login *aux_login = new C_login(usuario,password,id);
                 //retornar el objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_login;
             }break;
@@ -1291,8 +1374,8 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
         case MKUSR:
             {
                  //verificar los parametros obligatorios
-                if(usr == NULL){
-                    cout<<"El parametro usr es obligatorio en esta comando MKUSR \n";
+                if(usuario == NULL){
+                    cout<<"El parametro usuario es obligatorio en esta comando MKUSR \n";
                     return NULL;
                 }
                 if(pwd == NULL){
@@ -1304,19 +1387,19 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     return NULL;
                 }
                 //crear objeto auxiliar de la clase C_mkusr
-                C_mkusr *aux_mkusr = new C_mkusr(usr,pwd,grp);
+                C_mkusr *aux_mkusr = new C_mkusr(usuario,pwd,grp);
                 //retornar el objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_mkusr;
             }break;
         case RMUSR:
             {
                 //verificar que vengan los parametros obligatorios, si no viene el valor retorna NULL
-                if(usr == NULL){
-                    cout<<"El parametro usr es obligatorio en este comando RMUSR \n";
+                if(usuario == NULL){
+                    cout<<"El parametro usuario es obligatorio en este comando RMUSR \n";
                     return NULL;
                 }
                 //se crea un objeto auxiliar de la clase C_rmusr
-                C_rmusr *aux_rmusr = new C_rmusr(usr);
+                C_rmusr *aux_rmusr = new C_rmusr(usuario);
                 //retornar un objeto C_rmusr casteado a la clase Comando
                 return (Comando*)aux_rmusr;
             }break;
@@ -1340,30 +1423,27 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 //retornar el objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_chmod;
             }break;
-        case TOUCH:
+        case MKFILE:
             {
                 //verificar parametros obligatorios
                 if(path == NULL){
-                    cout<<"El parametro path es obligatorio en este comando TOUCH \n";
+                    cout<<"El parametro path es obligatorio en este comando MKFILE \n";
                     return NULL;
                 }
                 //crear objeto auxiliar
-                C_touch *aux_touch = new C_touch(path);
+                C_mkfile *aux_mkfile = new C_mkfile(path);
                 //verificar parametros opcionales
                 if(r_flag == true){
-                    aux_touch->r_flag = r_flag;
+                    aux_mkfile->r_flag = r_flag;
                 }
                 if(sizeEx){
-                    aux_touch->size = size;
+                    aux_mkfile->size = size;
                 }
                 if(cont != NULL){
-                    aux_touch->cont = cont;
-                }
-                if(stdin_flag == true){
-                    aux_touch->stdin_flag = stdin_flag;
+                    aux_mkfile->cont = cont;
                 }
                 //retornar el objeto auxiliar casteado a la clase Comando
-                return (Comando*)aux_touch;
+                return (Comando*)aux_mkfile;
             }break;
         case CAT:
             {
@@ -1378,17 +1458,17 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 return (Comando*)aux_cat;
 
             }break;
-        case RM:
+        case REMOVE:
             {
                 //verificar parametros obligatorios
                 if(path == NULL){
-                    cout<<"El parametro path es obligatorio en este comando RM \n";
+                    cout<<"El parametro path es obligatorio en este comando REMOVE \n";
                     return NULL;
                 }
                 //crear objeto auxiliar
-                C_rm *aux_rm = new C_rm(path);
+                C_remove *aux_remove = new C_remove(path);
                 //retornar objeto auxliar casteado a la clase Comando
-                return (Comando*)aux_rm;
+                return (Comando*)aux_remove;
             }break;
         case EDIT:
             {
@@ -1397,33 +1477,29 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     cout<<"El parametro path es obligatorio en este comando EDIT \n";
                     return NULL;
                 }
-                if(cont == NULL){
-                    cout<<"El paramtro cont es obligatorio en este comando EDIT \n";
+                if(contenido == NULL){
+                    cout<<"El paramtro contenido es obligatorio en este comando EDIT \n";
                     return NULL;
                 }
                 //crear el objeto auxiliar
-                C_edit *aux_edit = new C_edit(path, cont);
-                //verificar parametros opcionales
-                if(stdin_flag == true){
-                    aux_edit->stdin_flag = stdin_flag;
-                }
+                C_edit *aux_edit = new C_edit(path, contenido);
                 //retornar el objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_edit;
             }break;
-        case REN:
+        case RENAME:
             {
                  //verificar que vengan los parametros obligatorios
                 if(path == NULL){
-                    cout<<"El parametro path es obligatorio en este comando REN \n";
+                    cout<<"El parametro path es obligatorio en este comando RENAME \n";
                 }
                 if(name == NULL){
-                    cout<<"El parametro name es obligatorio en este comando REN \n";
+                    cout<<"El parametro name es obligatorio en este comando RENAME \n";
                     return NULL;
                 }
-                //crear el objeto auxiliar de la clase C_ren
-                C_ren *aux_ren = new C_ren(path, name);
+                //crear el objeto auxiliar de la clase C_rename
+                C_rename *aux_rename = new C_rename(path, name);
                 //se retorna el objeto auxiliar casteado a la clase Comando
-                return (Comando*)aux_ren;
+                return (Comando*)aux_rename;
             }break;
         case MKDIR:
             {
@@ -1431,7 +1507,7 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 if(path == NULL){
                     cout<<"El parametro path es obligatorio en este comando MKDIR \n";
                 }
-                //crear el objeto auxiliar de la clase C_MKDIR
+                //crear el objeto auxiliar de la clase C_mkdir
                 C_mkdir *aux_mkdir = new C_mkdir(path);
                 //verificar parametros obligarorios
                 if(p_flag == true){
@@ -1440,35 +1516,35 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 //retornar objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_mkdir;
             }break;
-        case CP:
+        case COPY:
             {
                  //verificar que vengan los parametros obligatorios
                 if(path == NULL){
-                    cout<<"El parametro path es obligatorio en este comando CP \n";
+                    cout<<"El parametro path es obligatorio en este comando COPY \n";
                 }
-                if(dest == NULL){
-                    cout<<"El parametro dest es obligatorio en este comando CP \n";
+                if(destino == NULL){
+                    cout<<"El parametro destino es obligatorio en este comando COPY \n";
                     return NULL;
                 }
-                //crear el objeto auxiliar de la clase C_cp
-                C_cp *aux_cp = new C_cp(path, dest);
+                //crear el objeto auxiliar de la clase C_copy
+                C_copy *aux_copy = new C_copy(path, destino);
                 //se retorna el objeto auxiliar casteado a la clase Comando
-                return (Comando*)aux_cp;
+                return (Comando*)aux_copy;
             }break;
-        case MV:
+        case MOVE:
             {
                  //verificar que vengan los parametros obligatorios
                 if(path == NULL){
-                    cout<<"El parametro path es obligatorio en este comando MV \n";
+                    cout<<"El parametro path es obligatorio en este comando MOVE \n";
                 }
-                if(dest == NULL){
-                    cout<<"El parametro dest es obligatorio en este comando MV \n";
+                if(destino == NULL){
+                    cout<<"El parametro dest es obligatorio en este comando MOVE \n";
                     return NULL;
                 }
-                //crear el objeto auxiliar de la clase C_mv
-                C_mv *aux_mv = new C_mv(path, dest);
+                //crear el objeto auxiliar de la clase C_move
+                C_move *aux_move = new C_move(path, destino);
                 //se retorna el objeto auxiliar casteado a la clase Comando
-                return (Comando*)aux_mv;
+                return (Comando*)aux_move;
 
             }break;
         case FIND:
@@ -1492,12 +1568,12 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 if(path == NULL){
                     cout<<"El parametro path es obligatorio en este comando CHOWN \n";
                 }
-                if(usr == NULL){
-                    cout<<"El parametro usr es obligatorio en este comando CHOWN \n";
+                if(usuario == NULL){
+                    cout<<"El parametro usuario es obligatorio en este comando CHOWN \n";
                     return NULL;
                 }
                 //crear el objeto auxiliar de la clase C_ren
-                C_chown *aux_chown = new C_chown(path, usr);
+                C_chown *aux_chown = new C_chown(path, usuario);
                 //verificar parametros opcionales
                 if(r_flag == true){
                     aux_chown->r_flag = r_flag;
@@ -1508,15 +1584,15 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
         case CHGRP:
             {
                  //verificar que vengan los parametros obligatorios
-                if(usr == NULL){
-                    cout<<"El parametro usr es obligatorio en este comando CHGRP \n";
+                if(usuario == NULL){
+                    cout<<"El parametro usuario es obligatorio en este comando CHGRP \n";
                 }
                 if(grp == NULL){
                     cout<<"El parametro grp es obligatorio en este comando CHGRP \n";
                     return NULL;
                 }
                 //crear el objeto auxiliar de la clase C_chgrp
-                C_chgrp *aux_chgrp = new C_chgrp(usr, grp);
+                C_chgrp *aux_chgrp = new C_chgrp(usuario, grp);
                 //se retorna el objeto auxiliar casteado a la clase Comando
                 return (Comando*)aux_chgrp;
             }break;
@@ -1557,6 +1633,63 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 //retornar objeto auxliar casteado a la clase Comando
                 return (Comando*)aux_exec;
             }break;
+        case REP:
+            {
+                 //verificar parametros obligatorios
+                if(name == NULL){
+                    cout<<"El parametro name es obligatorio en este comando REP \n";
+                    return NULL;
+                }
+                if(path == NULL){
+                    cout<<"El parametro path es obligatorio en este comando REP \n";
+                    return NULL;
+                }
+                if(id == NULL){
+                    cout<<"El parametro id es obligatorio en este comando REP \n";
+                    return NULL;
+                }
+                //verificar tipo de reporte
+                Tiporeporte reporte;
+                if(strcasecmp(name,"MBR")==0){
+                    reporte = MBR;
+                }else if(strcasecmp(name,"DISK")==0){
+                    reporte = DISK;
+                }else if(strcasecmp(name,"INODE")==0){
+                    reporte = INODE;
+                }else if(strcasecmp(name,"JOURNALING")==0){
+                    reporte = JOURNALING;
+                }else if(strcasecmp(name,"BLOCK")==0){
+                    reporte = BLOCK;
+                }else if(strcasecmp(name,"BM_INODE")==0){
+                    reporte = BM_INODE;
+                }else if(strcasecmp(name,"BM_BLOCK")==0){
+                    reporte = BM_BLOCK;
+                }else if(strcasecmp(name,"TREE")==0){
+                    reporte = TREE;
+                }else if(strcasecmp(name,"SB")==0){
+                    reporte = SB;
+                }else if(strcasecmp(name,"FILE")==0){
+                    reporte = FILE_REP;
+                }else if(strcasecmp(name,"LS")==0){
+                    reporte = LS;
+                }else{
+                    cout<<"EL TIPO DE REPORTE NO EXISTE... "<<endl;
+                    return NULL;
+                }
+                //crear objeto auxiliar
+                C_rep *aux_rep = new C_rep(name, path, id);
+                //verificar parametros opcionales
+                if(reporte == LS || reporte == FILE_REP){
+                    if(ruta == NULL){
+                        cout<<"AL SOLICITAR ESTE TIPO DE REPORTE DEBE INGRESAR EL PARAMETRO -ruta... "<<endl;
+                        return NULL;
+                    }else{
+                        aux_rep->ruta = ruta;
+                    }
+                }
+                //retornar objeto auxliar casteado a la clase Comando
+                return (Comando*)aux_rep;
+            }break;
     }
     //Si el comando tiene algun error retornara NULL
     return NULL;
@@ -1576,7 +1709,7 @@ Comando* ListarComando(Comando *command, bool flag){
 void Escribir_Comando(string comando, bool bandera){
     FILE *arch;
     if(!bandera){
-        arch = fopen("comandos.txt", "w+");
+        arch = fopen("comandos.script", "w+");
     }else{
         arch = fopen("comandos_definidos.txt", "w+");
     }
@@ -1588,7 +1721,7 @@ void Escribir_Comando(string comando, bool bandera){
 void Leer_Comando(bool bandera){
     FILE *arch;
     if(!bandera){
-        arch = fopen("comandos.txt", "r");
+        arch = fopen("comandos.script", "r");
     }else{
         arch = fopen("comandos_definidos.txt", "r");
     }
