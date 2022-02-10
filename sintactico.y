@@ -11,11 +11,8 @@ extern int yylineno;
 extern int columna;
 extern char *yytext;
 
-int yyerror(const char* msj){
-    if(strcmp(yytext, " ")==1){
-        std::cout<<"ERROR SINTACTICO EN: "<<msj<<" "<<yytext<< std::ends;
-    }
-    return 0;
+void yyerror(const char* msj){    
+    std::cout<<"ERROR SINTACTICO EN: "<<msj<<" "<<yytext<< std::endl;
 }
 
 %}
@@ -146,7 +143,7 @@ comand_list:            comand_list comando{
                         }
                         |comando{
                             $$ = $1;
-                        }
+                        }           
 ;
 
 comando:                comando_estado params_list{
@@ -198,7 +195,7 @@ comando_estado:         TOK_MKDISK{
                             $$=CHMOD;
                         }
                         |TOK_MKFILE{
-                            $$=MKFS;
+                            $$=MKFILE;
                         }
                         |TOK_CAT{
                             $$=CAT;
@@ -475,5 +472,6 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(RUTA);
                             strcpy($$->text, $3);
                         }
+                                            
 ;
 

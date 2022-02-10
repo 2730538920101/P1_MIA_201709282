@@ -22,8 +22,10 @@ int main(){
             system("clear");
             continue;
         }
-        Escribir_Comando(comando_entrada,false);
-        Leer_Comando(false);
+        if(comando_entrada != ""){
+            Escribir_Comando(comando_entrada,false);
+            Leer_Comando(false);
+        }
     }
     
 }

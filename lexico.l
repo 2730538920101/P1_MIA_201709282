@@ -27,7 +27,7 @@ mkfile          "MKFILE"
 cat             "CAT"
 remove          "REMOVE"
 edit            "EDIT"
-rename          "RENANE"
+rename          "RENAME"
 mkdir           "MKDIR"
 copy            "COPY"
 move            "MOVE"
@@ -66,7 +66,7 @@ numero          [0-9]+
 ajuste          "BF"|"FF"|"WF"
 unidades        "B"|"K"|"M"
 cadena          [\"][^\"\n]*[\"]
-ruta_r          ([/][^\n\" ]+)+
+ruta_r          ([/][^\n\" ]+?)+
 nombre          [\*\?a-zA-Z0-9._-]+
 tipo            "P"|"E"|"L"
 capacidad       "FAST"|"FULL"
@@ -98,7 +98,7 @@ igual           [=]
 {cat}                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAT;}
 {remove}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REMOVE;}
 {edit}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EDIT;}
-{rename}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RENAME;}
+{rename}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RENAME;}
 {copy}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_COPY;}
 {move}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MOVE;}
 {find}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIND;}
@@ -138,7 +138,7 @@ igual           [=]
 {sistema}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SISTEMA;}
 {igual}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IGUAL;}
 {nombre}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
-[[:blank:]]             ;
-.                       {std::cout<<yytext<<"ERROR LEXICO"<< std::ends;}
+[[:blank:]]             {}
+.                       {std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
 
 %%

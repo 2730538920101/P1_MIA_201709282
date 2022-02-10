@@ -1,0 +1,352 @@
+mkdisk -size=50 -unit=M -path=/home/archivos/faseU/Disco1.disk
+mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.disk
+mkDisk -size=10 -path=/home/archivos/faseU/Disco4.disk -unit=k
+mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/Disco3.disk"
+mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/mario/Escritorio/Disco5.disk"
+pause
+mkDisk -param=x -size=30 -path=/home/archivos/faseU/Disco4.disk
+pause
+rmDisk -path=/home/Disco4.disk
+rmDisk -path=/home/archivos/faseU/Disco2.disk
+rmDisk -path="/home/archivos/faseU/mis mario/Escritorio/Disco3.disk" 
+pause
+fdisk -type=P -unit=K -name=Part1 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=E -unit=K -name=Part2 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF
+fdisk -type=E -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF 
+fdisk -type=P -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF
+fdisk -type=P -unit=K -name=Part4 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=L -unit=K -name=Part5 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=L -unit=K -name=Part6 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=L -unit=K -name=Part7 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=WF
+fdisk -type=L -unit=K -name=Part8 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=WF
+fdisk -type=L -unit=K -name=Part9 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=L -unit=K -name=Part10 -size=1680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+pause
+fdisk -type=L -unit=K -name=Part28 -size=7680 -path=/home/archivos/faseU/Disco2.disk -fit=WF 
+fdisk -type=L -unit=K -name=Part27 -size=7680 -path=/home/archivos/faseU/Disco2.disk -fit=WF 
+fdisk -type=P -unit=K -name=Part12 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=P -unit=K -name=Part13 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=WF
+fdisk -type=P -unit=K -name=Part14 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=E -unit=K -name=Part15 -size=17360 -path=/home/archivos/faseU/Disco2.disk -fit=WF
+fdisk -type=L -unit=K -name=Part16 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part17 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part18 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=WF
+fdisk -type=L -unit=K -name=Part19 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=WF
+fdisk -type=L -unit=K -name=Part20 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part21 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part22 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part23 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part24 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+pause
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part1 
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part9 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part8 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part7 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part6 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part2 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part3 
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part12
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part13
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part14
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part15
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part16
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part17
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part18
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part19
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part20
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part210
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part221
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part232
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part243
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part254 
+pause
+unmount -id=123A
+unmount -id=123A
+pause
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/mbr1.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/disk1.png -name=disk
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/mbr4.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/disk4.png -name=disk
+pause
+fdisk -delete=fast -name=Part1 -path=/home/archivos/faseU/Disco1.disk
+fdisk -delete=fast -name=Part6 -path=/home/archivos/faseU/Disco1.disk
+fdisk -delete=fast -name=Part2 -path=/home/archivos/faseU/Disco1.disk 
+fdisk -delete=fast -name=Part10 -path=/home/archivos/faseU/Disco1.disk
+fdisk -delete=fast -name=Part9 -path=/home/archivos/faseU/Disco1.disk
+pause
+fdisk -delete=full -unit=K -path=/home/archivos/faseU/Disco2.disk -name=Part14
+fdisk -add=25 -unit=K -path=/home/archivos/faseU/Disco2.disk -name=Part13
+pause
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/mbr2.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/disk2.png -name=disk
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/mbr5.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/disk5.png -name=disk
+pause
+fdisk -add=-700 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part3
+fdisk -add=-800 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part4
+fdisk -add=-200 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part11
+fdisk -add=-400 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part8
+fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part13
+fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part13
+pause
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/mbr3.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/disk3.png -name=disk
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/mbr6.png -name=mbr
+rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/disk6.png -name=disk
+pause
+rmDisck -path=/home/archivos/faseU/Disco1.disk 
+rmDisck -path=/home/archivos/faseU/Disco2.disk 
+pause
+mkdisk -size=75 -unit=M -path=/home/archivos/faseU/Disco1.disk -fit=FF
+mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+pause
+fdisk -type=P -unit=M -name=Part1 -size=20 -path=/home/archivos/faseU/Disco1.disk -fit=FF
+fdisk -type=P -unit=M -name=Part2 -size=15 -path=/home/archivos/faseU/Disco1.disk -fit=FF
+fdisk -type=P -unit=M -name=Part3 -size=20 -path=/home/archivos/faseU/Disco1.disk -fit=FF
+pause
+fdisk -type=P -unit=M -name=Part1_D2 -size=20 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+fdisk -type=P -unit=M -name=Part2_D2 -size=10 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+fdisk -type=P -unit=M -name=Part3_D2 -size=10 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+pause
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part1 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part2 
+mount -path=/home/archivos/faseU/Disco1.disk -name=Part3 
+pause
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part1_D2 
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part2_D2 
+mount -path=/home/archivos/faseU/Disco2.disk -name=Part3_D2 
+pause
+mkfs -type=fast -id=123A -fs=3fs
+mkfs -type=full -id=123A -fs=3fs
+mkfs -type=fast -id=123A -fs=3fs
+pause
+rep -id=123A -Path="/home/archivos/reports2/reporte1_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte1_vda1_tree.jpg" -name=tree
+pause
+Login -password=567 -usuario=roca -id=123A
+logout
+Login -password=12345 -usuario=root -id=123A
+Login -password=123 -usuario=root -id=123A
+lOgin -password=error -usuario=error -id=123A
+pause
+mkgrp -naMe=Archivos
+mkgrp -NamE=SA
+mkgrp -name="Compi 2"
+mkgrp -NamE=Grupo1
+mkgrp -name="Compi 2"
+rmgrp -name="DB2"
+rmgrp -name=SA
+Mkusr -usr="user1" -grp=root -password=user1
+Mkusr -usr="user2" -grp="Compi 2" -pwd=user2
+Mkusr -usr="user3" -grp="Compi 2" -pwd=user3
+Mkusr -usr="user2" -grp="Compi 2" -pwd=user2
+Mkusr -usr="user2" -grp=SA -pwd=user2
+rmusr -usuario=user3
+rmusr -usuario=user3 
+rep -id=123A -Path="/home/archivos/reports2/Manejo_Usuarios.svg" -ruta="/users.txt" -name=file
+pause
+Mkdir -P  -path=/home/archivos/mia/faseU
+Mkdir -P  -path=/home/archivos/mia/carpeta2
+Mkdir -P  -path=/home/archivos/mia/z
+Mkdir -P  -path=/home/archivos/mia/carpeta3/carpeta7/carpeta8/carpeta9/carpeta10/carpeta11
+Mkdir -P  -path=/home/archivos/mia/carpeta4/carpeta7/carpeta8/carpeta9/carpeta10/carpeta11/carpeta7/carpeta8/carpeta9/carpeta10/carpeta11
+Mkdir  -path=/home/archivos/mia/carpeta2/a1
+Mkdir  -path=/home/archivos/mia/carpeta2/a2
+Mkdir  -path=/home/archivos/mia/carpeta2/a3
+Mkdir  -path=/home/archivos/mia/carpeta2/a4
+Mkdir  -path=/home/archivos/mia/carpeta2/a5
+Mkdir  -path=/home/archivos/mia/carpeta2/a6
+Mkdir  -path=/home/archivos/mia/carpeta2/a7
+Mkdir  -path=/home/archivos/mia/carpeta2/a8
+Mkdir  -path=/home/archivos/mia/carpeta2/a9
+Mkdir  -path=/home/archivos/mia/carpeta2/a10
+Mkdir  -path=/home/archivos/mia/carpeta2/a10
+Pause
+logout
+login -usuario=user2 -password=user2 -id=123A
+mkfile -path="/home/NOCREAR.txtS" -size=75
+Pause
+logout
+loGin -usuario=root -password=123 -id=123A
+mkfile -path="/home/b1.txt" -size=75
+mkfile -path="/home/Noexiste/b1.txt" -size=75
+mkfile -path="/home/b1.txt" -size=-45
+mkfile -p -path="/home/ahora/ya existe/b1.txt" -size=640
+mkfile -p -path="/home/ind.txt" -size=1200
+rep -id=123A -Path="/home/archivos/reports2/reporte3_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte3_vda1_tree.jpg" -name=tree
+pause
+remove -path=/home/ind.txt
+rep -id=123A -Path="/home/archivos/reports2/reporte4_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte4_vda1_tree.jpg" -name=tree
+pause
+move -path="/home/archivos/no existe" -destino="/home"
+move -path=/home/archivos/mia/carpeta2/a10 -destino="/home"
+find -Path="/" -name="?.*"
+Mkdir  -path=/home/archivos/mia/faseU/a1
+Mkdir  -path=/home/archivos/mia/faseU/a2
+Mkdir  -path=/home/archivos/mia/faseU/a3
+Mkdir  -path=/home/archivos/mia/faseU/a4
+Mkdir  -path=/home/archivos/mia/faseU/a5
+Mkdir  -path=/home/archivos/mia/faseU/a6
+Mkdir  -path=/home/archivos/mia/faseU/a7
+Mkdir  -path=/home/archivos/mia/faseU/a8
+Mkdir  -path=/home/archivos/mia/faseU/a9
+Mkdir  -path=/home/archivos/mia/faseU/a10
+Mkdir  -path=/home/archivos/mia/faseU/a11
+Mkdir  -path=/home/archivos/mia/faseU/a12
+Mkdir  -path=/home/archivos/mia/faseU/a13
+Mkdir  -path=/home/archivos/mia/faseU/a14
+Mkdir  -path=/home/archivos/mia/faseU/a15
+Mkdir  -path=/home/archivos/mia/faseU/a16
+Mkdir  -path=/home/archivos/mia/faseU/a17
+Mkdir  -path=/home/archivos/mia/faseU/a18
+Mkdir  -path=/home/archivos/mia/faseU/a19
+Mkdir  -path=/home/archivos/mia/faseU/a20
+Mkdir  -path=/home/archivos/mia/faseU/a21
+Mkdir  -path=/home/archivos/mia/faseU/a22
+Mkdir  -path=/home/archivos/mia/faseU/a23
+Mkdir  -path=/home/archivos/mia/faseU/a24
+Mkdir  -path=/home/archivos/mia/faseU/a25
+Mkdir  -path=/home/archivos/mia/faseU/a26
+Mkdir  -path=/home/archivos/mia/faseU/a27
+Mkdir  -path=/home/archivos/mia/faseU/a28
+Mkdir  -path=/home/archivos/mia/faseU/a29
+Mkdir  -path=/home/archivos/mia/faseU/a30
+Mkdir  -path=/home/archivos/mia/faseU/a31
+Mkdir  -path=/home/archivos/mia/faseU/a32
+Mkdir  -path=/home/archivos/mia/faseU/a33
+Mkdir  -path=/home/archivos/mia/faseU/a34
+Mkdir  -path=/home/archivos/mia/faseU/a35
+Mkdir  -path=/home/archivos/mia/faseU/a36
+Mkdir  -path=/home/archivos/mia/faseU/a37
+Mkdir  -path=/home/archivos/mia/faseU/a38
+Mkdir  -path=/home/archivos/mia/faseU/a39
+Mkdir  -path=/home/archivos/mia/faseU/a40
+Mkdir  -path=/home/archivos/mia/faseU/a41
+Mkdir  -path=/home/archivos/mia/faseU/a42
+Mkdir  -path=/home/archivos/mia/faseU/a43
+Mkdir  -path=/home/archivos/mia/faseU/a44
+Mkdir  -path=/home/archivos/mia/faseU/a45
+Mkdir  -path=/home/archivos/mia/faseU/a46
+mkdir  -path="/home/archivos/mia/faseU/b1"
+mkdir  -path="/home/archivos/mia/faseU/b2"
+mkdir  -path="/home/archivos/mia/faseU/b3"
+mkdir  -path="/home/archivos/mia/faseU/b4"
+mkdir  -path="/home/archivos/mia/faseU/b5"
+mkdir  -path="/home/archivos/mia/faseU/b6"
+mkdir  -path="/home/archivos/mia/faseU/b7"
+mkdir  -path="/home/archivos/mia/faseU/b8"
+mkdir  -path="/home/archivos/mia/faseU/b9"
+mkdir  -path="/home/archivos/mia/faseU/b10"
+mkdir  -path="/home/archivos/mia/faseU/b11"
+mkdir  -path="/home/archivos/mia/faseU/b12"
+mkdir  -path="/home/archivos/mia/faseU/b13"
+mkdir  -path="/home/archivos/mia/faseU/b14"
+mkdir  -path="/home/archivos/mia/faseU/b15"
+mkdir  -path="/home/archivos/mia/faseU/b16"
+mkdir  -path="/home/archivos/mia/faseU/b17"
+mkdir  -path="/home/archivos/mia/faseU/b18"
+mkdir  -path="/home/archivos/mia/faseU/b19"
+mkdir  -path="/home/archivos/mia/faseU/b20"
+mkdir  -path="/home/archivos/mia/faseU/b21"
+mkdir  -path="/home/archivos/mia/faseU/b22"
+mkdir  -path="/home/archivos/mia/faseU/b23"
+mkdir  -path="/home/archivos/mia/faseU/b24"
+mkdir  -path="/home/archivos/mia/faseU/b25"
+mkdir  -path="/home/archivos/mia/faseU/b26"
+mkdir  -path="/home/archivos/mia/faseU/b27"
+mkdir  -path="/home/archivos/mia/faseU/b28"
+mkdir  -path="/home/archivos/mia/faseU/b29"
+mkdir  -path="/home/archivos/mia/faseU/b30"
+mkdir  -path="/home/archivos/mia/faseU/b31"
+mkdir  -path="/home/archivos/mia/faseU/b32"
+mkdir  -path="/home/archivos/mia/faseU/b33"
+mkdir  -path="/home/archivos/mia/faseU/b34"
+mkdir  -path="/home/archivos/mia/faseU/b35"
+mkdir  -path="/home/archivos/mia/faseU/b36"
+mkdir  -path="/home/archivos/mia/faseU/b37"
+mkdir  -path="/home/archivos/mia/faseU/b38"
+mkdir  -path="/home/archivos/mia/faseU/b39"
+mkdir  -path="/home/archivos/mia/faseU/b40"
+mkdir  -path="/home/archivos/mia/faseU/b41"
+mkdir  -path="/home/archivos/mia/faseU/b42"
+mkdir  -path="/home/archivos/mia/faseU/b43"
+mkdir  -path="/home/archivos/mia/faseU/b44"
+mkdir  -path="/home/archivos/mia/faseU/b45"
+mkdir  -path="/home/archivos/mia/faseU/b46"
+mkdir  -path="/home/archivos/mia/faseU/b47"
+mkdir  -path="/home/archivos/mia/faseU/b48"
+mkdir  -path="/home/archivos/mia/faseU/b49"
+mkdir  -path="/home/archivos/mia/faseU/b50"
+rep -id=123A -Path="/home/archivos/reports2/reporte2_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte2_vda1_tree.jpg" -name=tree
+pause
+rep -id=123A -Path="/home/archivos/reports2/users.svg" -ruta="/users.txt" -name=file
+rep -id=123A -Path="/home/archivos/reports2/ls.pdf" -ruta="/" -name=ls
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_tree.jpg" -name=tree
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_inode.pdf" -name=inode
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_block.pdf" -name=block
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_bm_inode.pdf" -name=bm_inode
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_bm_block.pdf" -name=bm_block
+rep -id=123A -Path="/home/archivos/reports2/reporte5_vda1_journaling.pdf" -name=journalinging
+pause
+Loss -id=123A
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_tree.jpg" -name=tree
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_inode.pdf" -name=inode
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_block.pdf" -name=block
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_bm_inode.pdf" -name=bm_inode
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_bm_block.pdf" -name=bm_block
+rep -id=123A -Path="/home/archivos/reports2/reporte6_vda1_journaling.pdf" -name=journaling
+pause
+Recovery -id=123A
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_sb.pdf" -name=sb
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_tree.jpg" -name=tree
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_inode.pdf" -name=inode
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_block.pdf" -name=block
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_bm_inode.pdf" -name=bm_inode
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_bm_block.pdf" -name=bm_block
+rep -id=123A -Path="/home/archivos/reports2/reporte7_vda1_journaling.pdf" -name=journaling
+pause
+Login -password=123 -usuario=root -id=123A
+rename -path=/home/a10 -name=ren10
+rename -path="/home/archivos/mia/z" -name=rename
+logout
+loGin -usuario=user2 -password=user2 -id=123A
+rename -path="/home/b1.txt" -name=brenombre.txt
+logoUt
+pause
+Login -password=123 -usuario=root -id=123A
+mkfile -path="/home/b2ble.txt" -size=18000
+mkfile -path="/home/b3ple.txt" -size=280000
+rep -id=123A -Path="/home/archivos/reports2/reporte8_vda1_tree.jpg" -name=tree
+pause
+copy -path=/home/archivos/mia/carpeta3 -destino=/home/archivos/mia/yo/no/existo
+copy -path=/home/archivos/mia/carpeta3 -destino=/home/archivos/mia/carpeta2
+copy -path=/home/archivos/mia/faseU -destino=/home/archivos/mia/carpeta2
+rep -id=123A -Path="/home/archivos/reports2/reporte9_vda1_tree.jpg" -name=tree
+rep -id=123A -Path="/home/archivos/reports2/reporte9_vda1_tree.jpg" -ruta="/" -name=ls
+rep -id=123A -Path="/home/archivos/reports2/reporte9_vda1_tree.jpg" -name=file
+pause
+find -Path="/" -name=*
+pause
+find -Path="/" -name="?.*"
+find -Path="/no/existo" -name=?
+pause
+edit -path="/home/b3ple.txt" -size=50
+edit -path="/home/b2ble.txt" -size=280000
+rep -id=123A -Path="/home/archivos/reports2/reporte10_vda1_tree.jpg" -ruta="/" -name=ls
+rep -id=123A -Path="/home/archivos/reports2/reporte10_vda1_tree.jpg" -name=file
+rep -id=123A -Path="/home/archivos/reports2/reporte10_vda1_tree.jpg" -name=tree
+logout
+Login -password=user2 -usuario=user2 -id=123A
+cat -file2=/home/b1.txt -file1=/users.txt
+logout
+Login -password=123 -usuario=root -id=123A
+cat -file2=/home/b1.txt -file1=/users.txt
+Pause
+chmod -path=/ -ugo=000 -R
+rep -id=123A -Path="/home/archivos/reports2/lsULTIMO.pdf" -ruta="/" -name=ls
+pause

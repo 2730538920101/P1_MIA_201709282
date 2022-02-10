@@ -326,6 +326,19 @@ C_exec::C_exec(char path[]){
 //FUNCION EJECUTAR EXEC
 void C_exec::Ejecutar(){
     cout<<"Ejecutando comando EXEC... \n ";
+    FILE *archaux = fopen("entrada.script", "r");
+    if(archaux == NULL){
+        cout<<"ERROR AL INTENTAR ABIR EL SCRIPT... "<<endl;
+        return;
+    }
+    //se crea un buffer para la lectura 
+    char Buffer[1024];
+    while(fgets(Buffer, 1024, archaux)){
+        cout<<Buffer<<endl;
+        Escribir_Comando(Buffer,true);
+        Leer_Comando(true);
+    }
+    fclose(archaux);
 }
 
 //CREAR REP
@@ -351,6 +364,7 @@ void C_logout::Ejecutar(){
 //FUNCION EJECUTAR PAUSE
 void C_pause::Ejecutar(){
     cout<<"Ejecutando comando PAUSE... \n ";
+    system("read -r -p \"PARA CONTINUAR PRESIONA CUALQUIER TECLA...\" key");
 }
 
 
@@ -429,7 +443,6 @@ bool ValidarParametros(char *name, char *path, char *id, char *usuario, char *pa
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||
-                                            addEx ||
                                             ugoEx 
                                         );                   
                                     }break;
@@ -1711,7 +1724,7 @@ void Escribir_Comando(string comando, bool bandera){
     if(!bandera){
         arch = fopen("comandos.script", "w+");
     }else{
-        arch = fopen("comandos_definidos.txt", "w+");
+        arch = fopen("definidos.script", "w+");
     }
     fwrite(comando.c_str(), sizeof(char), strlen(comando.c_str()), arch);
     fclose(arch);
@@ -1723,7 +1736,7 @@ void Leer_Comando(bool bandera){
     if(!bandera){
         arch = fopen("comandos.script", "r");
     }else{
-        arch = fopen("comandos_definidos.txt", "r");
+        arch = fopen("definidos.script", "r");
     }
     if(arch == NULL){
         cout<<"Error en la lectura del archivo... \n \n";
