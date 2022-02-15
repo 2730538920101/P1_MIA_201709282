@@ -4,10 +4,10 @@
 #include "tipos.h"
 #include <string.h>
 #include <strings.h>
-#include "clases_comandos.h"
 #include "sintactico.h"
 #include "lexico.h"
 #include "retorno.h"
+#include "func_disk.h"
 
 using namespace std;
 

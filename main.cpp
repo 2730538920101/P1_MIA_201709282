@@ -6,6 +6,8 @@
 #include "sintactico.h"
 #include "clases_comandos.h"
 #include "retorno.h"
+#include "func_disk.h"
+#include "modelos.h"
 
 using namespace std;
 

@@ -119,7 +119,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "sintactico.y"
+#line 25 "sintactico.y"
 
 #include "tipos.h"
 

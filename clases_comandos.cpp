@@ -326,7 +326,7 @@ C_exec::C_exec(char path[]){
 //FUNCION EJECUTAR EXEC
 void C_exec::Ejecutar(){
     cout<<"Ejecutando comando EXEC... \n ";
-    FILE *archaux = fopen("entrada.script", "r");
+    FILE *archaux = fopen(path, "r");
     if(archaux == NULL){
         cout<<"ERROR AL INTENTAR ABIR EL SCRIPT... "<<endl;
         return;

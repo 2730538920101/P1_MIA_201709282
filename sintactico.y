@@ -6,6 +6,7 @@
 #include "tipos.h"
 #include "clases_comandos.h"
 #include "retorno.h"
+#include "modelos.h"
 
 extern int yylineno;
 extern int columna;
@@ -260,7 +261,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_PATH TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(PATH);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_SIZE TOK_IGUAL TOK_NUMERO{
                             $$ = new Parametro(SIZE);
@@ -310,7 +311,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_NAME TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(NAME);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_TYPE TOK_IGUAL TOK_TIPO{
                             $$ = new Parametro(TYPE);
@@ -394,7 +395,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_USUARIO TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(USUARIO);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_PASSWORD TOK_IGUAL TOK_NOMBRE{
                             $$ = new Parametro(PASSWORD);
@@ -418,7 +419,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_GRP TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(GRP);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_UGO TOK_IGUAL TOK_NUMERO{
                             $$ = new Parametro(UGO);
@@ -442,11 +443,11 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_CONTENIDO TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(CONTENIDO);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_CONT TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(CONT);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_DESTINO TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(DESTINO);
@@ -454,7 +455,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_DESTINO TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(DESTINO);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_FILEN TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(FILEN);
@@ -462,11 +463,11 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_FILEN TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(FILEN);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_RUTA TOK_IGUAL TOK_CADENA{
                             $$ = new Parametro(RUTA);
-                            strcpy($$->text, $3);
+                            strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
                         |TOK_RUTA TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(RUTA);

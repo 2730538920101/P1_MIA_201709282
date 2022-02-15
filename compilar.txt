@@ -1,3 +1,9 @@
 flex --header-file=lexico.h -o lexico.cpp lexico.l
 bison sintactico.y -o sintactico.cpp --defines=sintactico.h
 c++ *.cpp -o P1_201709282
+
+git: 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
+
+PRUEBA DEL COMANDO EXEC CON COMILLAS Y SIN COMILLAS 
+/home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script
+"/home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script"

@@ -1,1 +1,1 @@
-rename -path=/
+exec -path="/home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script"
