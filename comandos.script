@@ -1,1 +1,1 @@
-exec -path="/home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script"
+mkdisk -size=50 -unit=M -path=/home/archivos/faseU/Disco3.dk

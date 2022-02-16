@@ -1,4 +1,4 @@
-#ifdef MODELOS_H
+#ifndef MODELOS_H
 #define MODELOS_H
 #include "tipos.h"
 #include <iostream>
@@ -32,7 +32,7 @@ struct ExtendedBootRecord{
     long part_size;
     int part_next;
     char part_name[16];
-}
+};
 //-----------------------------------------------------------------------------
 
 

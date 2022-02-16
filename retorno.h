@@ -28,11 +28,25 @@ string getCadenaSinComillas(char path_original[]);
 //FUNCION QUE DEVUELVE EL NOMBRE DE UN ARCHIVO DESDE EL PATH RECIBIDO
 string getNameFromPath(char *path, int *position);
 
+//FUNCION QUE DEVUELVE EL PATH SIN EL NOMBRE INCLUIDO EN EL STRING
+string getPathSinNombre(char *path, int tamNombre);
+
 //FUNCION QUE DEVUELVE EL VALOR DEL TAMANO QUE SE INGRESA
 long getSize(int, Tipounit);
 
 //FUNCION QUE DEVUELVE LA FECHA ACTUAL EN EL SISTEMA
-char * getFecha();
+void getFecha(char[]);
 
+//FUNCION PARA CREAR CARPETAS
+void CrearCarpeta(string path);
+
+//FUNCION PARA LIMPIAR UN ARRAY
+void LimpiarArray(char[], int);
+
+//FUNCION QUE VERIFICA EL PATH DEL DISCO
+void getPathOfDisk(char [], char [], char []);
+
+//FUNCION QUE DEVUELVE UN MENSAJE DE ERROR SEGUN EL ERROR QUE ENCUENTRE
+void getErrorMsj(Respuesta);
 
 #endif //RETORNO_H

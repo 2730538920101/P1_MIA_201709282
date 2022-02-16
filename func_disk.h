@@ -16,8 +16,11 @@ using namespace std;
 int getSignature();
 
 //FUNCION QUE DEVUELVE UN MARCADOR BOOLEANO QUE ES TRUE CUANDO SE CREA Y ESCRIBE EL ARCHIVO MBR
-bool CrearArchivoMBR(char[], char[]);
-MasterBootRecord mbr;
+bool CrearArchivoMBR(MasterBootRecord*,char[], char[]);
+
+//FUNCION QUE DEVUELVE UNA RESPUESTA DE ERROR O DE SUCCESS AL CREAR UN NUEVO DISCO
+Respuesta CrearDisk(int, Tipofit, Tipounit, char[], char[]);
+
 
 
 

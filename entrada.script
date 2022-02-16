@@ -1,64 +1,64 @@
-mkdisk -size=50 -unit=M -path=/home/archivos/faseU/Disco1.disk
-mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.disk
-mkDisk -size=10 -path=/home/archivos/faseU/Disco4.disk -unit=k
-mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/Disco3.disk"
-mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/mario/Escritorio/Disco5.disk"
+mkdisk -size=50 -unit=M -path=/home/archivos/faseU/Disco1.dk
+mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.dk
+mkDisk -size=10 -path=/home/archivos/faseU/Disco4.dk -unit=k
+mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/Disco3.dk"
+mkdisk -size=51200 -unit=k -path="/home/archivos/faseU/misarchivos/mario/Escritorio/Disco5.dk"
 pause
-mkDisk -param=x -size=30 -path=/home/archivos/faseU/Disco4.disk
+mkDisk -param=x -size=30 -path=/home/archivos/faseU/Disco4.dk
 pause
-rmDisk -path=/home/Disco4.disk
-rmDisk -path=/home/archivos/faseU/Disco2.disk
-rmDisk -path="/home/archivos/faseU/mis mario/Escritorio/Disco3.disk" 
+rmDisk -path=/home/Disco4.dk
+rmDisk -path=/home/archivos/faseU/Disco2.dk
+rmDisk -path="/home/archivos/faseU/mis mario/Escritorio/Disco3.dk" 
 pause
-fdisk -type=P -unit=K -name=Part1 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
-fdisk -type=E -unit=K -name=Part2 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF
-fdisk -type=E -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF 
-fdisk -type=P -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=WF
-fdisk -type=P -unit=K -name=Part4 -size=7680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
-fdisk -type=L -unit=K -name=Part5 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
-fdisk -type=L -unit=K -name=Part6 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
-fdisk -type=L -unit=K -name=Part7 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=WF
-fdisk -type=L -unit=K -name=Part8 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=WF
-fdisk -type=L -unit=K -name=Part9 -size=1200 -path=/home/archivos/faseU/Disco1.disk -fit=BF
-fdisk -type=L -unit=K -name=Part10 -size=1680 -path=/home/archivos/faseU/Disco1.disk -fit=BF
+fdisk -type=P -unit=K -name=Part1 -size=7680 -path=/home/archivos/faseU/Disco1.dk -fit=BF
+fdisk -type=E -unit=K -name=Part2 -size=7680 -path=/home/archivos/faseU/Disco1.dk -fit=WF
+fdisk -type=E -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.dk -fit=WF 
+fdisk -type=P -unit=K -name=Part3 -size=7680 -path=/home/archivos/faseU/Disco1.dk -fit=WF
+fdisk -type=P -unit=K -name=Part4 -size=7680 -path=/home/archivos/faseU/Disco1.dk -fit=BF
+fdisk -type=L -unit=K -name=Part5 -size=1200 -path=/home/archivos/faseU/Disco1.dk -fit=BF
+fdisk -type=L -unit=K -name=Part6 -size=1200 -path=/home/archivos/faseU/Disco1.dk -fit=BF
+fdisk -type=L -unit=K -name=Part7 -size=1200 -path=/home/archivos/faseU/Disco1.dk -fit=WF
+fdisk -type=L -unit=K -name=Part8 -size=1200 -path=/home/archivos/faseU/Disco1.dk -fit=WF
+fdisk -type=L -unit=K -name=Part9 -size=1200 -path=/home/archivos/faseU/Disco1.dk -fit=BF
+fdisk -type=L -unit=K -name=Part10 -size=1680 -path=/home/archivos/faseU/Disco1.dk -fit=BF
 pause
-fdisk -type=L -unit=K -name=Part28 -size=7680 -path=/home/archivos/faseU/Disco2.disk -fit=WF 
-fdisk -type=L -unit=K -name=Part27 -size=7680 -path=/home/archivos/faseU/Disco2.disk -fit=WF 
-fdisk -type=P -unit=K -name=Part12 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=P -unit=K -name=Part13 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=WF
-fdisk -type=P -unit=K -name=Part14 -size=4680 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=E -unit=K -name=Part15 -size=17360 -path=/home/archivos/faseU/Disco2.disk -fit=WF
-fdisk -type=L -unit=K -name=Part16 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part17 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part18 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=WF
-fdisk -type=L -unit=K -name=Part19 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=WF
-fdisk -type=L -unit=K -name=Part20 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part21 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part22 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part23 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
-fdisk -type=L -unit=K -name=Part24 -size=1200 -path=/home/archivos/faseU/Disco2.disk -fit=BF
+fdisk -type=L -unit=K -name=Part28 -size=7680 -path=/home/archivos/faseU/Disco2.dk -fit=WF 
+fdisk -type=L -unit=K -name=Part27 -size=7680 -path=/home/archivos/faseU/Disco2.dk -fit=WF 
+fdisk -type=P -unit=K -name=Part12 -size=4680 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=P -unit=K -name=Part13 -size=4680 -path=/home/archivos/faseU/Disco2.dk -fit=WF
+fdisk -type=P -unit=K -name=Part14 -size=4680 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=E -unit=K -name=Part15 -size=17360 -path=/home/archivos/faseU/Disco2.dk -fit=WF
+fdisk -type=L -unit=K -name=Part16 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part17 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part18 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=WF
+fdisk -type=L -unit=K -name=Part19 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=WF
+fdisk -type=L -unit=K -name=Part20 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part21 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part22 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part23 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=K -name=Part24 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
 pause
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part1 
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part9 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part8 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part7 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part6 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part2 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part3 
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part12
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part13
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part14
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part15
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part16
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part17
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part18
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part19
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part20
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part210
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part221
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part232
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part243
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part254 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part1 
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part9 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part8 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part7 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part6 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part2 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part3 
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part12
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part13
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part14
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part15
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part16
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part17
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part18
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part19
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part20
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part210
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part221
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part232
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part243
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part254 
 pause
 unmount -id=123A
 unmount -id=123A
@@ -68,53 +68,53 @@ rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/disk1.png -name=disk
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/mbr4.png -name=mbr
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep1/disk4.png -name=disk
 pause
-fdisk -delete=fast -name=Part1 -path=/home/archivos/faseU/Disco1.disk
-fdisk -delete=fast -name=Part6 -path=/home/archivos/faseU/Disco1.disk
-fdisk -delete=fast -name=Part2 -path=/home/archivos/faseU/Disco1.disk 
-fdisk -delete=fast -name=Part10 -path=/home/archivos/faseU/Disco1.disk
-fdisk -delete=fast -name=Part9 -path=/home/archivos/faseU/Disco1.disk
+fdisk -delete=fast -name=Part1 -path=/home/archivos/faseU/Disco1.dk
+fdisk -delete=fast -name=Part6 -path=/home/archivos/faseU/Disco1.dk
+fdisk -delete=fast -name=Part2 -path=/home/archivos/faseU/Disco1.dk 
+fdisk -delete=fast -name=Part10 -path=/home/archivos/faseU/Disco1.dk
+fdisk -delete=fast -name=Part9 -path=/home/archivos/faseU/Disco1.dk
 pause
-fdisk -delete=full -unit=K -path=/home/archivos/faseU/Disco2.disk -name=Part14
-fdisk -add=25 -unit=K -path=/home/archivos/faseU/Disco2.disk -name=Part13
+fdisk -delete=full -unit=K -path=/home/archivos/faseU/Disco2.dk -name=Part14
+fdisk -add=25 -unit=K -path=/home/archivos/faseU/Disco2.dk -name=Part13
 pause
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/mbr2.png -name=mbr
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/disk2.png -name=disk
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/mbr5.png -name=mbr
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep2/disk5.png -name=disk
 pause
-fdisk -add=-700 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part3
-fdisk -add=-800 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part4
-fdisk -add=-200 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part11
-fdisk -add=-400 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part8
-fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part13
-fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.disk -name=Part13
+fdisk -add=-700 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part3
+fdisk -add=-800 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part4
+fdisk -add=-200 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part11
+fdisk -add=-400 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part8
+fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part13
+fdisk -add=-1000 -unit=K -path=/home/archivos/faseU/Disco1.dk -name=Part13
 pause
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/mbr3.png -name=mbr
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/disk3.png -name=disk
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/mbr6.png -name=mbr
 rep -id=123A -Path=/home/archivos/faseU/reportes/rep3/disk6.png -name=disk
 pause
-rmDisck -path=/home/archivos/faseU/Disco1.disk 
-rmDisck -path=/home/archivos/faseU/Disco2.disk 
+rmDisck -path=/home/archivos/faseU/Disco1.dk 
+rmDisck -path=/home/archivos/faseU/Disco2.dk 
 pause
-mkdisk -size=75 -unit=M -path=/home/archivos/faseU/Disco1.disk -fit=FF
-mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+mkdisk -size=75 -unit=M -path=/home/archivos/faseU/Disco1.dk -fit=FF
+mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.dk -fit=FF
 pause
-fdisk -type=P -unit=M -name=Part1 -size=20 -path=/home/archivos/faseU/Disco1.disk -fit=FF
-fdisk -type=P -unit=M -name=Part2 -size=15 -path=/home/archivos/faseU/Disco1.disk -fit=FF
-fdisk -type=P -unit=M -name=Part3 -size=20 -path=/home/archivos/faseU/Disco1.disk -fit=FF
+fdisk -type=P -unit=M -name=Part1 -size=20 -path=/home/archivos/faseU/Disco1.dk -fit=FF
+fdisk -type=P -unit=M -name=Part2 -size=15 -path=/home/archivos/faseU/Disco1.dk -fit=FF
+fdisk -type=P -unit=M -name=Part3 -size=20 -path=/home/archivos/faseU/Disco1.dk -fit=FF
 pause
-fdisk -type=P -unit=M -name=Part1_D2 -size=20 -path=/home/archivos/faseU/Disco2.disk -fit=FF
-fdisk -type=P -unit=M -name=Part2_D2 -size=10 -path=/home/archivos/faseU/Disco2.disk -fit=FF
-fdisk -type=P -unit=M -name=Part3_D2 -size=10 -path=/home/archivos/faseU/Disco2.disk -fit=FF
+fdisk -type=P -unit=M -name=Part1_D2 -size=20 -path=/home/archivos/faseU/Disco2.dk -fit=FF
+fdisk -type=P -unit=M -name=Part2_D2 -size=10 -path=/home/archivos/faseU/Disco2.dk -fit=FF
+fdisk -type=P -unit=M -name=Part3_D2 -size=10 -path=/home/archivos/faseU/Disco2.dk -fit=FF
 pause
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part1 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part2 
-mount -path=/home/archivos/faseU/Disco1.disk -name=Part3 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part1 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part2 
+mount -path=/home/archivos/faseU/Disco1.dk -name=Part3 
 pause
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part1_D2 
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part2_D2 
-mount -path=/home/archivos/faseU/Disco2.disk -name=Part3_D2 
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part1_D2 
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part2_D2 
+mount -path=/home/archivos/faseU/Disco2.dk -name=Part3_D2 
 pause
 mkfs -type=fast -id=123A -fs=3fs
 mkfs -type=full -id=123A -fs=3fs

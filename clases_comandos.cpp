@@ -14,6 +14,17 @@ C_mkdisk::C_mkdisk(int size, char path[]){
 //FUNCION EJECUTAR MKDISK
 void C_mkdisk::Ejecutar(){
     cout<<"Ejecutando comando MKDISK... \n ";
+    int aux = 0;
+    string nom;
+    nom = getNameFromPath(path, &aux);
+    char *aux2 = &nom[0];
+    string aux3 = getPathSinNombre(path, strlen(aux2)+aux);
+    Respuesta resultado = CrearDisk(size, fit, unit, &aux3[0], aux2);
+    if(resultado == CORRECTO){
+        cout<<"EL DISCO FUE CREADO EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(resultado);
+    }
 }
 
 //CREAR RMDISK

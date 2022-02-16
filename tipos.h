@@ -7,6 +7,8 @@ enum Tipoparticion {P, E, L, TIPO_ERROR};
 enum Tipocapacidad {FAST, FULL, CAPACIDAD_ERROR};
 enum Tiposistema {EXT2, EXT3, FS_EXT_ERROR};
 
+enum Tipostatus {ACTIVO = 1, INACTIVO = 0};
+
 enum Tiporeporte {
     MBR,
     DISK,
@@ -23,7 +25,8 @@ enum Tiporeporte {
 };
 
 enum Respuesta { 
-    CORRECTO
+    CORRECTO,
+    ERR_DISK_NO_EX
 };
 
 enum TipoComando{
