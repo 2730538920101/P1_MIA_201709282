@@ -353,9 +353,9 @@ void C_exec::Ejecutar(){
 }
 
 //CREAR REP
-C_rep::C_rep(char name[], char path[], char id[]){
+C_rep::C_rep(Tiporeporte reporte, char path[], char id[]){
     //parametros obligatorios
-    this->name = name;
+    this->reporte = reporte;
     this->path = path;
     this->id = id;
     //parametros opcionales con valor por defecto
@@ -365,6 +365,57 @@ C_rep::C_rep(char name[], char path[], char id[]){
 //FUNCION EJECUTAR REP
 void C_rep::Ejecutar(){
     cout<<"Ejecutando comando REP... \n";
+    switch(this->reporte){
+        case MBR:
+        {
+            cout<<"REPORTE MBR... "<<endl;
+            ReadDisk(this->path);
+        }break;
+        case DISK:
+        {
+            cout<<"REPORTE DISK... "<<endl;
+        }break;
+        case INODE:
+        {
+            cout<<"REPORTE INODE... "<<endl;
+        }break;
+        case BLOCK:
+        {
+            cout<<"REPORTE BLOCK... "<<endl;
+        }break;
+        case JOURNALING:
+        {
+            cout<<"REPORTE JOURNALING... "<<endl;
+        }break;
+        case BM_BLOCK:
+        {
+            cout<<"REPORTE BM_BLOCK... "<<endl;
+        }break;
+        case BM_INODE:
+        {
+            cout<<"REPORTE BM_INODE... "<<endl;
+        }break;
+        case TREE:
+        {
+            cout<<"REPORTE TREE... "<<endl;
+        }break;
+        case SB:
+        {
+            cout<<"REPORTE SB... "<<endl;
+        }break;
+        case FILE_REP:
+        {
+            cout<<"REPORTE FILE... "<<endl;
+        }break;
+        case LS:
+        {
+            cout<<"REPORTE LS... "<<endl;
+        }break;
+        default:
+        {
+            cout<<"EL REPORTE SOLICITADO ES INCORRECTO... "<<endl;
+        }break;
+    }
 }
 
 //FUNCION EJECUTAR LOGOUT
@@ -1701,7 +1752,7 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     return NULL;
                 }
                 //crear objeto auxiliar
-                C_rep *aux_rep = new C_rep(name, path, id);
+                C_rep *aux_rep = new C_rep(reporte, path, id);
                 //verificar parametros opcionales
                 if(reporte == LS || reporte == FILE_REP){
                     if(ruta == NULL){

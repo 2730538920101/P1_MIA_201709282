@@ -49,4 +49,7 @@ void getPathOfDisk(char [], char [], char []);
 //FUNCION QUE DEVUELVE UN MENSAJE DE ERROR SEGUN EL ERROR QUE ENCUENTRE
 void getErrorMsj(Respuesta);
 
+//FUNCION PARA DAR LECTURA A UN ARCHIVO BINARIO
+void ReadDisk(char []);
+
 #endif //RETORNO_H

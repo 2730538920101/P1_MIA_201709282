@@ -1,1 +1,1 @@
-mkdisk -size=50 -unit=M -path=/home/archivos/faseU/Disco3.dk
+rep -name=MBR -path=/home/archivos/faseU/Disco2.dk -id=123A

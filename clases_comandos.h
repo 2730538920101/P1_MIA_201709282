@@ -328,12 +328,12 @@ class C_exec:public Comando{
 //Clase para generar el comando rep, hereda de la clase Comando
 class C_rep:public Comando{
     public:
-        char *name;
+        Tiporeporte reporte;
         char *path;
         char *id;
         char *ruta;
         //constructor con los parametros obligatorios
-        C_rep(char name[], char path[], char id[]);
+        C_rep(Tiporeporte reporte, char path[], char id[]);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };

@@ -7,3 +7,7 @@ git: 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
 PRUEBA DEL COMANDO EXEC CON COMILLAS Y SIN COMILLAS 
 /home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script
 "/home/carlosmz87/Proyectos_C/pruebaCpp/entrada.script"
+
+mkdisk -unit=K -size=51200 -path=/home/archivos/faseU/Disco2.dk
+
+rep -name=MBR -path=/home/archivos/faseU/Disco2.dk -id=123A

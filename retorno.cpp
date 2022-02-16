@@ -156,6 +156,36 @@ void getPathOfDisk(char path[], char name[], char path_comp[]){
     strcat(path_comp, ".dk");
 }
 
+//FUNCION PARA DAR LECTURA A UN ARCHIVO BINARIO
+void ReadDisk(char path[]){
+    MasterBootRecord data;
+    FILE *arch = fopen(path, "rb+");
+    if(arch != NULL){
+        fseek(arch, 0, SEEK_SET);
+        fread(&data, sizeof(MasterBootRecord), 1, arch);
+        cout<<"----DATOS DEL MBR----"<<endl;
+        cout<<"MBR SIZE: "<<sizeof(MasterBootRecord)<<endl;
+        cout<<"FECHA DE CREACION: "<<data.mbr_fecha_creacion<<endl;
+        cout<<"FIT: "<<data.disk_fit<<endl;
+        cout<<"SIGNATURE: "<<data.mbr_disk_signature<<endl;
+        cout<<"SIZE: "<<data.mbr_tamano<<endl;
+        cout<<"----PARTICIONES----"<<endl;
+        for(int i =0; i < 4; i++){
+            cout<<"PARTICION "<<i<<endl;
+            cout<<"NAME: "<<data.particiones[i].part_name<<endl;
+            cout<<"SIZE: "<<data.particiones[i].part_size<<endl;
+            cout<<"FIT: "<<data.particiones[i].part_fit<<endl;
+            cout<<"TYPE: "<<data.particiones[i].part_type<<endl;
+            cout<<"START: "<<data.particiones[i].part_start<<endl;
+            cout<<"STATUS: "<<data.particiones[i].part_status<<endl;
+            cout<<"------------------------------------"<<endl;
+        }
+    }else{
+        cout<<"EL DISCO NO HA SIDO CREADO EN ESA RUTA... "<<endl;
+    }
+    fclose(arch);
+}
+
 //FUNCION QUE DEVUELVE UN MENSAJE DE ERROR SEGUN EL ERROR QUE ENCUENTRE
 void getErrorMsj(Respuesta res){
     switch(res){
