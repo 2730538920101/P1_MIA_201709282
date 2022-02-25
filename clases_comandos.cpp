@@ -36,6 +36,7 @@ C_rmdisk::C_rmdisk(char path[]){
 //FUNCION EJECUTAR RMDISK
 void C_rmdisk::Ejecutar(){
     cout<<"Ejecutando comando RMDISK... \n ";
+    RemoveDisk(path);
 }
 
 //CREAR FDISK
@@ -44,16 +45,96 @@ C_fdisk::C_fdisk(int size, char path[], char name[]){
     this->size = size;
     this->path = path;
     this->name = name;
-    //parametros opcionales con valor por defecto
-    this->tipo = P;
+    //patrametros opcionales con valor por defecto
     this->unit = K;
+    this->tipo = P;
     this->fit = WF;
-    this->add = 0;
+    this->capacidad = CAPACIDAD_ERROR;    
 }
 
 //FUNCION EJECUTAR FDISK
 void C_fdisk::Ejecutar(){
     cout<<"Ejecutando comando FDISK... \n ";
+    int inicio = 0;
+    string str;
+    str = getNameFromPath(path, &inicio);
+    char *word = &str[0];
+    string finalstr = getPathSinNombre(path, strlen(word) + inicio);
+    Respuesta res = CrearParticion(size, unit, &finalstr[0], word, this->tipo, fit, name);
+    if(res == CORRECTO){
+        switch(this->tipo){
+            case P:
+            {
+                cout<<"SE HA CREADO UNA PARTICION PRIMARIA... "<<endl;
+            }break;
+            case E:
+            {
+                cout<<"SE HA CREADO UNA PARTICION EXTENDIDA... "<<endl;
+            }break;
+            case L:
+            {
+                cout<<"SE HA CREADO UNA PARTICION LOGICA... "<<endl;
+            }break;
+            default:
+            {
+                break;
+            }
+        }
+    }else{
+        getErrorMsj(res);
+    }
+}
+
+//CLASE AUXILIAR PARA EJECUTAR EL PARAMETRO ADD EN EL COMANDO FDISK
+C_add::C_add(char name[], char path[], int size){
+    //parametros obligatorios
+    this->size = size;
+    this->name = name;
+    this->path = path;
+    //parametros opcionales con valor por defecto
+    this->unit = K;
+}
+
+//funcion ejecutar comando FDISK con parametro add
+void C_add::Ejecutar(){
+    cout<<"Ejecutando comando FDISK con parametro ADD... \n ";
+    int inicio = 0;
+    string str;
+    str = getNameFromPath(path, &inicio);
+    char *word = &str[0];
+    string finalstr = getPathSinNombre(path, strlen(word) + inicio);
+    Respuesta res = AddSizePart(&finalstr[0], word, name, this->size, unit);
+    if(res == CORRECTO){
+        cout<<"LA PARTICION SE HA MODIFICADO EXITOSAMENTE... "<<endl;
+    }else{
+        getErrorMsj(res);
+    }
+}
+
+//Clase auxiliar para ejecutar el parametro DELETE en el comando FDISK
+C_delete::C_delete(char name[], char path[], Tipocapacidad capacidad, Tipoparticion tipo){
+    //parametros obligatorios
+    this->name = name;
+    this->path = path;
+    this->capacidad = capacidad;
+    this->tipo = tipo;
+}
+
+//funcion ejecutar FDISK con parametro delete
+void C_delete::Ejecutar(){
+    cout<<"Ejecutando comando FDISK con parametro DELETE... \n ";
+    int inicio = 0;
+    string str;
+    str = getNameFromPath(path, &inicio);
+    char *word = &str[0];
+    string finalstr = getPathSinNombre(path, strlen(word) + inicio);
+    Respuesta res = DeletePart(&finalstr[0], word, name, this->tipo, this->capacidad);
+    if(res == CORRECTO){
+        cout<<"LA PARTICION HA SIDO ELIMINADA EXITOSAMENTE... "<<endl;
+    }else{
+        getErrorMsj(res);
+    }
+
 }
 
 //CREAR MOUNT
@@ -1200,6 +1281,7 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     type = auxparam->type;
                 }break;
             case DELETE:
+            case FORMATO:
                 {
                     capacidad = auxparam->capacidad;
                 }break;
@@ -1327,13 +1409,31 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     cout<<"El parametro path es obligatorio en este comando FDISK \n";
                     return NULL;
                 }
-                if(!sizeEx){
+                if(!sizeEx && type == -1){
                     cout<<"El parametro size es obligatorio en este comando FDISK \n";
                     return NULL;
                 }
                 if(name == NULL){
                     cout<<"El parametro name es obligatorio en este comando FDISK \n";
                     return NULL;
+                }
+                if(capacidad != CAPACIDAD_ERROR){
+                    //Eliminar la particion
+                    C_delete *del = new C_delete(name, path, capacidad, P);
+                    //verificar que tenga parametro tipo de particion
+                    if(type != TIPO_ERROR){
+                        del->tipo = type;
+                    }
+                    return del;
+                }
+                if(addEx){
+                    //agregar tamano
+                    C_add *addp = new C_add(name, path, size);
+                    //verificar que tenga el parametro unit
+                    if(unit != UNIT_ERROR){
+                        addp->unit = unit;
+                    }
+                    return addp;
                 }
                 // crear un objeto de la clase C_fdisk
                 C_fdisk *aux_fdisk = new C_fdisk(size, path, name);
@@ -1346,12 +1446,6 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                 }
                 if(fit != FIT_ERROR){
                     aux_fdisk->fit = fit;
-                }
-                if(capacidad != CAPACIDAD_ERROR){
-                    aux_fdisk->capacidad = capacidad;
-                }
-                if(addEx){
-                    aux_fdisk->add = add;
                 }
                 //retornar el objeto de la clase C_fdisk y castearlo a la clase Comando
                 return (Comando*)aux_fdisk;

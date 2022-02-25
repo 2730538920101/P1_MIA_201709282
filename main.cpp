@@ -8,6 +8,10 @@
 #include "retorno.h"
 #include "func_disk.h"
 #include "modelos.h"
+#include "globales.h"
+#include "func_part.h"
+#include "virtual_disk.h"
+#include "func_sys.h"
 
 using namespace std;
 
@@ -16,7 +20,7 @@ int main(){
     std::cout<<"BIENVENIDO AL SISTEMA DE ARCHIVOS, PROYECTO 1 MIA 1S2022\n";
     std::cout<<"CARLOS JAVIER MARTINEZ POLANCO 201709282\n\n";
     while(true){
-        std::cout<< "Ingresa un comando: ";
+        std::cout<< "\nIngresa un comando: ";
         getline(std::cin, comando_entrada);
         if(strcmp(comando_entrada.c_str(), "exit")==0){
             break;
@@ -24,10 +28,10 @@ int main(){
             system("clear");
             continue;
         }
-        if(comando_entrada != ""){
+        if(comando_entrada != "" && comando_entrada != "\n" && comando_entrada != " "){
             Escribir_Comando(comando_entrada,false);
             Leer_Comando(false);
         }
     }
-    
+    return 0;
 }

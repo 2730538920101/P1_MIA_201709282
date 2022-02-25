@@ -10,6 +10,7 @@ int columna = 0;
 %option noyywrap
 %option caseless
 
+
 mkdisk          "MKDISK"
 rmdisk          "RMDISK"
 fdisk           "FDISK"
@@ -63,14 +64,9 @@ fit             "-fit"
 ruta            "-ruta"
 identificador   [0-9]{3}[Aa-zZ]
 numero          [0-9]+
-ajuste          "BF"|"FF"|"WF"
-unidades        "B"|"K"|"M"
 cadena          [\"][^\"\n]*[\"]
 ruta_r          ([/][^\n\" ]+?)+
 nombre          [\*\?a-zA-Z0-9._-]+
-tipo            "P"|"E"|"L"
-capacidad       "FAST"|"FULL"
-sistema         "2FS"|"3FS"
 igual           [=]
 
 
@@ -130,12 +126,20 @@ igual           [=]
 {r}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_R;}
 {p}                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_P;}
 {ruta}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA;}
-{ajuste}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_AJUSTE;}
-{unidades}              {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNIDADES;}
+"FF"                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIRST;}
+"WF"                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_WORST;}
+"BF"                    {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_BEST;}
+"K"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_KB;}
+"M"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MB;}
+"B"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_BYTES;}
 {ruta_r}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA_R;}
-{tipo}                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TIPO;}
-{capacidad}             {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAPACIDAD;}
-{sistema}               {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SISTEMA;}
+"P"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PRIMARIA;}
+"E"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXTENDIDA;}
+"L"                     {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGICA;}
+"FAST"                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FAST;}
+"FULL"                  {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FULL;}
+"2FS"                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXT2;}
+"3FS"                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXT3;}
 {igual}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IGUAL;}
 {nombre}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
 [[:blank:]]             {}

@@ -16,6 +16,8 @@
 #include <time.h>
 #include "modelos.h"
 #include "func_disk.h"
+#include "virtual_disk.h"
+#include "func_sys.h"
 
 using namespace std;
 
@@ -49,7 +51,14 @@ void getPathOfDisk(char [], char [], char []);
 //FUNCION QUE DEVUELVE UN MENSAJE DE ERROR SEGUN EL ERROR QUE ENCUENTRE
 void getErrorMsj(Respuesta);
 
-//FUNCION PARA DAR LECTURA A UN ARCHIVO BINARIO
-void ReadDisk(char []);
+//FUNCION PARA ESCRIBIR CEROS EN UN ARCHIVO
+void LlenarCeros(char[], int, int);
+
+//FUNCION QUE CUENTA LOS DISCOS
+Respuesta getContDisk(int *contador, char *id);
+
+//FUNCION QUE RETORNA UN ID PARA LAS PARTICIONES CREADAS CON LOS ULTIMOS DIGITOS DE MI CARNET COMO BASE
+//82
+char *getPartitionId(char, int);
 
 #endif //RETORNO_H

@@ -156,35 +156,7 @@ void getPathOfDisk(char path[], char name[], char path_comp[]){
     strcat(path_comp, ".dk");
 }
 
-//FUNCION PARA DAR LECTURA A UN ARCHIVO BINARIO
-void ReadDisk(char path[]){
-    MasterBootRecord data;
-    FILE *arch = fopen(path, "rb+");
-    if(arch != NULL){
-        fseek(arch, 0, SEEK_SET);
-        fread(&data, sizeof(MasterBootRecord), 1, arch);
-        cout<<"----DATOS DEL MBR----"<<endl;
-        cout<<"MBR SIZE: "<<sizeof(MasterBootRecord)<<endl;
-        cout<<"FECHA DE CREACION: "<<data.mbr_fecha_creacion<<endl;
-        cout<<"FIT: "<<data.disk_fit<<endl;
-        cout<<"SIGNATURE: "<<data.mbr_disk_signature<<endl;
-        cout<<"SIZE: "<<data.mbr_tamano<<endl;
-        cout<<"----PARTICIONES----"<<endl;
-        for(int i =0; i < 4; i++){
-            cout<<"PARTICION "<<i<<endl;
-            cout<<"NAME: "<<data.particiones[i].part_name<<endl;
-            cout<<"SIZE: "<<data.particiones[i].part_size<<endl;
-            cout<<"FIT: "<<data.particiones[i].part_fit<<endl;
-            cout<<"TYPE: "<<data.particiones[i].part_type<<endl;
-            cout<<"START: "<<data.particiones[i].part_start<<endl;
-            cout<<"STATUS: "<<data.particiones[i].part_status<<endl;
-            cout<<"------------------------------------"<<endl;
-        }
-    }else{
-        cout<<"EL DISCO NO HA SIDO CREADO EN ESA RUTA... "<<endl;
-    }
-    fclose(arch);
-}
+
 
 //FUNCION QUE DEVUELVE UN MENSAJE DE ERROR SEGUN EL ERROR QUE ENCUENTRE
 void getErrorMsj(Respuesta res){
@@ -193,9 +165,115 @@ void getErrorMsj(Respuesta res){
         {
             cout<<"EL DISCO NO EXISTE... \n";
         }break;
+        case ERR_ID_INCORRECT:
+        {
+            cout<<"EL ID ES INCORRECTO... \n";
+        }break;
+        case ERR_DISK_UNMOUNTED:
+        {
+            cout<<"EL DISCO NO ESTA MONTADO... \n";
+        }break;
+        case ERR_ESPACIO_INS:
+        {
+            cout<<"EL DISCO NO TIENE SUFICIENTE ESPACIO... \n";
+        }break;
+        case ERR_PART_EX:
+        {
+            cout<<"LA PARTICION YA EXISTE EN EL DISCO... \n";
+        }break;
+        case ERR_PP_LLENA:
+        {
+            cout<<"EL DISCO NO PUEDE CREAR UNA PARTICION PRIMARIA, SOLO PERMITE 4... \n";
+        }break;
+        case ERR_PE_EX:
+        {
+            cout<<"EL DISCO YA TIENE UNA PARTICION EXTENDIDA... \n";
+        }break;
+        case ERR_PE_NOEX:
+        {
+            cout<<"ERROR AL OPERAR LA PARTICION LOGICA, NO EXISTE UNA PARTICION EXTENDIDA EN EL DISCO... \n";
+        }break;
+        case ERR_IRRECONOCIBLE:
+        {
+            cout<<"ERROR NO MANEJABLE... \n";
+        }break;
+        case ERR_TAM_MIN:
+        {
+            cout<<"EL TAMANO DEBE SER MAYOR A CERO... \n";
+        }break;
+        case ERR_PART_NOEX:
+        {
+            cout<<"LA PARTICION NO EXISTE... \n";
+        }break;
+        case ERR_NO_ADD_ESPACIO:
+        {
+            cout<<"NO SE PUEDE AGREGAR ESPACIO A LA PARTICION, YA NO HAY ESPACIO LIBRE... \n";
+        }break;
         default:
         {
             cout<<"ERROR NO IDENTIFICADO... \n";
         }break;
     }
+}
+
+//FUNCION PARA ESCRIBIR CEROS EN UN ARCHIVO
+void LlenarCeros(char path[], int pos, int tam){
+    //INICIALIZAR UN PUNTERO A UN ARCHIVO UBICADO EN LA RUTA QUE RECIBE COMO PARAMETRO
+    FILE *arch;
+    arch = fopen(path, "rb+");
+    //VERIFICAR QUE EXISTA O SE HAYA CREADO EL ARCHIVO
+    if(arch == NULL){
+        cout<<"ERROR AL ABRIR EL ARCHIVO... \n";
+        return;
+    }
+    //ubicar el puntero en la posicion que recibe como parametro
+    fseek(arch, pos, SEEK_SET);
+    //FTELL DA EL VALOR DE LA POSICION SENALADA POR EL PUNTERO REUBICADO POR FSEEK
+    //FTELL DEVUELVE -1 SI NO SE CUMPLE 
+    while(ftell(arch) < tam && ftell(arch) !=-1){
+        //escribir ceros
+        fwrite("\0",sizeof(char), 1, arch);
+    }
+    //CERRAR EL STREAM
+    fclose(arch);
+}
+
+
+//FUNCION QUE CUENTA LOS DISCOS
+Respuesta getContDisk(int *contador, char *id){
+    //casting a string del id
+    string word(id);
+    //verificar la longitud del id
+    if(strlen(id) < 4){
+        return ERR_ID_INCORRECT;
+    }
+    char letra = word.at(2);
+    //BUSCAR LA LETRA
+    *contador = 0;
+    //bandera para verificar si existe el disco
+    bool flag = false;
+    while(discos_montados[*contador] != NULL){
+        //validar la existencia
+        if(discos_montados[*contador]->letra == letra){
+            flag = true;
+            break;
+        }
+        (*contador)++;
+    }
+    //validar error de disco montado
+    if(!flag){
+        return ERR_DISK_UNMOUNTED;
+    }
+    //devolver respuesta de exito
+    return CORRECTO;
+}
+
+
+//FUNCION QUE RETORNA UN ID PARA LAS PARTICIONES CREADAS CON LOS ULTIMOS DIGITOS DE MI CARNET COMO BASE
+//82
+char *getPartitionId(char letra, int numero){
+    string str("82");
+    str+=letra;
+    str+=to_string(numero);
+    return &str[0];
 }

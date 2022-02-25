@@ -40,13 +40,21 @@ int INT;
 }
 
 %token <entrada> TOK_NUMERO
-%token <entrada> TOK_AJUSTE
+%token <entrada> TOK_FIRST
+%token <entrada> TOK_WORST
+%token <entrada> TOK_BEST
 %token <entrada> TOK_RUTA_R
-%token <entrada> TOK_UNIDADES
-%token <entrada> TOK_TIPO
+%token <entrada> TOK_KB
+%token <entrada> TOK_MB
+%token <entrada> TOK_BYTES
+%token <entrada> TOK_PRIMARIA
+%token <entrada> TOK_LOGICA
+%token <entrada> TOK_EXTENDIDA
 %token <entrada> TOK_NOMBRE
-%token <entrada> TOK_CAPACIDAD
-%token <entrada> TOK_SISTEMA
+%token <entrada> TOK_FAST
+%token <entrada> TOK_FULL
+%token <entrada> TOK_EXT2
+%token <entrada> TOK_EXT3
 %token <entrada> TOK_IDENTIFICADOR
 %token <entrada> TOK_REPORTES
 %token <entrada> TOK_CADENA
@@ -114,6 +122,12 @@ int INT;
 
 %type <PARAM> params_list
 %type <PARAM> param
+
+%type <fit> ajustes
+%type <capacidad> capacidades
+%type <unit> unidades
+%type <tipo> tipos
+%type <sistema> sistemas
 
 %start inicio  
 
@@ -267,43 +281,15 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(SIZE);
                             $$->num = getNumero($3);
                         }
-                        |TOK_UNIT TOK_IGUAL TOK_UNIDADES{
-                            $$ = new Parametro(UNIT);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux == "K"){
-                                $$->unit = K;
-                            }
-                            if(aux == "B"){
-                                $$->unit = B;
-                            }
-                            if(aux == "M"){
-                                $$->unit = M;
-                            }
-                            else{
-                                $$->unit = UNIT_ERROR;
-                            }
+                        |TOK_UNIT TOK_IGUAL unidades{
+                            $$ = new Parametro(UNIT);    
+                            $$->unit = $3;
+                            
                         }
-                        |TOK_FIT TOK_IGUAL TOK_AJUSTE{
+                        |TOK_FIT TOK_IGUAL ajustes{
                             $$ = new Parametro(FIT);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux == "BF"){
-                                $$->fit = BF;
-                            }
-                            if(aux == "FF"){
-                                $$->fit = FF;
-                            }
-                            if(aux == "WF"){
-                                $$->fit = WF;
-                            }
-                            else{
-                                $$->fit = FIT_ERROR;
-                            }
+                            $$->fit = $3;
+                            
                         }
                         |TOK_NAME TOK_IGUAL TOK_NOMBRE{
                             $$ = new Parametro(NAME);
@@ -313,40 +299,15 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(NAME);
                             strcpy($$->text, getCadenaSinComillas($3).c_str());
                         }
-                        |TOK_TYPE TOK_IGUAL TOK_TIPO{
+                        |TOK_TYPE TOK_IGUAL tipos{
                             $$ = new Parametro(TYPE);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux =="P"){
-                                $$->type = P;
-                            }
-                            if(aux =="E"){
-                                $$->type = E;
-                            }
-                            if(aux =="L"){
-                                $$->type = L;
-                            }
-                            else{
-                                $$->type = TIPO_ERROR;
-                            }
+                            $$->type = $3;
+                            
                         }
-                        |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD{
+                        |TOK_DELETE TOK_IGUAL capacidades{
                             $$ = new Parametro(DELETE);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux =="FAST"){
-                                $$->capacidad = FAST;
-                            }
-                            if(aux =="FULL"){
-                                $$->capacidad = FULL;
-                            }
-                            else{
-                                $$->capacidad = CAPACIDAD_ERROR;
-                            }
+                            $$->capacidad = $3;
+                            
                         }
                         |TOK_ADD TOK_IGUAL TOK_NUMERO{
                             $$ = new Parametro(ADD);
@@ -356,38 +317,13 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(ID);
                             strcpy($$->text, $3);
                         }
-                        |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD{
-                            $$ = new Parametro(TYPE);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux =="FAST"){
-                                $$->capacidad = FAST;
-                            }
-                            if(aux =="FULL"){
-                                $$->capacidad = FULL;
-                            }
-                            else{
-                                $$->capacidad = CAPACIDAD_ERROR;
-                            }
+                        |TOK_TYPE TOK_IGUAL capacidades{
+                            $$ = new Parametro(FORMATO);
+                            $$->capacidad = $3;
                         }
-                        |TOK_FS TOK_IGUAL TOK_SISTEMA{
+                        |TOK_FS TOK_IGUAL sistemas{
                             $$ = new Parametro(FS);
-                            $$ = new Parametro(TYPE);
-                            for(int i=0; i < strlen($3); i++){
-                                $3[i] = toupper($3[i]);
-                            }
-                            char *aux = $3;
-                            if(aux =="2FS"){
-                                $$->sistema = EXT2;
-                            }
-                            if(aux =="3FS"){
-                                $$->sistema = EXT3;
-                            }
-                            else{
-                                $$->sistema = FS_EXT_ERROR;
-                            }
+                            $$->sistema = FS_EXT_ERROR;
                         }
                         |TOK_USUARIO TOK_IGUAL TOK_NOMBRE{
                             $$ = new Parametro(USUARIO);
@@ -472,7 +408,54 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         |TOK_RUTA TOK_IGUAL TOK_RUTA_R{
                             $$ = new Parametro(RUTA);
                             strcpy($$->text, $3);
-                        }
-                                            
+                        }                                           
 ;
 
+unidades:               TOK_KB{
+                            $$ = K;
+                        }
+                        |TOK_MB{
+                            $$ = M;
+                        }
+                        |TOK_BYTES{
+                            $$ = B;
+                        }
+;
+
+tipos:                  TOK_PRIMARIA{
+                            $$ = P;
+                        }
+                        |TOK_EXTENDIDA{
+                            $$ = E;
+                        }
+                        |TOK_LOGICA{
+                            $$ = L;
+                        }
+;
+
+capacidades:            TOK_FAST{
+                            $$ = FAST;
+                        }
+                        |TOK_FULL{
+                            $$ = FULL;
+                        }
+;
+
+sistemas:               TOK_EXT2{
+                            $$ = EXT2;
+                        }
+                        |TOK_EXT3{
+                            $$ = EXT3;
+                        }
+;
+
+ajustes:                TOK_FIRST{
+                            $$ = FF;
+                        }
+                        |TOK_WORST{
+                            $$ = WF;
+                        }
+                        |TOK_BEST{
+                            $$ = BF;
+                        }
+;

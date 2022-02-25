@@ -8,6 +8,8 @@
 #include "lexico.h"
 #include "retorno.h"
 #include "func_disk.h"
+#include "virtual_disk.h"
+#include "modelos.h"
 
 using namespace std;
 
@@ -53,10 +55,35 @@ class C_fdisk:public Comando{
         Tipoparticion tipo;
         Tipofit fit;
         Tipocapacidad capacidad;
-        int add;
         //constructor con los parametros obligatorios
         C_fdisk(int size, char path[], char name[]);
         //funcion ejecutar, heredada de la clase Comando
+        void Ejecutar();
+};
+
+//CLASE AUXILIAR PARA EJECUTAR EL PARAMETRO ADD EN EL COMANDO FDISK
+class C_add:public Comando{
+    public:
+        int size;
+        Tipounit unit;
+        char *path;
+        char *name;
+        //constructor con los parametros obligatorios
+        C_add(char name[], char path[], int size);
+        //metodo ejecutar
+        void Ejecutar();
+};
+
+//Clase auxiliar para ejecutar el parametro DELETE en el comando FDISK
+class C_delete:public Comando{
+    public:
+        char *name;
+        char *path;
+        Tipocapacidad capacidad;
+        Tipoparticion tipo;
+        //constructor con los parametros obligatorios
+        C_delete(char name[], char path[], Tipocapacidad capacidad, Tipoparticion tipo);
+        //metodo ejecutar
         void Ejecutar();
 };
 

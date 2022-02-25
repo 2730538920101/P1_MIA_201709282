@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 65
-#define YY_END_OF_BUFFER 66
+#define YY_NUM_RULES 73
+#define YY_END_OF_BUFFER 74
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -366,30 +366,30 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[221] =
     {   0,
-        0,    0,   66,   64,   63,   65,   64,   62,   62,   57,
-        2,    2,    2,   61,   56,   62,   58,   62,   56,   58,
-       56,   58,   62,   62,   62,    0,    1,   62,   62,   62,
-       62,   62,   62,   62,   62,   53,   52,   62,   62,   62,
-       57,   57,    2,   62,   62,   55,   62,   62,   62,   62,
-       62,   62,   62,   55,   62,   62,   62,   62,   62,   62,
-       62,   62,   62,   55,   62,   62,   62,   62,   50,   62,
-       36,   62,   62,   62,   62,   62,   62,   62,   62,   62,
-        2,   60,   60,   20,   62,   62,   62,   62,   62,   62,
-       62,   62,   62,   62,   62,   62,   62,   62,   62,   62,
+        0,    0,   74,   72,   71,   73,   72,   70,   70,   61,
+        2,    2,    2,   69,   60,   70,   63,   70,   58,   64,
+       59,   62,   70,   70,   70,    0,    1,   70,   70,   70,
+       70,   70,   70,   70,   70,   53,   52,   70,   70,   70,
+       61,   61,    2,   70,   70,   57,   70,   70,   70,   70,
+       70,   70,   70,   55,   70,   70,   70,   70,   70,   70,
+       70,   70,   70,   56,   70,   70,   70,   70,   50,   70,
+       36,   70,   70,   70,   70,   70,   70,   70,   70,   70,
+        2,   67,   68,   20,   70,   70,   70,   70,   70,   70,
+       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
 
-       62,   62,   62,   62,   62,   62,   32,   62,   62,   62,
-       62,   49,   62,   62,   62,   62,   51,   40,   62,   62,
-       62,   39,   62,   62,   62,   41,   62,   62,    2,    3,
-       62,   62,   62,   24,   22,   31,   59,   62,   26,   59,
-       62,   62,   30,   62,   62,   10,   62,   62,   62,   25,
-       62,   62,   62,   62,   62,   62,   62,   62,   44,   62,
-       62,   62,   35,   62,   34,   54,   33,   47,   46,   62,
-       28,   18,   27,    7,   11,   62,   16,   62,   62,   13,
-       15,    8,    4,   62,   62,   62,   62,   14,   17,   62,
-       62,   62,   62,   42,   62,   62,   12,    5,   19,   62,
+       70,   70,   70,   70,   70,   70,   32,   70,   70,   70,
+       70,   49,   70,   70,   70,   70,   51,   40,   70,   70,
+       70,   39,   70,   70,   70,   41,   70,   70,    2,    3,
+       70,   70,   70,   24,   22,   31,   65,   70,   26,   66,
+       70,   70,   30,   70,   70,   10,   70,   70,   70,   25,
+       70,   70,   70,   70,   70,   70,   70,   70,   44,   70,
+       70,   70,   35,   70,   34,   54,   33,   47,   46,   70,
+       28,   18,   27,    7,   11,   70,   16,   70,   70,   13,
+       15,    8,    4,   70,   70,   70,   70,   14,   17,   70,
+       70,   70,   70,   42,   70,   70,   12,    5,   19,   70,
 
-       21,   23,    6,   62,   62,   48,   62,   62,   62,   62,
-        9,   62,   45,   62,   37,   29,   62,   38,   43,    0
+       21,   23,    6,   70,   70,   48,   70,   70,   70,   70,
+        9,   70,   45,   70,   37,   29,   70,   38,   43,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -863,7 +863,7 @@ YY_DECL
 		}
 
 	{
-#line 78 "lexico.l"
+#line 74 "lexico.l"
 
 #line 869 "lexico.cpp"
 
@@ -924,330 +924,370 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 79 "lexico.l"
+#line 75 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CADENA;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 80 "lexico.l"
+#line 76 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NUMERO;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 81 "lexico.l"
+#line 77 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IDENTIFICADOR;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 82 "lexico.l"
+#line 78 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PAUSE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 83 "lexico.l"
+#line 79 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKDISK;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 84 "lexico.l"
+#line 80 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMDISK;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 85 "lexico.l"
+#line 81 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FDISK;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 86 "lexico.l"
+#line 82 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MOUNT;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 87 "lexico.l"
+#line 83 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNMOUNT;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 88 "lexico.l"
+#line 84 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKFS;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 89 "lexico.l"
+#line 85 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGIN;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 90 "lexico.l"
+#line 86 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGOUT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 91 "lexico.l"
+#line 87 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKGRP;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 92 "lexico.l"
+#line 88 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMGRP;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 93 "lexico.l"
+#line 89 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKUSR;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 94 "lexico.l"
+#line 90 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKDIR;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 95 "lexico.l"
+#line 91 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RMUSR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 96 "lexico.l"
+#line 92 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHMOD;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 97 "lexico.l"
+#line 93 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MKFILE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 98 "lexico.l"
+#line 94 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 99 "lexico.l"
+#line 95 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REMOVE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 100 "lexico.l"
+#line 96 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EDIT;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 101 "lexico.l"
+#line 97 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RENAME;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 102 "lexico.l"
+#line 98 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_COPY;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 103 "lexico.l"
+#line 99 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MOVE;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 104 "lexico.l"
+#line 100 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIND;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 105 "lexico.l"
+#line 101 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHOWN;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 106 "lexico.l"
+#line 102 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CHGRP;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 107 "lexico.l"
+#line 103 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RECOVERY;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 108 "lexico.l"
+#line 104 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOSS;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 109 "lexico.l"
+#line 105 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXEC;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 110 "lexico.l"
+#line 106 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_REP;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 111 "lexico.l"
+#line 107 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SIZE;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 112 "lexico.l"
+#line 108 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PATH;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 113 "lexico.l"
+#line 109 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NAME;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 114 "lexico.l"
+#line 110 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_ID;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 115 "lexico.l"
+#line 111 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_USUARIO;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 116 "lexico.l"
+#line 112 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PASSWORD;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 117 "lexico.l"
+#line 113 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PWD;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 118 "lexico.l"
+#line 114 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_GRP;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 119 "lexico.l"
+#line 115 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UGO;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 120 "lexico.l"
+#line 116 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FILEN;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 121 "lexico.l"
+#line 117 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CONTENIDO;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 122 "lexico.l"
+#line 118 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CONT;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 123 "lexico.l"
+#line 119 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_DESTINO;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 124 "lexico.l"
+#line 120 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNIT;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 125 "lexico.l"
+#line 121 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TYPE;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 126 "lexico.l"
+#line 122 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_DELETE;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 127 "lexico.l"
+#line 123 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_ADD;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 128 "lexico.l"
+#line 124 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FS;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 129 "lexico.l"
+#line 125 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIT;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 130 "lexico.l"
+#line 126 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_R;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 131 "lexico.l"
+#line 127 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_P;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 132 "lexico.l"
+#line 128 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 133 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_AJUSTE;}
+#line 129 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FIRST;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 134 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_UNIDADES;}
+#line 130 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_WORST;}
 	YY_BREAK
 case 57:
+YY_RULE_SETUP
+#line 131 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_BEST;}
+	YY_BREAK
+case 58:
+YY_RULE_SETUP
+#line 132 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_KB;}
+	YY_BREAK
+case 59:
+YY_RULE_SETUP
+#line 133 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_MB;}
+	YY_BREAK
+case 60:
+YY_RULE_SETUP
+#line 134 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_BYTES;}
+	YY_BREAK
+case 61:
 YY_RULE_SETUP
 #line 135 "lexico.l"
 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_RUTA_R;}
 	YY_BREAK
-case 58:
-YY_RULE_SETUP
-#line 136 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_TIPO;}
-	YY_BREAK
-case 59:
-YY_RULE_SETUP
-#line 137 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CAPACIDAD;}
-	YY_BREAK
-case 60:
-YY_RULE_SETUP
-#line 138 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_SISTEMA;}
-	YY_BREAK
-case 61:
-YY_RULE_SETUP
-#line 139 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IGUAL;}
-	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 140 "lexico.l"
-{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
+#line 136 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_PRIMARIA;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 141 "lexico.l"
-{}
+#line 137 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXTENDIDA;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 142 "lexico.l"
-{std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
+#line 138 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_LOGICA;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
+#line 139 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FAST;}
+	YY_BREAK
+case 66:
+YY_RULE_SETUP
+#line 140 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_FULL;}
+	YY_BREAK
+case 67:
+YY_RULE_SETUP
+#line 141 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXT2;}
+	YY_BREAK
+case 68:
+YY_RULE_SETUP
+#line 142 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXT3;}
+	YY_BREAK
+case 69:
+YY_RULE_SETUP
+#line 143 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IGUAL;}
+	YY_BREAK
+case 70:
+YY_RULE_SETUP
 #line 144 "lexico.l"
+{columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
+	YY_BREAK
+case 71:
+YY_RULE_SETUP
+#line 145 "lexico.l"
+{}
+	YY_BREAK
+case 72:
+YY_RULE_SETUP
+#line 146 "lexico.l"
+{std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
+	YY_BREAK
+case 73:
+YY_RULE_SETUP
+#line 148 "lexico.l"
 ECHO;
 	YY_BREAK
-#line 1251 "lexico.cpp"
+#line 1291 "lexico.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2252,5 +2292,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 144 "lexico.l"
+#line 148 "lexico.l"
 
