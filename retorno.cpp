@@ -209,6 +209,14 @@ void getErrorMsj(Respuesta res){
         {
             cout<<"NO SE PUEDE AGREGAR ESPACIO A LA PARTICION, YA NO HAY ESPACIO LIBRE... \n";
         }break;
+        case ERR_PART_UNMOUNTED:
+        {
+            cout<<"LA PARTICION NO HA SIDO MONTADA... \n";
+        }break;
+        case ERR_PART_MOUNTED:
+        {
+            cout<<"LA PARTICION YA HA SIDO MONTADA... \n";
+        }break;
         default:
         {
             cout<<"ERROR NO IDENTIFICADO... \n";
@@ -273,7 +281,12 @@ Respuesta getContDisk(int *contador, char *id){
 //82
 char *getPartitionId(char letra, int numero){
     string str("82");
-    str+=letra;
     str+=to_string(numero);
+    str+=letra;
     return &str[0];
+}
+
+//FUNCION QUE RETORNA UN NUMERO DECIMAL CONVERTIDO A FLOAT PARA ESCRIBIR LOS RESPORTES
+float getDecimalCast(float val){
+    return roundf(val * 100) / 100;
 }

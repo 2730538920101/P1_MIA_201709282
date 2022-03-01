@@ -1,6 +1,7 @@
 #ifndef FUNC_SYS_H
 #define FUNC_SYS_H
 
+
 #include "func_disk.h"
 #include "modelos.h"
 #include "tipos.h"

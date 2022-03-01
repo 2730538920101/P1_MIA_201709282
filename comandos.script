@@ -1,1 +1,1 @@
-rmdisk -path=/home/archivos/faseU/Disco2.dk
+Rep -name=DISK -path=/home/archivos/faseU/Disco2.dk -id=821a

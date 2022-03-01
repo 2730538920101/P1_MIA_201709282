@@ -1,11 +1,11 @@
 #ifndef FUNC_PART_H
 #define FUNC_PART_H
 
+#include "globales.h"
 #include "tipos.h"
 #include "modelos.h"
 #include "retorno.h"
 #include "func_disk.h"
-#include "globales.h"
 #include "virtual_disk.h"
 #include "func_sys.h"
 #include <iostream>
@@ -54,5 +54,26 @@ Respuesta  DelPartition(char[], char[], Tipoparticion, Tipocapacidad);
 
 //FUNCION PARA ELIMINAR UNA PARTICION, ENVIA LOS DATOS A LA FUNCION DELPARTITION
 Respuesta DeletePart(char[], char[], char[], Tipoparticion, Tipocapacidad);
+
+//FUNCION PARA MONTAR UNA PARTICION EN EL SISTEMA
+Respuesta MontarParticion(char[], char[]);
+
+//FUNCION QUE DEVUELVE EL DISCO QUE SE ENCUENTRA EN USO
+Discos_Montados *getDiscoMontado(char id[]);
+
+//FUNCION QUE DEVUELVE LA PARTICION QUE SE ENCUENTRA MONTADA
+Particiones_Montadas *getParticionMontada(char id[]);
+
+//FUNCION QUE DEVUELVE EL DISCO QUE SE ENCUENTRA EN USO
+Discos_Montados *getDiscoMontado(char id[]);
+
+//FUNCION QUE DEVUELVE LA PARTICION QUE SE ENCUENTRA MONTADA
+Particiones_Montadas *getParticionMontada(char id[]);
+
+//FUNCION PARA DESMONTAR UNA PARTICION DEL SISTEMA
+Respuesta UnmountP(char[]);
+
+//FUNCION PARA MOSTRAR LAS PARTICIONES MONTADAS
+void showMounts();
 
 #endif //FUNC_PART_H

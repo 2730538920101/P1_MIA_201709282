@@ -147,6 +147,13 @@ C_mount::C_mount(char path[], char name[]){
 //FUNCION EJECUTAR MOUNT
 void C_mount::Ejecutar(){
     cout<<"Ejecutando comando MOUNT... \n ";
+    Respuesta res = MontarParticion(path, name);
+    if(res != CORRECTO){
+        getErrorMsj(res);
+        return;
+    }else{
+        cout<<"SE HA MONTADO UNA PARTICION EXITOSAMENTE... \n";
+    }
 }
 
 //CREAR UNMOUNT
@@ -158,6 +165,14 @@ C_unmount::C_unmount(char id[]){
 //FUNCION EJECUTAR UNMOUNT
 void C_unmount::Ejecutar(){
     cout<<"Ejecutando comando UNMOUNT... \n ";
+    Respuesta res = UnmountP(id);
+    if(res != CORRECTO){
+        getErrorMsj(res);
+        return;
+    }else{
+        showMounts();
+        cout<<"PARTICION DESMONTADA EXITOSAMENTE... \n";
+    }
 }
 
 //CREAR MKFS
@@ -445,16 +460,35 @@ C_rep::C_rep(Tiporeporte reporte, char path[], char id[]){
 
 //FUNCION EJECUTAR REP
 void C_rep::Ejecutar(){
+    showMounts();
     cout<<"Ejecutando comando REP... \n";
+    Discos_Montados *disk = getDiscoMontado(this->id);
+    if(disk == NULL){
+        cout<<"NO HAY DISCOS MONTADOS... \n";
+        return;
+    }
+    Particiones_Montadas *part = getParticionMontada(this->id);
+    if(part == NULL){
+        cout<<"LA PARTICION NO HA SIDO MONTADA... \n";
+        return;
+    }
+    int ext = 0;
+    string msj;
+    msj = getNameFromPath(this->path, &ext);
+    char *aux = &msj[0];
+    string aux2 = getPathSinNombre(this->path, strlen(aux) + ext);
+    CrearCarpeta(aux2);
     switch(this->reporte){
         case MBR:
         {
             cout<<"REPORTE MBR... "<<endl;
             ReadDisk(this->path);
+            ReporteMasterBootRecord(disk->path, this->path);
         }break;
         case DISK:
         {
             cout<<"REPORTE DISK... "<<endl;
+            ReporteDisco(disk->path, this->path);
         }break;
         case INODE:
         {

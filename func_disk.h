@@ -5,7 +5,6 @@
 #include "modelos.h"
 #include "retorno.h"
 #include "func_part.h"
-#include "globales.h"
 #include "virtual_disk.h"
 #include "func_sys.h"
 #include <stdio.h>
@@ -13,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include "globales.h"
 
 using namespace std;
 
@@ -51,5 +51,9 @@ ExtendedBootRecord* getDataEBR(int, char[]);
 
 //FUNCION PARA OBTENER DATOS DE LA PARTICION EXTENDIDA
 Partition* getExtPart(char[], MasterBootRecord*);
+
+
+
+
 
 #endif //FUNC_DISK_H

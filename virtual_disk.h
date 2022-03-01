@@ -4,6 +4,8 @@
 #include <iostream>
 #include "modelos.h"
 
+
+
 using namespace std;
 
 //DEFINIR UNA CLASE DE TIPO LISTA PARA VIRTUALIZAR EL ESPACIO DEL DISCO
@@ -45,6 +47,5 @@ class Discos_Montados{
             }
         }
 };
-
 
 #endif

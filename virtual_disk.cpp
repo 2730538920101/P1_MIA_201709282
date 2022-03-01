@@ -16,3 +16,4 @@ Espacio_v::Espacio_v(long tam, int inicio, Tipostatusblock status){
     this->status = status;
 }
 
+

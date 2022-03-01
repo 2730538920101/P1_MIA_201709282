@@ -5,13 +5,10 @@
 #include "lexico.h"
 #include "sintactico.h"
 #include "clases_comandos.h"
-#include "retorno.h"
 #include "func_disk.h"
-#include "modelos.h"
-#include "globales.h"
 #include "func_part.h"
-#include "virtual_disk.h"
 #include "func_sys.h"
+#include "func_reportes.h"
 
 using namespace std;
 

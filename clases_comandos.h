@@ -10,6 +10,8 @@
 #include "func_disk.h"
 #include "virtual_disk.h"
 #include "modelos.h"
+#include "func_reportes.h"
+#include "func_part.h"
 
 using namespace std;
 

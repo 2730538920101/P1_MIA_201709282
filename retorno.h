@@ -19,6 +19,7 @@
 #include "virtual_disk.h"
 #include "func_sys.h"
 
+
 using namespace std;
 
 //FUNCION QUE DEVUELVE EL VALOR DE UN NUMERO EN STRING A ENTRERO
@@ -60,5 +61,10 @@ Respuesta getContDisk(int *contador, char *id);
 //FUNCION QUE RETORNA UN ID PARA LAS PARTICIONES CREADAS CON LOS ULTIMOS DIGITOS DE MI CARNET COMO BASE
 //82
 char *getPartitionId(char, int);
+
+//FUNCION QUE RETORNA UN NUMERO DECIMAL CONVERTIDO A FLOAT PARA ESCRIBIR LOS RESPORTES
+float getDecimalCast(float);
+
+
 
 #endif //RETORNO_H

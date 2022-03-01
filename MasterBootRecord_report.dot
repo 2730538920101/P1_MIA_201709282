@@ -1,0 +1,59 @@
+digraph {
+tbl[
+shape=plaintext
+ label =<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="3">Disk1</td></tr>
+<th><td>NOMBRE</td><td>VALOR</td></th>
+<tr><td bgcolor="lightblue">mbr_tamaño</td><td bgcolor="lightblue">52428800</td></tr>
+<tr><td bgcolor="lightblue">mbr_Fecha_creación</td><td bgcolor="lightblue">01/03/22 11:32</td></tr>
+<tr><td bgcolor="lightblue">mbr_disk_signature</td><td bgcolor="lightblue">120</td></tr>
+<tr><td bgcolor="lightblue">mbr_disk_fit</td><td bgcolor="lightblue">B</td></tr>
+<tr><td colspan="2" bgcolor="#bcf7c1">Part1</td></tr>
+<tr><td bgcolor="#bcf7c1">part_status</td><td bgcolor="#bcf7c1">49</td></tr>
+<tr><td bgcolor="#bcf7c1">part_type</td><td bgcolor="#bcf7c1">P</td></tr>
+<tr><td bgcolor="#bcf7c1">part_fit</td><td bgcolor="#bcf7c1">B</td></tr>
+<tr><td bgcolor="#bcf7c1">part_start</td><td bgcolor="#bcf7c1">160</td></tr>
+<tr><td bgcolor="#bcf7c1">part_size</td><td bgcolor="#bcf7c1">128</td></tr>
+<tr><td colspan="2" bgcolor="#f8fc92">Part2</td></tr>
+<tr><td bgcolor="#f8fc92">part_status</td><td bgcolor="#f8fc92">49</td></tr>
+<tr><td bgcolor="#f8fc92">part_type</td><td bgcolor="#f8fc92">E</td></tr>
+<tr><td bgcolor="#f8fc92">part_fit</td><td bgcolor="#f8fc92">B</td></tr>
+<tr><td bgcolor="#f8fc92">part_start</td><td bgcolor="#f8fc92">288</td></tr>
+<tr><td bgcolor="#f8fc92">part_size</td><td bgcolor="#f8fc92">7680</td></tr>
+<tr><td colspan="2" bgcolor="#fcc292">Part3</td></tr>
+<tr><td bgcolor="#fcc292">part_status</td><td bgcolor="#fcc292">49</td></tr>
+<tr><td bgcolor="#fcc292">part_type</td><td bgcolor="#fcc292">P</td></tr>
+<tr><td bgcolor="#fcc292">part_fit</td><td bgcolor="#fcc292">B</td></tr>
+<tr><td bgcolor="#fcc292">part_start</td><td bgcolor="#fcc292">7968</td></tr>
+<tr><td bgcolor="#fcc292">part_size</td><td bgcolor="#fcc292">128</td></tr>
+</table>
+>];
+
+tbl1 [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="3">Part7</td></tr>
+<th><td>NOMBRE</td><td>VALOR</td></th>
+<tr><td bgcolor="#fcc8c8">part_status</td><td bgcolor="#fcc8c8">49</td></tr>
+<tr><td bgcolor="#fcc8c8">part_fit</td><td bgcolor="#fcc8c8">B</td></tr>
+<tr><td bgcolor="#fcc8c8">part_start</td><td bgcolor="#fcc8c8">328</td></tr>
+<tr><td bgcolor="#fcc8c8">part_size</td><td bgcolor="#fcc8c8">1200</td></tr>
+<tr><td bgcolor="#fcc8c8">part_next</td><td bgcolor="#fcc8c8">1528</td></tr>
+</table>
+>];
+tbl2 [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="3">Part6</td></tr>
+<th><td>NOMBRE</td><td>VALOR</td></th>
+<tr><td bgcolor="#fcc8c8">part_status</td><td bgcolor="#fcc8c8">49</td></tr>
+<tr><td bgcolor="#fcc8c8">part_fit</td><td bgcolor="#fcc8c8">B</td></tr>
+<tr><td bgcolor="#fcc8c8">part_start</td><td bgcolor="#fcc8c8">1568</td></tr>
+<tr><td bgcolor="#fcc8c8">part_size</td><td bgcolor="#fcc8c8">1200</td></tr>
+<tr><td bgcolor="#fcc8c8">part_next</td><td bgcolor="#fcc8c8">-1</td></tr>
+</table>
+>];
+}

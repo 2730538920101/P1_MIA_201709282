@@ -569,3 +569,221 @@ Respuesta DelLogica(char name[], MasterBootRecord *disco, char path[]){
 
 //-----------------------------------------------MOUNT----------------------------------------------------------
 
+//FUNCION PARA MONTAR UNA PARTICION EN EL SISTEMA
+Respuesta MontarParticion(char path[], char name[]){
+    int contador = 0;
+    bool exist= false;
+    //MONTAR DISCO
+    while(discos_montados[contador]!=NULL){
+        if(strcmp(discos_montados[contador]->path,path)==0){
+            exist = true;
+            break;
+        }
+        contador++;
+    }
+    if(!exist){
+        discos_montados[contador] = new Discos_Montados();
+        strcpy(discos_montados[contador]->path,path);
+        discos_montados[contador]->letra = 97+contador;
+    }
+    //MONTAR PARTICION
+    bool existPart = false;
+    Discos_Montados *mdisk = discos_montados[contador];
+    int contador2=0;
+    //VALIDAR QUE YA ESTÉ MONTADA LA PARTICION
+    while(mdisk->parts_mounted[contador2]!=NULL){
+        if(strcmp(mdisk->parts_mounted[contador2]->name,name)==0){
+            return ERR_PART_MOUNTED;
+        }
+        contador2++;
+    }
+
+    MasterBootRecord *disco = getDataMBR(mdisk->path);
+    if(disco==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    //BUSCAR PARTICION PRIMARIA/EXTENDIDA
+    int i;
+    int init;
+    for(i=0;i<4;i++){
+        if(strcmp(disco->particiones[i].part_name,name)==0){
+            existPart = true;
+            init = disco->particiones[i].part_start;
+            break;
+        }
+    }
+
+    if(existPart){
+         mdisk->parts_mounted[contador2] = new Particiones_Montadas();
+         strcpy(mdisk->parts_mounted[contador2]->id,getPartitionId(mdisk->letra,contador2));
+         strcpy(mdisk->parts_mounted[contador2]->name, name);
+         mdisk->parts_mounted[contador2]->inicio = init;
+    }else{
+        return ERR_PART_NOEX;
+    }
+    //MODIFICAR SUPERBLOCK
+
+    SuperBlock *sb = ReadSuperBlock(path,name);
+    if(sb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    sb->s_mnt_count = sb->s_mnt_count+1;
+    getFecha(sb->s_mtime);
+    CrearArchivoSuperBlock(sb,path,init);
+    return CORRECTO;
+}
+
+
+//FUNCION QUE DEVUELVE EL DISCO QUE SE ENCUENTRA EN USO
+Discos_Montados *getDiscoMontado(char id[]){
+    if(id==NULL) return NULL;
+    string str(id);
+    if(strlen(id)<4){
+        getErrorMsj(ERR_ID_INCORRECT);
+        return NULL;
+    }
+    char letra = str.at(3);
+    //BUSCAR LETRA
+    int contadorDiscos = 0;
+    bool existeDisco= false;
+    while(discos_montados[contadorDiscos]!=NULL){
+        if(discos_montados[contadorDiscos]->letra == letra){
+            existeDisco = true;
+            break;
+        }
+        contadorDiscos++;
+    }
+    if(!existeDisco){
+        getErrorMsj(ERR_DISK_UNMOUNTED);
+        return NULL;
+    }
+    return discos_montados[contadorDiscos];
+}
+
+//FUNCION QUE DEVUELVE LA PARTICION QUE SE ENCUENTRA MONTADA
+Particiones_Montadas *getParticionMontada(char id[]){
+    string str(id);
+    if(strlen(id)<4){
+        getErrorMsj(ERR_ID_INCORRECT);
+        return NULL;
+    }
+    char letra = str.at(3);
+    //BUSCAR LETRA
+    int contadorDiscos = 0;
+    bool existeDisco= false;
+    while(discos_montados[contadorDiscos]!=NULL){
+        if(discos_montados[contadorDiscos]->letra == letra){
+            existeDisco = true;
+            break;
+        }
+        contadorDiscos++;
+    }
+    if(!existeDisco){
+        getErrorMsj(ERR_DISK_NO_EX);
+        return NULL;
+    }
+    //BUSCAR NUMERO
+    int contadorPart = 0;
+    int sizeParts= 0;
+    bool existePart = false;
+
+    while((discos_montados[contadorDiscos])->parts_mounted[sizeParts]!=NULL){
+        sizeParts++;
+    }
+    while((discos_montados[contadorDiscos])->parts_mounted[contadorPart]!=NULL){
+        if(strcmp((discos_montados[contadorDiscos])->parts_mounted[contadorPart]->id,id)==0){
+            existePart = true;
+            break;
+        }
+        contadorPart++;
+    }
+    if(existePart){
+        return discos_montados[contadorDiscos]->parts_mounted[contadorPart];
+    }else{
+        getErrorMsj(ERR_PART_UNMOUNTED);
+        return NULL;
+    }
+}
+
+//---------------------------------------UNMOUNT--------------------------------------------------------------
+//FUNCION PARA DESMONTAR UNA PARTICION DEL SISTEMA
+Respuesta UnmountP(char id[]){
+    string str(id);
+    if(strlen(id)<4){
+        return ERR_ID_INCORRECT;
+    }
+    char letra = str.at(3);
+    //BUSCAR LETRA
+    int contadorDiscos = 0;
+    bool existeDisco= false;
+    while(discos_montados[contadorDiscos]!=NULL){
+        if(discos_montados[contadorDiscos]->letra == letra){
+            existeDisco = true;
+            break;
+        }
+        contadorDiscos++;
+    }
+    if(!existeDisco){
+        return ERR_DISK_NO_EX;
+    }
+    //BUSCAR NUMERO
+    int contadorPart = 0;
+    int sizeParts= 0;
+    bool existePart = false;
+
+    while((discos_montados[contadorDiscos])->parts_mounted[sizeParts]!=NULL){
+        sizeParts++;
+    }
+
+    while((discos_montados[contadorDiscos])->parts_mounted[contadorPart]!=NULL){
+        if(strcmp((discos_montados[contadorDiscos])->parts_mounted[contadorPart]->id,id)==0){
+            existePart = true;
+            break;
+        }
+        contadorPart++;
+    }
+    if(existePart){
+        delete (discos_montados[contadorDiscos])->parts_mounted[contadorPart];
+        (discos_montados[contadorDiscos])->parts_mounted[contadorPart] = NULL;
+        sizeParts--;
+        if(sizeParts == 0){
+            //desmontar disco
+            SuperBlock *sb =ReadSuperBlock(discos_montados[contadorDiscos]->path,
+                                           discos_montados[contadorDiscos]->parts_mounted[contadorPart]->name);
+            if(sb==NULL){
+                return ERR_IRRECONOCIBLE;
+            }
+            sb->s_mnt_count = sb->s_mnt_count+1;
+            getFecha(sb->s_mtime);
+            CrearArchivoSuperBlock(sb,discos_montados[contadorDiscos]->path,discos_montados[contadorDiscos]->parts_mounted[contadorPart]->inicio);
+
+            while((discos_montados[contadorDiscos])!=NULL){
+                delete discos_montados[contadorDiscos];
+                (discos_montados[contadorDiscos]) = (discos_montados[contadorDiscos+1]);
+            }
+            (discos_montados[contadorDiscos]) = NULL;
+        }
+    }else{
+        return ERR_PART_UNMOUNTED;
+    }
+    return CORRECTO;
+}
+
+void showMounts(){
+    int contador = 0;
+    int contador2=0;
+    while(discos_montados[contador]!=NULL){
+        cout<<"--------------------------------------------------\n";
+        cout<<"DISCO \""<<discos_montados[contador]->letra<<"\" \n";
+        cout<<discos_montados[contador]->path<<endl;
+        cout<<"Particiones: \n";
+            contador2 = 0;
+            while (discos_montados[contador]->parts_mounted[contador2]!=NULL) {
+                cout<<"Nombre: "<<discos_montados[contador]->parts_mounted[contador2]->name<<endl;
+                cout<<"Id: "<<discos_montados[contador]->parts_mounted[contador2]->id<<endl;
+                contador2++;
+            }
+        contador++;
+    }
+    cout<<"--------------------------------------------------\n";
+}

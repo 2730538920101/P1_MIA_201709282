@@ -38,7 +38,11 @@ enum Respuesta {
     ERR_IRRECONOCIBLE,
     ERR_TAM_MIN,
     ERR_PART_NOEX,
-    ERR_NO_ADD_ESPACIO
+    ERR_NO_ADD_ESPACIO,
+    ERR_DISCO_NO_MONT,
+    ERR_ID_MAL_GEN,
+    ERR_PART_UNMOUNTED,
+    ERR_PART_MOUNTED
 };
 
 enum TipoComando{

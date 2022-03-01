@@ -1,0 +1,27 @@
+digraph G {
+parent [
+shape=plaintext
+label=<
+<table border='1' cellborder='1'>
+<tr>
+<td rowspan="2" bgcolor ="#dd8703" >MBR</td>
+<td rowspan="2" bgcolor ="#50b104" >PRIMARIA <br/>0.00%</td>
+<td>
+<table border = "1" cellborder="1" bgcolor="#da3a85">
+<tr>
+<td bgcolor="#eeeeee">EBR</td>
+<td bgcolor="#eeeeee">LOGICA <br/>0.00%</td>
+<td bgcolor="#eeeeee">EBR</td>
+<td bgcolor="#eeeeee">LOGICA <br/>0.00%</td>
+<td rowspan="2" bgcolor = "#3ac9da">LIBRE<br/>
+0.01%</td>
+</tr>
+</table>
+</td>
+<td rowspan="2" bgcolor ="#50b104" >PRIMARIA <br/>0.00%</td>
+<td rowspan="2" bgcolor = "#3ac9da">LIBRE<br/>
+99.98%</td>
+</tr>
+</table>
+>];
+}

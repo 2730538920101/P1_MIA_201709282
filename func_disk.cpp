@@ -1,5 +1,4 @@
 #include "func_disk.h"
-#include "globales.h"
 #include <iostream>
 using namespace std;
 
