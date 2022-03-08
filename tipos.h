@@ -6,10 +6,8 @@ enum Tipounit {K='k', M='m', B='b', UNIT_ERROR};
 enum Tipoparticion {P='P', E='E', L='L', TIPO_ERROR};
 enum Tipocapacidad {FAST, FULL, CAPACIDAD_ERROR};
 enum Tiposistema {EXT2='2', EXT3='3', FS_EXT_ERROR};
-
 enum Tipostatus {ACTIVO = '1', INACTIVO = '0'};
 enum Tipostatusblock {OCUPADO, LIBRE};
-
 enum Tiporeporte {
     MBR,
     DISK,
@@ -24,7 +22,6 @@ enum Tiporeporte {
     LS,
     REPORTE_ERROR
 };
-
 enum Respuesta { 
     CORRECTO,
     ERR_DISK_NO_EX,
@@ -42,9 +39,10 @@ enum Respuesta {
     ERR_DISCO_NO_MONT,
     ERR_ID_MAL_GEN,
     ERR_PART_UNMOUNTED,
-    ERR_PART_MOUNTED
+    ERR_PART_MOUNTED,
+    ERR_DIR_NOEX,
+    ERR_LEVEL_FULL
 };
-
 enum TipoComando{
     MKDISK,
     RMDISK,
@@ -76,7 +74,6 @@ enum TipoComando{
     PAUSE,
     REP
 };
-
 enum Tipoparametro{
     SIZE,
     PATH,
@@ -102,10 +99,26 @@ enum Tipoparametro{
     RUTA,
     FORMATO
 };
-
 enum Tipoinodo{
     IN_FILE = 0,
     IN_DIRECTORY = 1
+};
+enum TipoOperacion{
+    MAKEDIR, 
+    MAKEFILE_PATH, 
+    MAKEFILE_SIZE, 
+    VACIO, 
+    ADDUSUARIO, 
+    ADDGRUPO, 
+    DELUSUARIO, 
+    DELGRUPO, 
+    EDITFILE 
+};
+
+enum Tipobloque{
+    ARCHIVO,
+    DIRECTORIO,
+    APUNTADOR
 };
 
 #endif //TIPOS_H

@@ -1,1 +1,1 @@
-Rep -name=DISK -path=/home/archivos/faseU/Disco2.dk -id=821a
+mkfs -type=full -id=821a -fs=2fs

@@ -187,6 +187,20 @@ C_mkfs::C_mkfs(char id[]){
 //FUNCION EJECUTAR MKFS
 void C_mkfs::Ejecutar(){
     cout<<"Ejecutando comando MKFS... \n ";
+    Discos_Montados *disk = getDiscoMontado(this->id);
+    if(disk == NULL){
+        cout<<"EL DISCO NO HA SIDO MONTADO... \n";
+    }
+    Particiones_Montadas *part = getParticionMontada(this->id);
+    if(part == NULL){
+        cout<<"LA PARTICION NO HA SIDO MONTADA O NO EXISTE... \n";
+    }
+    Respuesta res = Formatear(disk->path, part->name, this->capacidad, this->sistema, false);
+    if(res == CORRECTO){
+        cout<<"SE HA CREADO EL SISTEMA DE ARCHIVOS EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 //CREAR LOGIN
@@ -692,7 +706,7 @@ bool ValidarParametros(char *name, char *path, char *id, char *usuario, char *pa
                                             destino != NULL ||
                                             fit != FIT_ERROR ||
                                             unit != UNIT_ERROR ||
-                                            capacidad != CAPACIDAD_ERROR ||
+                                            type != TIPO_ERROR ||
                                             //banderas para verificar el tipo de dato
                                             r_flag ||
                                             p_flag ||

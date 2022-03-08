@@ -19,11 +19,13 @@ rmdisk -path=/home/archivos/faseU/Disco2.dk
 PRUEBAS DE REPORTES
 //MBR
 rep -name=MBR -path=/home/archivos/faseU/Disco2.dk -id=820a
+//DISK
+Rep -name=DISK -path=/home/archivos/faseU/Disco2.dk -id=820a
 
 PRUEBAS DEL FDISK
-fdisk -type=P -unit=B -name=Part1 -size=128 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=P -unit=B -name=Part3 -size=128 -path=/home/archivos/faseU/Disco2.dk -fit=BF
 fdisk -type=E -unit=B -name=Part2 -size=7680 -path=/home/archivos/faseU/Disco2.dk -fit=BF
-fdisk -type=L -unit=B -name=Part3 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
+fdisk -type=L -unit=B -name=Part6 -size=1200 -path=/home/archivos/faseU/Disco2.dk -fit=BF
 
 PRUEBA DELETE FDISK
 fdisk -delete=full -name=Part3 -path=/home/archivos/faseU/Disco2.dk
@@ -35,3 +37,11 @@ PRUEBA MOUNT
 mount -path=/home/archivos/faseU/Disco2.dk -name=Part1 
 mount -path=/home/archivos/faseU/Disco2.dk -name=Part2 
 mount -path=/home/archivos/faseU/Disco2.dk -name=Part3
+
+PRUEBA UNMOUNT 
+unmount -id=820a
+
+PRUEBA MKFS 
+mkfs -type=fast -id=820a -fs=3fs
+mkfs -type=full -id=821a -fs=2fs
+

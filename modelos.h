@@ -3,6 +3,8 @@
 #include "tipos.h"
 #include <iostream>
 
+using namespace std;
+
 //-----------------------------------------MANEJO DE DISCOS---------------------------------
 //DEFINIR UN STRUCT PARA LAS PARTICIONES
 struct Partition{
@@ -90,5 +92,76 @@ struct BloquesApuntadores{
     int b_pointers[16];
 };
 
+//-------IMPLEMENTACION DEL JOURNAL SISTEMA EXT3--------------------
+class Journal{
+    public:
+        TipoOperacion j_operation;
+        char j_date[16];
+        char *j_path;
+        char *j_content;
+        char *j_user;
+        char *j_group;
+        int j_size;
+        int j_perms;
+        bool j_boolean;
+        //METODO CONTRUCTOR
+        Journal(){
+            //INICIALIZAR LOS ATRIBUTOS DEL JOURNAL CON EL CONSTRUCTOR
+            this->j_operation = VACIO;
+            this->j_path = NULL;
+            this->j_content = NULL;
+            this->j_group = NULL;
+            this->j_user = NULL;
+            this->j_size = -1;
+            this->j_perms = -1;
+            this->j_boolean = false;
+        }
+};
+
+
+//---------------------------CLASES SISTEMA DE LOGIN -----------
+class Login_Sesion{
+    public:
+        char *user;
+        char *path;
+        char *nomPart;
+        char *id;
+        char *id_usuario;
+        char *id_grupo;
+        //METODO CONTRUCTOR
+        Login_Sesion(){
+            //Inicializar los atributos en el constructor
+            this->user = NULL;
+            this->path = NULL;
+            this->nomPart = NULL;
+            this->id = NULL;
+            this->id_grupo = NULL;
+            this->id_usuario = NULL;
+        }
+        //METODO PARA INICIALIZAR UN VALOR EN CERO
+        void LimpiarSesion(){
+            user = NULL;
+            path = NULL;
+            nomPart = NULL;
+            id = NULL;
+            this->id_grupo = NULL;
+            this->id_usuario = NULL;
+        }
+};
+
+class Usuario{
+    public:
+        string id;
+        char tipo;
+        string name;
+        string pwd;
+        string group;
+};
+
+class Grupo{
+    public:
+        string id;
+        string name;
+};
 
 #endif //MODELOS_H

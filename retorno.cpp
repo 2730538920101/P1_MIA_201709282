@@ -217,6 +217,14 @@ void getErrorMsj(Respuesta res){
         {
             cout<<"LA PARTICION YA HA SIDO MONTADA... \n";
         }break;
+        case ERR_DIR_NOEX:
+        {
+            cout<<"EL DIRECTORIO NO EXISTE... \n";
+        }break;
+        case ERR_LEVEL_FULL:
+        {
+            cout<<"NO SE PUEDEN CREAR MAS CARPETAS O ARCHIVOS, NO HAY ESPACIO SUFICIENTE... \n";
+        }break;
         default:
         {
             cout<<"ERROR NO IDENTIFICADO... \n";
