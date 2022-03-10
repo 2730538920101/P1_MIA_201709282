@@ -1156,7 +1156,7 @@ string BuscarContenidoArchivo(char filePath[], char path[], char partition[], ch
 //----------------------------------------- COMANDO MKFS -------------------------------
 
 //FUNCION PARA FORMATEAR UNA PARTICION COMANDO MKFS
-Respuesta Formatear(char path[], char partition[], Tipocapacidad tipoFormateo, Tiposistema sistem,bool isRecovery){
+Respuesta Formatear(char path[], char partition[], Tipocapacidad tipoFormateo, Tiposistema sistem,bool flag_recov){
     MasterBootRecord *disco = getDataMBR(path);
     if(disco==NULL){
         return ERR_DISK_NO_EX;
@@ -1216,7 +1216,7 @@ Respuesta Formatear(char path[], char partition[], Tipocapacidad tipoFormateo, T
     //CREAR ARCHIVO DE USERS
     char *users = (char*)"1,G,root\n1,U,root,root,123\n";
     CrearArchivosEscritos((char*)"/users.txt",true,users,28,path,partition);    
-    if(sistem == EXT3 && !isRecovery){
+    if(sistem == EXT3 && !flag_recov){
         EscribirJournal(initPart+sizeof(SuperBlock),cantInodos,path);
     }
     delete disco;
@@ -1347,7 +1347,7 @@ Grupo *getGrupoId(char name[], char path[], char namePartition[]){
 
 
 //FUNCION PARA CREAR UN GRUPO
-Respuesta CrearGrupo(char *path, char *partition, char grp[], bool isRecovery){
+Respuesta CrearGrupo(char *path, char *partition, char grp[], bool flag_recov){
     char *title;
     char *filePath=(char*)"/users.txt";
     int indexInode = BuscarArchivo(filePath,path,partition,&title);
@@ -1377,7 +1377,7 @@ Respuesta CrearGrupo(char *path, char *partition, char grp[], bool isRecovery){
     newContent+=grp;
     newContent+="\n";
     Respuesta r = ReemplazarContenido(indexInode,&newContent[0],path,partition);
-    if(r == CORRECTO && !isRecovery){
+    if(r == CORRECTO && !flag_recov){
         //AGREGAR A JOURNAL
         Journal *newj = new Journal();
         newj->j_operation = ADDGRUPO;
@@ -1390,7 +1390,7 @@ Respuesta CrearGrupo(char *path, char *partition, char grp[], bool isRecovery){
 }
 
 //FUNCION PARA ELIMINAR UN GRUPO
-Respuesta BorrarGrupo(char path[], char partition[], char name[], bool isRecovery){
+Respuesta BorrarGrupo(char path[], char partition[], char name[], bool flag_recov){
     char *title;
     char *filePath=(char*)"/users.txt";
     int indexInode = BuscarArchivo(filePath,path,partition,&title);
@@ -1457,7 +1457,7 @@ Respuesta BorrarGrupo(char path[], char partition[], char name[], bool isRecover
     }
     char *my_argument = const_cast<char*> (newContent.c_str());
     Respuesta r = ReemplazarContenido(indexInode,my_argument,path,partition);
-    if(r == CORRECTO && !isRecovery){
+    if(r == CORRECTO && !flag_recov){
         //AGREGAR A JOURNAL
         Journal *newj = new Journal();
         newj->j_operation = DELGRUPO;
@@ -1630,7 +1630,7 @@ Usuario *getUsuarioId(char id[], char path[], char namePartition[]){
 }
 
 //FUNCION PARA CREAR UN USUARIO
-Respuesta CrearUsuario(char *path, char *partition, char usr[], char pwd[], char grp[], bool isRecovery){
+Respuesta CrearUsuario(char *path, char *partition, char usr[], char pwd[], char grp[], bool flag_recov){
     char *title;
     char *filePath= (char*)"/users.txt";
     int indexInode = BuscarArchivo(filePath,path,partition,&title);
@@ -1668,7 +1668,7 @@ Respuesta CrearUsuario(char *path, char *partition, char usr[], char pwd[], char
     newContent+=pwd;
     newContent+="\n";
     Respuesta r = ReemplazarContenido(indexInode,&newContent[0],path,partition);
-    if(r == CORRECTO && !isRecovery){
+    if(r == CORRECTO && !flag_recov){
         //AGREGAR A JOURNAL
         Journal *newj = new Journal();
         newj->j_operation = ADDUSUARIO;
@@ -1683,19 +1683,19 @@ Respuesta CrearUsuario(char *path, char *partition, char usr[], char pwd[], char
 }
 
 //FUNCION PARA BORRAR UN USUARIO
-Respuesta BorrarUsuario(char path[], char partition[], char name[], bool isRecovery){
+Respuesta BorrarUsuario(char path[], char partition[], char name[], bool flag_recov){
     char *title;
     char *filePath=(char*)"/users.txt";
     int indexInode = BuscarArchivo(filePath,path,partition,&title);
-    if(indexInode==-1){
+    if(indexInode == -1){
         return ERR_IRRECONOCIBLE;
     }
-    int startSb = -1;
-    SuperBlock *sb = ReadSuperBlock(path,partition,&startSb);
-    if(sb==NULL){
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
         return ERR_IRRECONOCIBLE;
     }
-    string content = getContenidoArchivo(indexInode,path,sb);
+    string content = getContenidoArchivo(indexInode,path,superb);
     //if(content!=NULL)return ERROR_UNHANDLED;
     stringstream ss(content);
     string token;
@@ -1757,14 +1757,201 @@ Respuesta BorrarUsuario(char path[], char partition[], char name[], bool isRecov
     }
     char *my_argument = const_cast<char*> (newContent.c_str());
     Respuesta r = ReemplazarContenido(indexInode,my_argument,path,partition);
-    if(r == CORRECTO && !isRecovery){
+    if(r == CORRECTO && !flag_recov){
         //AGREGAR A JOURNAL
         Journal *newj = new Journal();
         newj->j_operation = DELUSUARIO;
         newj->j_user =name;
         getFecha(newj->j_date);
-        CrearArchivoJournal(sb,startSb,path,newj);
+        CrearArchivoJournal(superb,startsuperb,path,newj);
     }
-    delete sb;
+    delete superb;
+    return r;
+}
+
+
+//------------------------------ COMANDO MKDIR -------------------
+//FUNCION PARA CREAR DIRECTORIOS
+Respuesta CrearCarpeta(bool recursivo, char id[], char path[], bool flag_recov){
+    Discos_Montados *disco = getDiscoMontado(id);
+    if(disco == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    Particiones_Montadas *part = getParticionMontada(id);
+    if(part == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    //VERIFICAR ESPACIO PARA CREAR INODOS Y BLOQUES
+    int startsuperb;
+    SuperBlock *superb = ReadSuperBlock(disco->path, part->name, &startsuperb);
+    if(superb == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    int indexPadre = 0;
+    int indexBloqueActual = 0;
+    stringstream ss(path);
+    string token;
+    string dirPad = "/";
+    while(getline(ss, token, '/')){
+        if(token != ""){
+            if(ss.tellg() == -1){
+                Respuesta res = CrearNodoCarpeta(&dirPad[0], &token[0], disco->path, superb, &indexPadre, &indexBloqueActual);
+                if(res != CORRECTO)return res;
+            }else{
+                int indexBloque = BuscarCarpeta(&token[0], disco->path, &indexPadre, superb);
+                if(indexBloque != -1){
+                    indexBloqueActual = indexBloque;
+                }else{
+                    if(recursivo){
+                        Respuesta res = CrearNodoCarpeta(&dirPad[0], &token[0], disco->path, superb, &indexPadre, &indexBloqueActual);
+                        if(res != CORRECTO){
+                            return res;
+                        }
+                    }else{
+                        return ERR_DIR_NOEX;
+                    }
+                }
+            }
+            dirPad = token;
+        }
+    }
+    //ESCRIBIR EN EL SUPER BLOQUE
+    CrearArchivoSuperBlock(superb, disco->path, startsuperb);
+    if(!flag_recov){
+        //AGREGAR AL JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = MAKEDIR;
+        newj->j_path = path;
+        newj->j_boolean = recursivo;
+        newj->j_group = login_activo->id_grupo;
+        newj->j_user = login_activo->id_usuario;
+        newj->j_perms = 777;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(superb, startsuperb, disco->path, newj);
+    }
+    return CORRECTO;
+}
+//---------------------------------------------------------------
+
+//-------------------- COMANDO MKFILE ---------------------------
+//FUNCION PARA CREAR ARCHIVOS
+Respuesta CrearArchivo(char newPath[], bool createPath, int size, char path[], char namePartition[], bool flag_recov){
+    //generar texto
+    char *txt = (char*)malloc(sizeof(char)*size);
+    int i;
+    char caracter = '0';
+    for(i=0;i<size;i++){
+        txt[i] =caracter;
+        caracter++;
+        if(caracter>'9'){
+            caracter = '0';
+        }
+    }
+    Respuesta res = CrearArchivosEscritos(newPath,createPath,txt,size,path,namePartition);
+    if(res == CORRECTO && !flag_recov){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = MAKEFILE_SIZE;
+        newj->j_path = newPath;
+        newj->j_group = login_activo->id_grupo;
+        newj->j_user = login_activo->id_usuario;
+        newj->j_size = size;
+        newj->j_perms = 664;
+        newj->j_boolean = createPath;
+        getFecha(newj->j_date);
+
+        int startsuperb;
+        SuperBlock *superb = ReadSuperBlock(path,namePartition,&startsuperb);
+        if(superb==NULL){
+            return ERR_IRRECONOCIBLE;
+        }
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+        delete superb;
+    }
+    return res;
+}
+
+//FUNCION PARA CREAR ARCHIVOS CON PARAMETRO CONT
+Respuesta CrearArchivo(char newPath[], bool createPath, char pathFile[], char path[], char namePartition[], bool flag_recov){
+    FILE *fileText;
+    fileText = fopen(pathFile,"r+");
+    if(fileText==NULL){
+        cout<<"ERROR AL ABRIR EL ARCHIVO EN LA RUTA:  \""<<pathFile<<"\"\n";
+        return ERR_IRRECONOCIBLE;
+    }
+    fseek(fileText, 0L, SEEK_END);
+    int file_size = ftell(fileText);
+    char txt[file_size];
+    fseek(fileText,0L,SEEK_SET);
+    fread(txt,file_size,1,fileText);
+    fclose(fileText);
+    Respuesta res = CrearArchivosEscritos(newPath,createPath,txt,file_size,path,namePartition);
+    if(res == CORRECTO && !flag_recov){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = MAKEFILE_PATH;
+        newj->j_path = newPath;
+        newj->j_group = login_activo->id_grupo;
+        newj->j_user = login_activo->id_usuario;
+        newj->j_content = pathFile;
+        newj->j_boolean = createPath;
+        newj->j_perms = 664;
+        getFecha(newj->j_date);
+        int startsuperb;
+        SuperBlock *superb = ReadSuperBlock(path,namePartition,&startsuperb);
+        if(superb==NULL){
+            return ERR_IRRECONOCIBLE;
+        }
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+        delete superb;
+    }
+    return res;
+}
+
+//--------------------------- COMANDO CAT --------------------------------
+
+//FUNCION PARA EL COMANDO CAT
+Respuesta Cat(char filePath[], char path[], char partition[]){
+    char *title;
+    string res = BuscarContenidoArchivo(filePath,path,partition,&title);
+    cout<<res<<endl;
+    return CORRECTO;
+}
+
+//-------------------------- COMANDO EDIT --------------------------------
+
+//FUNCION PARA EL COMANDO EDIT
+Respuesta Edit(char pathFile[], char newCont[], char path[], char namePart[], bool flag_recov){
+    char *title;
+    int indexInode = BuscarArchivo(pathFile,path,namePart,&title);
+    if(indexInode==-1){
+        return ERR_IRRECONOCIBLE;
+    }
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,namePart,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    string content  = getContenidoArchivo(indexInode,path,superb);
+    string newContent = "";
+    int contador = 0;
+    while(content[contador]!='\0'){
+        newContent+=content[contador];
+        contador++;
+    }
+    newContent+=newCont;
+    Respuesta r = ReemplazarContenido(indexInode,&newContent[0],path,namePart);
+    if(r == CORRECTO && !flag_recov){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = EDITFILE;
+        newj->j_user = login_activo->id_usuario;
+        newj->j_group = login_activo->id_usuario;
+        newj->j_content = newCont;
+        newj->j_path = pathFile;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+    }
+    delete superb;
     return r;
 }

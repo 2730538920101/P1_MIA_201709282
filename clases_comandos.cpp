@@ -358,6 +358,25 @@ C_mkfile::C_mkfile(char path[]){
 //FUNCION EJECUTAR MKFILE
 void C_mkfile::Ejecutar(){
     cout<<"Ejecutando comando MKFILE... \n ";
+    if(!LoginActivo()){
+        cout<<"NO HA INICIADO SESION... \n";
+        return;
+    }
+    if(cont!= NULL){
+        Respuesta res = CrearArchivo(this->path, this->r_flag, this->cont, login_activo->path, login_activo->nomPart, false);
+        if(res == CORRECTO){
+            cout<<"ARCHIVO CREADO EXISTOSAMENTE... \n";
+        }else{
+            getErrorMsj(res);
+        }
+    }else{
+        Respuesta res = CrearArchivo(this->path, this->r_flag, this->size, login_activo->path, login_activo->nomPart, false);
+        if(res == CORRECTO){
+            cout<<"ARCHIVO CREADO EXISTOSAMENTE... \n";
+        }else{
+            getErrorMsj(res);
+        }
+    }
 }
 
 //CREAR CAT
@@ -369,6 +388,14 @@ C_cat::C_cat(char filen[]){
 //FUNCION EJECUTAR CAT
 void C_cat::Ejecutar(){
     cout<<"Ejecutando comando CAT... \n ";
+    if(!LoginActivo()){
+        cout<<"NO HA INICIADO SESION... \n";
+        return;
+    }
+    Respuesta res = Cat(this->filen, login_activo->path, login_activo->nomPart);
+    if(res != CORRECTO){
+        getErrorMsj(res);
+    }
 }
 
 //CREAR REMOVE
@@ -392,6 +419,16 @@ C_edit::C_edit(char path[], char contenido[]){
 //FUNCION EJECUTAR EDIT
 void C_edit::Ejecutar(){
     cout<<"Ejecutando comando EDIT... \n ";
+    if(!LoginActivo()){
+        cout<<"NO SE HA INICIADO SESION... \n";
+        return;
+    }
+    Respuesta res = Edit(this->path, this->contenido, login_activo->path, login_activo->nomPart, false);
+    if(res == CORRECTO){
+        cout<<"ARCHIVO EDITADO EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 //CREAR RENAME
@@ -417,6 +454,16 @@ C_mkdir::C_mkdir(char path[]){
 //FUNCION EJECUTAR MKDIR
 void C_mkdir::Ejecutar(){
     cout<<"Ejecutando comando MKDIR... \n ";
+    if(!LoginActivo()){
+        cout<<"NO HA INICIADO SESION... \n";
+        return;
+    }
+    Respuesta res = CrearCarpeta(this->p_flag,login_activo->id, this->path, false);
+    if(res == CORRECTO){
+        cout<<"LA CARPETA HA SIDO CREADA EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 //CREAR COPY

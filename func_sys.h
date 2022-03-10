@@ -95,6 +95,9 @@ int CrearApuntadorInd(int, int*, SuperBlock*, char[]);
 //FUNCION QUE DEVUELVE EL INDICE DE UN ESPACIO LIBRE EN LOS BLOQUES DE APUNTADORES
 int getBloqueApuntadorLibre(int, TablaInodos*, int, char[], SuperBlock*, int*);
 
+//FUNCION PARA CREAR DIRECTORIOS
+Respuesta CrearCarpeta(bool, char[], char[], bool);
+
 //FUNCION QUE CREA UN DIRECTORIO Y DEVUELVE SU INDICE
 int CrearDirectorio(SuperBlock*, char[], char[], char[], int);
 
@@ -115,6 +118,12 @@ int BuscarCarpeta(char[], char[], int*, SuperBlock*);
 
 //FUNCION PARA CREAR ARCHIVOS DE TEXTO ESCRITOS
 Respuesta CrearArchivosEscritos(char[], bool, char[], int, char[], char[]);
+
+//FUNCION PARA CREAR ARCHIVOS
+Respuesta CrearArchivo(char[], bool, int, char[], char[], bool);
+
+//FUNCION PARA CREAR ARCHIVOS CON PARAMETRO CONT
+Respuesta CrearArchivo(char[], bool, char[], char[], char[], bool);
 
 //FUNCION PARA FORMATEAR UNA PARTICION COMANDO MKFS
 Respuesta Formatear(char[], char[], Tipocapacidad, Tiposistema, bool);
@@ -166,5 +175,11 @@ Respuesta CrearUsuario(char*, char*, char[], char[], char[], bool);
 
 //FUNCION PARA BORRAR UN USUARIO
 Respuesta BorrarUsuario(char[], char[], char[], bool);
+
+//FUNCION PARA EL COMANDO CAT
+Respuesta Cat(char[], char[], char[]);
+
+//FUNCION PARA EL COMANDO EDIT
+Respuesta Edit(char[], char[], char[], char[], bool);
 
 #endif //FUNC_SYS_H
