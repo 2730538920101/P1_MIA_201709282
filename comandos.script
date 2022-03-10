@@ -1,1 +1,1 @@
-mkfs -type=full -id=821a -fs=2fs
+rep -name=MBR -path=/home/archivos/faseU/Disco2.dk -id=820a

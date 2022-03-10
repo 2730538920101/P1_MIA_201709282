@@ -147,24 +147,17 @@ class C_pause:public Comando{
 };
 
 //Clase para generar el comando mkgrp, hereda de la clase Comando
-class C_mkgrp:public Comando{
+class C_grp:public Comando{
     public:
         char *name;
+        bool flag_create;
         //constructor con los parametros obligatorios
-        C_mkgrp(char name[]);
+        C_grp(char name[], bool flag_create);
         //funcion ejecutar, heredada de la clase Comando
         void Ejecutar();
 };
 
-//Clase para generar el comando rmgrp, hereda de la clase Comando
-class C_rmgrp:public Comando{
-    public:
-        char *name;
-        //constructor con los parametros obligatorios
-        C_rmgrp(char name[]);
-        //funcion ejecutar, heredada de la clase Comando
-        void Ejecutar();
-};
+
 
 //Clase para generar el comando mkusr, hereda de la clase Comando
 class C_mkusr:public Comando{

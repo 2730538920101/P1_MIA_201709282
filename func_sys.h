@@ -119,5 +119,52 @@ Respuesta CrearArchivosEscritos(char[], bool, char[], int, char[], char[]);
 //FUNCION PARA FORMATEAR UNA PARTICION COMANDO MKFS
 Respuesta Formatear(char[], char[], Tipocapacidad, Tiposistema, bool);
 
+//FUNCION PARA REEMPLAZAR EL CONTENIDO DE UN ARCHIVO
+Respuesta ReemplazarContenido(int, char*, char[], char[]);
+
+//FUNCION QUE RETORNA EL INDICE DEL ARCHIVO QUE SE DESEA ENCONTRAR
+int BuscarArchivo(char[], char[], char[], char**);
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHVIVO EN STRING
+string BuscarContenidoArchivo(char[], char[], char[], char**);
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHIVO
+string getContenidoArchivo(int, char[], SuperBlock*);
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHIVO DESDE LOS BLOQUES DE APUNTADORES
+string getContenidoArchivoApuntador(int, int, char[], SuperBlock*);
+
+//FUNCION PARA CONTAR LOS GRUPOS
+int ContarGrupos(char[]);
+
+//FUNCION QUE RETORNA UN GRUPO 
+Grupo *getGrupo(char[], char*);
+
+//FUNCION QUE RETORNA EL GRUPO QUE SE BUSCA POR ID
+Grupo *getGrupoId(char[], char[], char[]);
+
+//FUNCION PARA CREAR UN GRUPO
+Respuesta CrearGrupo(char*, char*, char[], bool);
+
+//FUNCION PARA ELIMINAR UN GRUPO
+Respuesta BorrarGrupo(char[], char[], char[], bool);
+
+//FUNCION PARA DEVOLVER EL NUMERO DE USUARIOS CREADOS
+int ContarUsuarios(char[]);
+
+//FUNCION QUE RETORNA EL USUARIO
+Usuario *getUsuario(char[], char*);
+
+//FUNCION QUE RETORNA EL USUARIO Y LO INSERTA EN EL ARCHIVO
+Usuario *getUsuario(char[], char[], char[]);
+
+//FUNCION QUE RETORNA EL USUARIO QUE SE BUSCA POR ID
+Usuario *getUsuarioId(char[], char[], char[]);
+
+//FUNCION PARA CREAR UN USUARIO
+Respuesta CrearUsuario(char*, char*, char[], char[], char[], bool);
+
+//FUNCION PARA BORRAR UN USUARIO
+Respuesta BorrarUsuario(char[], char[], char[], bool);
 
 #endif //FUNC_SYS_H

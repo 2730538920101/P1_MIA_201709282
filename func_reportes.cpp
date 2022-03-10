@@ -69,7 +69,7 @@ void ReporteMasterBootRecord(char path[], char path_rep[]){
        fputs("\">part_status</td><td bgcolor=\"",arch);
        fputs(colors[i],arch);
        fputs("\">",arch);
-       fprintf(arch, "%d", part.part_status);
+       fprintf(arch, "%c", char(part.part_status));
        fputs("</td></tr>\n",arch);
        //PART TYPE
        fputs("<tr><td bgcolor=\"",arch);

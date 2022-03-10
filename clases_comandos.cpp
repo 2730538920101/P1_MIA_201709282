@@ -214,29 +214,78 @@ C_login::C_login(char usuario[], char password[], char id[]){
 //FUNCION EJECUTAR LOGIN
 void C_login::Ejecutar(){
     cout<<"Ejecutando comando LOGIN... \n ";
+    if(LoginActivo()){
+        cout<<"EL USUARIO "<< login_activo->user<<" YA HA INICIADO SESION... \n";
+    }else{
+        Discos_Montados *disco = getDiscoMontado(this->id);
+        if(disco == NULL){
+            return;
+        }
+        Particiones_Montadas *part = getParticionMontada(this->id);
+        if(part == NULL){
+            return;
+        }
+        Usuario *user = getUsuario(this->usuario, disco->path, part->name);
+        if(user == NULL){
+            getErrorMsj(ERR_USR_NOEX);
+            return;
+        }
+        if(user->pwd != this->password){
+            getErrorMsj(ERR_INCORRECT_PWD);
+            return;
+        }
+        int check = 0;
+        if(check == 0){
+            login_activo->user = &user->name[0];
+            login_activo->path = disco->path;
+            login_activo->nomPart = part->name;
+            login_activo->id = this->id;
+            login_activo->id_usuario = &user->id[0];
+            login_activo->id_grupo = &user->group[0];
+            cout<<"SESION INICIADA EXITOSAMENTE CON EL USUARIO "<<login_activo->user<<endl;
+        }else if(check == 1){
+            cout<<"EL USUARIO NO EXISTE... \n";
+        }else{
+            cout<<"LAS CREDENCIALES DE INICIO DE SESION SON INCORRECTAS... \n";
+        }
+    }
 }
 
 //CREAR MKGRP
-C_mkgrp::C_mkgrp(char name[]){
+C_grp::C_grp(char name[], bool flag_create){
     //parametros obligatorios
     this->name = name;
+    this->flag_create = flag_create;
 }
 
 //FUNCION EJECUTAR MKGRP
-void C_mkgrp::Ejecutar(){
-    cout<<"Ejecutando comando MKGRP... \n ";
+void C_grp::Ejecutar(){
+    cout<<"Ejecutando comando MKGRP/RMGRP... \n ";
+    if(!LoginActivo()){
+        cout<<"NO SE HA INICIADO SESION... \n";
+        return;
+    }
+    if(flag_create){
+        if(strcmp(login_activo->user, "root") != 0){
+            cout<<"SOLO EL USUARIO ROOT TIENE PERMISOS PARA CREAR GRUPOS... \n";
+            return;
+        }
+        Respuesta res = CrearGrupo(login_activo->path, login_activo->nomPart, this->name, false);
+        if(res == CORRECTO){
+            cout<<"SE HA CREADO EL GRUPO EXITOSAMENTE... \n";
+        }else{
+            getErrorMsj(res);
+        }
+    }else{
+        Respuesta res = BorrarGrupo(login_activo->path, login_activo->nomPart, this->name, false);
+        if(res == CORRECTO){
+            cout<<"SE HA ELIMINADO EL GRUPO EXITOSAMENTE... \n";
+        }else{
+            getErrorMsj(res);
+        }
+    }
 }
 
-//CREAR RMGRP
-C_rmgrp::C_rmgrp(char name[]){
-    //parametros obligatorios
-    this->name = name;
-}
-
-//FUNCION EJECUTAR RMGRP
-void C_rmgrp::Ejecutar(){
-    cout<<"Ejecutando comando RMGRP... \n ";
-}
 
 //CREAR MKUSER
 C_mkusr::C_mkusr(char usuario[], char pwd[], char grp[]){
@@ -249,6 +298,16 @@ C_mkusr::C_mkusr(char usuario[], char pwd[], char grp[]){
 //FUNCION EJECUTAR MKUSR
 void C_mkusr::Ejecutar(){
     cout<<"Ejecutando comando MKUSR... \n ";
+    if(!LoginActivo()){
+        cout<<"DEBE INICIAR SESION... \n";
+        return;
+    }
+    Respuesta res = CrearUsuario(login_activo->path, login_activo->nomPart, this->usuario, this->pwd, this->grp, false);
+    if(res == CORRECTO){
+        cout<<"EL USUARIO FUE CREADO EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 //CREAR RMUSR
@@ -260,6 +319,16 @@ C_rmusr::C_rmusr(char usuario[]){
 //FUNCION EJECUTAR RMUSR
 void C_rmusr::Ejecutar(){
     cout<<"Ejecutando comando RMUSR... \n ";
+    if(!LoginActivo()){
+        cout<<"NO HA INICIADO SESION... \n";
+        return;
+    }
+    Respuesta res = BorrarUsuario(login_activo->path, login_activo->nomPart, this->usuario, false);
+    if(res == CORRECTO){
+        cout<<"SE HA ELIMINADO UN USUARIO EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 //CREAR CHMOD
@@ -550,6 +619,8 @@ void C_rep::Ejecutar(){
 //FUNCION EJECUTAR LOGOUT
 void C_logout::Ejecutar(){
     cout<<"Ejecutando comando LOGOUT... \n ";
+    login_activo->LimpiarSesion();
+    cout<<"LA SESION HA TERMINADO... \n";
 }
 
 //FUNCION EJECUTAR PAUSE
@@ -1571,9 +1642,9 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     cout<<"El parametro name es obligatorio en este comando MKGRP \n";
                     return NULL;
                 }
-                //se crea un objeto auxiliar de la clase C_rmdisk
-                C_mkgrp *aux_mkgrp = new C_mkgrp(name);
-                //retornar un objeto C_mkgrp casteado a la clase Comando
+                //se crea un objeto auxiliar de la clase C_grp
+                C_grp *aux_mkgrp = new C_grp(name, true);
+                //retornar un objeto C_grp casteado a la clase Comando
                 return (Comando*)aux_mkgrp;
             }break;
         case RMGRP:
@@ -1583,9 +1654,9 @@ Comando* getComando(TipoComando commandtype, Parametro *param){
                     cout<<"El parametro name es obligatorio en este comando RMGRP \n";
                     return NULL;
                 }
-                //se crea un objeto auxiliar de la clase C_rmgrp
-                C_rmgrp *aux_rmgrp = new C_rmgrp(name);
-                //retornar un objeto C_rmgrp casteado a la clase Comando
+                //se crea un objeto auxiliar de la clase C_grp
+                C_grp *aux_rmgrp = new C_grp(name, false);
+                //retornar un objeto C_grp casteado a la clase Comando
                 return (Comando*)aux_rmgrp;
             }break;
         case MKUSR:

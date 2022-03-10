@@ -25,7 +25,7 @@ Respuesta getParticionInicial(MasterBootRecord *disco, char name[], int *init){
 }
 
 //FUNCION PARA ESCRIBIR EL SUPER BLOQUE
-void CrearArchivoSuperBlock(SuperBlock *sb, char path[], int init){
+void CrearArchivoSuperBlock(SuperBlock *superb, char path[], int init){
     //UBICAR EL PUNTERO AL INICIO DEL SUPER BLOQUE DEL DISCO
     FILE *arch;
     arch = fopen(path, "rb+");
@@ -35,18 +35,18 @@ void CrearArchivoSuperBlock(SuperBlock *sb, char path[], int init){
     }
     fseek(arch, init, SEEK_SET);
     //ESCRIBIR EL SUPER BLOQUE
-    fwrite(sb, sizeof(SuperBlock),1,arch);
+    fwrite(superb, sizeof(SuperBlock),1,arch);
     fclose(arch);
 }
 
 //FUNCION QUE LEE EL SUPER BLOQUE
-SuperBlock* ReadSuperBlock(char path[], char name[],int *startSb){
+SuperBlock* ReadSuperBlock(char path[], char name[],int *startsuperb){
     MasterBootRecord *disco = getDataMBR(path);
     if(disco==NULL){
         cout<<"ERROR AL ABIR EL DISCO... \n";
         return NULL;
     }
-    Respuesta res = getParticionInicial(disco,name,startSb);
+    Respuesta res = getParticionInicial(disco,name,startsuperb);
     if(res!=CORRECTO){
         return NULL;
     }
@@ -56,12 +56,12 @@ SuperBlock* ReadSuperBlock(char path[], char name[],int *startSb){
         cout<<"ERROR AL ABRIR EL DISCO...  \n";
         return NULL;
     }
-    SuperBlock *sb = (SuperBlock*)malloc(sizeof(SuperBlock));
+    SuperBlock *superb = (SuperBlock*)malloc(sizeof(SuperBlock));
 
-    fseek(arch, *startSb, SEEK_SET);
-    fread(sb, sizeof(SuperBlock), 1, arch);
+    fseek(arch, *startsuperb, SEEK_SET);
+    fread(superb, sizeof(SuperBlock), 1, arch);
     fclose(arch);
-    return sb;
+    return superb;
 }
 
 //FUNCION QUE LEE EL SUPER BLOQUE
@@ -86,13 +86,13 @@ SuperBlock *ReadSuperBlock(char path[], char name[]){
         return NULL;
     }
     //INICIALIZAR EL SUPER BLOQUE
-    SuperBlock *sb = (SuperBlock*)malloc(sizeof(SuperBlock));
+    SuperBlock *superb = (SuperBlock*)malloc(sizeof(SuperBlock));
     //UBICAR EL PUNTERO EN EL INICIO DE LA ESCRITURA DEL SUPER BLOQUE
     fseek(arch, init, SEEK_SET);
     //LEER INFORMACION ESCRITA EN EL SUPER BLOQUE
-    fread(sb, sizeof(SuperBlock), 1, arch);
+    fread(superb, sizeof(SuperBlock), 1, arch);
     fclose(arch);
-    return sb;
+    return superb;
 }
 
 //FUNCION QUE RETORNA EL BLOQUE INICIAL
@@ -175,9 +175,9 @@ void EscribirJournal(int inicio, int cant, char path[]){
 }
 
 //FUNCION PARA AGREGAR EL JOURNAL AL ARCHIVO
-void CrearArchivoJournal(SuperBlock *auxSB, int primerSB, char path[], Journal *auxJournal){
+void CrearArchivoJournal(SuperBlock *auxsuperb, int primersuperb, char path[], Journal *auxJournal){
     //DEFINIR EL TAMANO INICIAL DEL SUPER BLOQUE
-    int startOp = primerSB+sizeof(SuperBlock);
+    int startOp = primersuperb+sizeof(SuperBlock);
     int contador = 0;
     //VERIFICAR EL DISCO
     FILE *arch = fopen(path, "rb+");
@@ -190,7 +190,7 @@ void CrearArchivoJournal(SuperBlock *auxSB, int primerSB, char path[], Journal *
     //UBICAR EL PUNTERO EN EL INICIO DE DONDE SE ESCRIBIRA EL JOURNAL
     fseek(arch, startOp, SEEK_SET);
     //RECORRER LOS INODOS
-    while(contador < auxSB->s_inodes_count){
+    while(contador < auxsuperb->s_inodes_count){
         //LEER EL JOURNAL ASOCIADO AL INODO
         fread(journal, sizeof(Journal), 1, arch);
         //SI EL JOURNAL ESTA VACIO SALIR DEL CICLO
@@ -233,8 +233,8 @@ TablaInodos *CrearInodo(Tipoinodo tipo, int permisos, int tam){
 }
 
 //FUNCION QUE DEVUELVE LA POSICION DEL PRIMER INODO
-int getInodoInicial(SuperBlock *auxSB, int indice){
-    return auxSB->s_inode_start + (auxSB->s_inode_size * indice);
+int getInodoInicial(SuperBlock *auxsuperb, int indice){
+    return auxsuperb->s_inode_start + (auxsuperb->s_inode_size * indice);
 }
 
 //FUNCION PARA ESCRIBIR EL INODO EN EL ARCHIVO
@@ -444,7 +444,7 @@ BloquesCarpetas *CrearBloqueCarpetas(char name[], int indiceDir, char namePad[],
 }
 
 //FUNCION PARA ESCRIBIR LOS DATOS DEL BLOQUE DE CARPETAS EN EL ARCHIVO
-void CrearArchivoBloquesCarpetas(BloquesCarpetas *auxSB, char path[], int inicio){
+void CrearArchivoBloquesCarpetas(BloquesCarpetas *auxsuperb, char path[], int inicio){
     //APUNTADOR AL ARCHIVO DEL DISCO
     FILE *arch = fopen(path, "rb+");
     if(arch == NULL){
@@ -454,7 +454,7 @@ void CrearArchivoBloquesCarpetas(BloquesCarpetas *auxSB, char path[], int inicio
     //UBICAR EL PUNTERO AL INICIO DEL BLOQUE DE CARPETAS
     fseek(arch, inicio, SEEK_SET);
     //ESCRIBIR EN EL ARCHIVO
-    fwrite(auxSB, sizeof(BloquesCarpetas), 1, arch);
+    fwrite(auxsuperb, sizeof(BloquesCarpetas), 1, arch);
     fclose(arch);
 }
 
@@ -911,47 +911,246 @@ Respuesta CrearNodoArchivo(int size, char *text, char path[], char dirpad[], cha
 //FUNCION PARA CREAR ARCHIVOS DE TEXTO ESCRITOS
 Respuesta CrearArchivosEscritos(char newPath[], bool createPath, char text[], int size, char path[], char namePartition[]){
     //VALIDAR QUE HAYA ESPACIO PARA CREAR INODOS Y BLOQUES
-    int startSb;
-    SuperBlock *sb = ReadSuperBlock(path,namePartition,&startSb);
-    if(sb==NULL){
+    int startsuperb;
+    SuperBlock *superb = ReadSuperBlock(path,namePartition,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    int indexInodoPadre = 0;
+    stringstream ss(newPath);
+    string token;
+    string dirPad="/";
+    int indexBloqueActual = 0;
+    while (getline(ss, token, '/')) {
+        if(token!=""){
+            //cout<<"padre: "<<dirPad<<endl;
+            //cout<<"archivo/carpeta: "<<token<<endl;
+            if (ss.tellg() == -1) {
+                Respuesta res = CrearNodoArchivo(size,text,path,&dirPad[0],&token[0],superb,indexBloqueActual,indexInodoPadre);
+                if(res != CORRECTO){
+                    return res;
+                }
+            }else{
+                int indexBloque = BuscarCarpeta(&token[0],path,&indexInodoPadre,superb);
+                if(indexBloque!=-1){
+                    indexBloqueActual = indexBloque;
+                }else{
+                    if(createPath){
+                        Respuesta rs = CrearNodoCarpeta(&dirPad[0],&token[0],path,superb,&indexInodoPadre,&indexBloqueActual);;
+                        if(rs != CORRECTO){
+                            return rs;
+                        }
+                    }else{
+                        return ERR_DIR_NOEX;
+                    }
+                }
+            }
+            dirPad = token;
+        }
+    }
+    CrearArchivoSuperBlock(superb,path,startsuperb);
+    delete superb;
+    return CORRECTO;
+}
+
+//FUNCION PARA REEMPLAZAR EL CONTENIDO DE UN ARCHIVO
+Respuesta ReemplazarContenido(int indiceInodo, char *contenido, char path[], char nomPart[]){
+    int bloqueInicial = 0;
+    //LEER EL SUPER BLOQUE
+    SuperBlock *bloque = ReadSuperBlock(path, nomPart, &bloqueInicial);
+    //VALIDAR
+    if(bloque == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    //LEER LA TABLA DE INODOS
+    TablaInodos *inodo = ReadInodo(path, getInodoInicial(bloque, indiceInodo));
+    if(inodo == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    //CREAR UN BLOQUE DE ARCHIVO
+    BloquesArchivos *bl = CrearBloqueArchivos();
+    int indexInodo = 0;
+    int contCar = 0;
+    int indexCar = 0;
+    bool flag = true;
+    //CREAR UN NUEVO BLOQUE
+    while(flag){
+        if(contCar >= 64 || contenido[indexCar] == '\0'){
+            if(indexInodo < 12){
+                if(inodo->i_block[indexInodo] != -1){
+                    CrearArchivoBloquesArchivos(bl, path, getBloqueInicial(bloque, inodo->i_block[indexInodo]));
+                    indexInodo++;
+                }else{
+                    inodo->i_block[indexInodo] = bloque->s_first_blo;
+                    GuardarBloqueArchivos(bl, bloque, path);
+                    indexInodo++;
+                }
+            }
+            bl = CrearBloqueArchivos();
+            contCar = 0;
+        }
+        //VERIFICAR EL CONTENIDO
+        bl->b_content[contCar] = contenido[indexCar];
+        if(contenido[indexCar] == '\0'){
+            break;
+        }
+        contCar++;
+        indexCar++;
+    }
+    //ESCRIBIR EL INDODO
+    CrearArchivoInodo(inodo, path, getInodoInicial(bloque, indiceInodo));
+    return CORRECTO;
+}
+
+//FUNCION QUE RETORNA EL INDICE DEL ARCHIVO QUE SE DESEA ENCONTRAR
+int BuscarArchivo(char filePath[], char path[], char partition[], char **title){
+    //VALIDAR QUE HAYA ESPACIO PARA CREAR INODOS Y BLOQUES
+    int startsuperb;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
         return ERR_IRRECONOCIBLE;
     }
 
     int indexInodoPadre = 0;
-    std::stringstream ss(newPath);
-        std::string token;
-        std::string dirPad="/";
-        int indexBloqueActual = 0;
-        while (std::getline(ss, token, '/')) {
-            if(token!=""){
-                //cout<<"padre: "<<dirPad<<endl;
-                //cout<<"archivo/carpeta: "<<token<<endl;
-                if (ss.tellg() == -1) {
-                    Respuesta res = CrearNodoArchivo(size,text,path,&dirPad[0],&token[0],sb,indexBloqueActual,indexInodoPadre);
-                    if(res != CORRECTO){
-                        return res;
-                    }
-                }else{
-                    int indexBloque = BuscarCarpeta(&token[0],path,&indexInodoPadre,sb);
-                    if(indexBloque!=-1){
-                        indexBloqueActual = indexBloque;
-                    }else{
-                        if(createPath){
-                            Respuesta rs = CrearNodoCarpeta(&dirPad[0],&token[0],path,sb,&indexInodoPadre,&indexBloqueActual);;
-                            if(rs != CORRECTO){
-                                return rs;
+    stringstream ss(filePath);
+    string token;
+    string dirPad="/";
+    int indexBloqueActual = 0;
+    while (getline(ss, token, '/')) {
+        if(token!=""){
+            //cout<<"padre: "<<dirPad<<endl;
+            //cout<<"carpeta: "<<token<<endl;
+            if (ss.tellg() == -1) {
+                //inodo de directorio
+                TablaInodos *inodo = ReadInodo(path,getInodoInicial(superb,indexInodoPadre));
+                if(inodo == NULL){
+                    return ERR_DIR_NOEX;
+                }
+                if(inodo->i_type == IN_DIRECTORY){
+                    int indexBloqueInodo;
+                    for(indexBloqueInodo = 0;indexBloqueInodo<12;indexBloqueInodo++){
+                        if(inodo->i_block[indexBloqueInodo]!=-1){
+                            BloquesCarpetas *directory = ReadBloquesCarpetas(path,getBloqueInicial(superb,inodo->i_block[indexBloqueInodo]));
+                            if(directory == NULL){
+                                return ERR_IRRECONOCIBLE;
                             }
-                        }else{
-                            return ERR_DIR_NOEX;
+                            int indexInodoBloque;
+                            for(indexInodoBloque = 2;indexInodoBloque <4;indexInodoBloque++){
+                                if(strcmp(directory->b_content[indexInodoBloque].b_name,&token[0])==0){
+                                    //encontrado
+                                    TablaInodos *file = ReadInodo(path,getInodoInicial(superb,directory->b_content[indexInodoBloque].b_inodo));
+                                    if(file!=NULL){
+                                        if(file->i_type == IN_FILE){
+                                            *title=(char*)malloc(sizeof(directory->b_content[indexInodoBloque].b_name));
+                                            strcpy(*title,directory->b_content[indexInodoBloque].b_name);
+                                            return directory->b_content[indexInodoBloque].b_inodo;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
+                }else{
+                    return -1;
+                }
+            }else{
+                int indexBloque = BuscarCarpeta(&token[0],path,&indexInodoPadre,superb);
+                if(indexBloque!=-1){
+                    indexBloqueActual = indexBloque;
+                }else{
+                    getErrorMsj(ERR_DIR_NOEX);
+                    return -1;
                 }
                 dirPad = token;
             }
         }
-    CrearArchivoSuperBlock(sb,path,startSb);
-    delete sb;
-    return CORRECTO;
+    }
+  return -1;
+}
+
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHIVO
+string getContenidoArchivo(int indexInodo, char path[], SuperBlock *superb){
+    string contenido = "";
+    TablaInodos *inodo = ReadInodo(path,getInodoInicial(superb,indexInodo));
+    if(inodo == NULL){
+        return "";
+    }
+    if(inodo->i_type == IN_FILE){
+        int indexBloque;
+        for(indexBloque = 0;indexBloque<12;indexBloque++){
+            if(inodo->i_block[indexBloque]!=-1){
+                BloquesArchivos *file = ReadBloquesArchivos(path,getBloqueInicial(superb,inodo->i_block[indexBloque]));
+                if(file== NULL){
+                    return "";
+                }
+                int index;
+                for(index=0;index<64;index++){
+                    contenido+=file->b_content[index];
+                }
+
+            }
+        }
+        //APUNTADORES INDIRECTOS
+        for(indexBloque = 12;indexBloque<14;indexBloque++){
+            if(inodo->i_block[indexBloque]!=-1){
+                contenido+=getContenidoArchivoApuntador(indexBloque-11,inodo->i_block[indexBloque],path,superb);
+            }
+        }
+    }
+    return contenido;
+}
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHIVO DESDE LOS BLOQUES DE APUNTADORES
+string getContenidoArchivoApuntador(int level, int indexBlock, char path[], SuperBlock *superb){
+    BloquesApuntadores *points = ReadBloquesApuntadores(path,getBloqueInicial(superb,indexBlock));
+    if(points == NULL){
+        return "";
+    }
+    if(level == 1){
+        string contenido = "";
+        int indexBloque;
+        for(indexBloque = 0;indexBloque<15;indexBloque++){
+            if(points->b_pointers[indexBloque]!=-1){
+                BloquesArchivos *file = ReadBloquesArchivos(path,getBloqueInicial(superb,points->b_pointers[indexBloque]));
+                if(file== NULL){
+                    return "";
+                }
+                int index;
+                for(index=0;index<64;index++){
+                    contenido+=file->b_content[index];
+                }
+
+            }
+        }
+        return contenido;
+    }else{
+        string contenido = "";
+        int indexBloque;
+        for(indexBloque = 0;indexBloque<15;indexBloque++){
+            if(points->b_pointers[indexBloque]!=-1){
+                contenido+=getContenidoArchivoApuntador(level-1,points->b_pointers[indexBloque],path,superb);
+            }
+        }
+        return contenido;
+    }
+}
+
+//FUNCION QUE RETORNA EL CONTENIDO DE UN ARCHVIVO EN STRING
+string BuscarContenidoArchivo(char filePath[], char path[], char partition[], char **title){
+    int indexInode = BuscarArchivo(filePath,path,partition,title);
+    if(indexInode==-1){
+        return "";
+    }
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
+
+        return "";
+    }
+    string contentResponse = getContenidoArchivo(indexInode,path,superb);
+    delete superb;
+    return contentResponse;
 }
 
 //----------------------------------------- COMANDO MKFS -------------------------------
@@ -984,43 +1183,588 @@ Respuesta Formatear(char path[], char partition[], Tipocapacidad tipoFormateo, T
     }
     int sizeInodos = sizeof(TablaInodos)*cantInodos;
     //BLOQUES
-    SuperBlock *sb = (SuperBlock*)malloc(sizeof(SuperBlock));
-    sb->s_filesystem_type = sistem;
-    getFecha(sb->s_mtime);
-    getFecha(sb->s_umtime);
-    sb->s_mnt_count = 0;
-    sb->s_magic = 0xEF53;
-    sb->s_inode_size = sizeof(TablaInodos);
-    sb->s_block_size = sizeof(BloquesArchivos);
-    sb->s_first_ino = 0;
-    sb->s_first_blo = 0;
+    SuperBlock *superb = (SuperBlock*)malloc(sizeof(SuperBlock));
+    superb->s_filesystem_type = sistem;
+    getFecha(superb->s_mtime);
+    getFecha(superb->s_umtime);
+    superb->s_mnt_count = 0;
+    superb->s_magic = 0xEF53;
+    superb->s_inode_size = sizeof(TablaInodos);
+    superb->s_block_size = sizeof(BloquesArchivos);
+    superb->s_first_ino = 0;
+    superb->s_first_blo = 0;
     if(sistem == EXT2){
-        sb->s_bm_inode_start = initPart+sizeof(SuperBlock);
+        superb->s_bm_inode_start = initPart+sizeof(SuperBlock);
     }else{
-        sb->s_bm_inode_start = initPart+sizeof(SuperBlock)+(sizeof(Journal)*cantInodos);
+        superb->s_bm_inode_start = initPart+sizeof(SuperBlock)+(sizeof(Journal)*cantInodos);
     }
-    sb->s_bm_block_start = sb->s_bm_inode_start+cantInodos;
-    sb->s_inode_start = sb->s_bm_block_start + cantBloques;
-    sb->s_block_start = sb->s_inode_start + sizeInodos;
-    sb->s_free_blocks_count = cantBloques;
-    sb->s_free_inodes_count = cantInodos;
-    sb->s_blocks_count = cantBloques;
-    sb->s_inodes_count = cantInodos;
-    CrearArchivoSuperBlock(sb,path,initPart);
+    superb->s_bm_block_start = superb->s_bm_inode_start+cantInodos;
+    superb->s_inode_start = superb->s_bm_block_start + cantBloques;
+    superb->s_block_start = superb->s_inode_start + sizeInodos;
+    superb->s_free_blocks_count = cantBloques;
+    superb->s_free_inodes_count = cantInodos;
+    superb->s_blocks_count = cantBloques;
+    superb->s_inodes_count = cantInodos;
+    CrearArchivoSuperBlock(superb,path,initPart);
     //BITMAP DE INODOS
-    CrearBitmapTable(cantInodos,sb->s_bm_inode_start,path);
+    CrearBitmapTable(cantInodos,superb->s_bm_inode_start,path);
     //BITMAP DE BLOQUES
-    CrearBitmapTable(cantBloques,sb->s_bm_block_start,path);
+    CrearBitmapTable(cantBloques,superb->s_bm_block_start,path);
     //CREAR CARPETA RAIZ
-    CrearDirectorio(sb,path,"/","/",0);
-    CrearArchivoSuperBlock(sb,path,initPart);
+    CrearDirectorio(superb,path,(char*)"/",(char*)"/",0);
+    CrearArchivoSuperBlock(superb,path,initPart);
     //CREAR ARCHIVO DE USERS
-    char *users = "1,G,root\n1,U,root,root,123\n";
-    CrearArchivosEscritos("/users.txt",true,users,28,path,partition);    
+    char *users = (char*)"1,G,root\n1,U,root,root,123\n";
+    CrearArchivosEscritos((char*)"/users.txt",true,users,28,path,partition);    
     if(sistem == EXT3 && !isRecovery){
         EscribirJournal(initPart+sizeof(SuperBlock),cantInodos,path);
     }
     delete disco;
-    delete sb;
+    delete superb;
     return CORRECTO;
+}
+
+//----------------------- GRUPOS COMANDO MKGRP Y RMGRP ------------------------------------------
+
+//FUNCION PARA CONTAR LOS GRUPOS
+int ContarGrupos(char contentGroups[]){
+    int contadortoken;
+    stringstream ss(contentGroups);
+    string token;
+    int contadorGrupos = 0;
+    while (getline(ss, token, '\n')) {
+        if(token!=""){
+            contadortoken = 0;
+            stringstream line(token);
+            string tokenLine;
+            while (getline(line, tokenLine, ',')) {
+                if(contadortoken == 0){
+                    if(tokenLine == "0"){
+                        continue;
+                    }
+                }else if(contadortoken==1){
+                    if(tokenLine == "G"){
+                        contadorGrupos++;
+                    }else{
+                        break;
+                    }
+                }else{
+                    break;
+                }
+                contadortoken++;
+            }
+        }
+    }
+    return contadorGrupos;
+}
+
+//FUNCION QUE RETORNA UN GRUPO 
+Grupo *getGrupo(char name[], char *contentUsers){
+    int contadortoken;
+    string nameG(name);
+    Grupo *grp = NULL;
+    stringstream ss(contentUsers);
+    string token;
+    while (getline(ss, token, '\n')) {
+        grp = new Grupo();
+        contadortoken = 0;
+        stringstream line(token);
+        string tokenLine;
+        while (getline(line, tokenLine, ',')) {
+            if(contadortoken == 0){
+                if(tokenLine == "0"){
+                    continue;
+                }else{
+                    grp->id = tokenLine;
+                }
+            }else if(contadortoken==1){
+                if(tokenLine != "G"){
+                    grp = NULL;
+                    break;
+                }
+            }else if(contadortoken == 2){
+                if(tokenLine == nameG ){
+                    grp->name = tokenLine;
+                }else{
+                    grp = NULL;
+                    break;
+                }
+            }else{
+                break;
+            }
+            contadortoken++;
+        }
+        if(grp!=NULL)return grp;
+    }
+    return grp;
+}
+
+//FUNCION QUE RETORNA EL GRUPO QUE SE BUSCA POR ID
+Grupo *getGrupoId(char name[], char path[], char namePartition[]){
+    char *title;
+    char *filePath = (char*)"/users.txt";
+    string res = BuscarContenidoArchivo(filePath,path,namePartition,&title);
+    int contadortoken;
+    string nameG(name);
+    Grupo *grp = NULL;
+    stringstream ss(res);
+    string token;
+    bool found = false;
+    while (getline(ss, token, '\n')) {
+        grp = new Grupo();
+        contadortoken = 0;
+        stringstream line(token);
+        string tokenLine;
+        while (getline(line, tokenLine, ',')) {
+            if(contadortoken == 0){
+                if(tokenLine == "0"){
+                    continue;
+                }else{
+                    grp->id = tokenLine;
+                    if(tokenLine == nameG){
+                        found = true;
+                    }
+                }
+            }else if(contadortoken==1){
+                if(tokenLine != "G"){
+                    grp = NULL;
+                    break;
+                }
+            }else if(contadortoken == 2){
+                    grp->name = tokenLine;
+            }else{
+                break;
+            }
+            contadortoken++;
+        }
+        if(grp!=NULL && found){
+            return grp;
+        }
+    }
+    if(!found) return NULL;
+    return grp;
+}
+
+
+//FUNCION PARA CREAR UN GRUPO
+Respuesta CrearGrupo(char *path, char *partition, char grp[], bool isRecovery){
+    char *title;
+    char *filePath=(char*)"/users.txt";
+    int indexInode = BuscarArchivo(filePath,path,partition,&title);
+    if(indexInode==-1){
+        return ERR_IRRECONOCIBLE;
+    }
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    string resContent = getContenidoArchivo(indexInode,path,superb);
+    char *content = &resContent[0];
+    int contadorGrupos=ContarGrupos(content);
+    Grupo *grpp=getGrupo(grp,content);
+    if(grpp != NULL){
+        return ERR_GRP_EX;
+    }
+    string newContent = "";
+    int contador = 0;
+    while(resContent[contador]!='\0'){
+        newContent+=resContent[contador];
+        contador++;
+    }
+    newContent+= to_string(contadorGrupos+1);
+    newContent+=",G,";
+    newContent+=grp;
+    newContent+="\n";
+    Respuesta r = ReemplazarContenido(indexInode,&newContent[0],path,partition);
+    if(r == CORRECTO && !isRecovery){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = ADDGRUPO;
+        newj->j_group =grp;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+    }
+    delete superb;
+    return r;
+}
+
+//FUNCION PARA ELIMINAR UN GRUPO
+Respuesta BorrarGrupo(char path[], char partition[], char name[], bool isRecovery){
+    char *title;
+    char *filePath=(char*)"/users.txt";
+    int indexInode = BuscarArchivo(filePath,path,partition,&title);
+    if(indexInode==-1){
+        return ERR_IRRECONOCIBLE;
+    }
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    string content = getContenidoArchivo(indexInode,path,superb);
+    stringstream ss(content);
+    string token;
+    string newContent="";
+    int contadorToken = 0;
+    bool found = false;
+    bool save = false;
+    while (getline(ss, token, '\n')) {
+        if(!found){
+            stringstream ss2(token);
+            string tokenLine;
+            string newline="";
+            contadorToken = 0;
+            while (getline(ss2, tokenLine, ',')) {
+                if(token!=""){
+                    if(contadorToken == 0){
+                        if(tokenLine != "0"){
+                            newline +="0,";
+                        }else{
+                            newline+=tokenLine;
+                            newline+=",";
+                        }
+                    }else if(contadorToken == 1){
+                        if(tokenLine != "G"){
+                            break;
+                        }else{
+                            newline+="G,";
+                        }
+                    }else if(contadorToken == 2){
+                        newline+=tokenLine;
+                        newline+="\n";
+                        if(name == tokenLine){
+                            save = true;
+                            found = true;
+                        }else{
+                            break;
+                        }
+                    }
+                }
+                contadorToken++;
+            }
+            if(save){
+                newContent+=newline;
+                newContent+="\n";
+            }else{
+                newContent+=token;
+                newContent+="\n";
+            }
+        }else{
+            newContent+=token;
+            newContent+="\n";
+        }
+    }
+    char *my_argument = const_cast<char*> (newContent.c_str());
+    Respuesta r = ReemplazarContenido(indexInode,my_argument,path,partition);
+    if(r == CORRECTO && !isRecovery){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = DELGRUPO;
+        newj->j_group =name;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+    }
+    delete superb;
+    return r;
+}
+
+//----------------------------- USUARIOS COMANDOS MKUSR Y RMUSR ------------------------
+
+//FUNCION PARA DEVOLVER EL NUMERO DE USUARIOS CREADOS
+int ContarUsuarios(char contentUsers[]){
+    int contadortoken;
+    stringstream ss(contentUsers);
+    string token;
+    int contadorUsuarios = 0;
+    while(getline(ss, token, '\n')) {
+        if(token!=""){
+            contadortoken = 0;
+            stringstream line(token);
+            string tokenLine;
+            while(getline(line, tokenLine, ',')) {
+                if(contadortoken == 0){
+                    if(tokenLine == "0"){
+                        continue;
+                    }
+                }else if(contadortoken==1){
+                    if(tokenLine == "U"){
+                        contadorUsuarios++;
+                    }else{
+                        break;
+                    }
+                }else{
+                    break;
+                }
+                contadortoken++;
+            }
+        }
+    }
+    return contadorUsuarios;
+}
+
+//FUNCION QUE RETORNA EL USUARIO
+Usuario *getUsuario(char usr[], char *contentUsers){
+    int contadortoken;
+    string nameUser(usr);
+    Usuario *user = NULL;
+    stringstream ss(contentUsers);
+    string token;
+    while(getline(ss, token, '\n')) {
+        if(token!=""){
+            user = new Usuario();
+            contadortoken = 0;
+            stringstream line(token);
+            string tokenLine;
+            while(getline(line, tokenLine, ',')) {
+                if(tokenLine!=""){
+                    if(contadortoken == 0){
+                        if(tokenLine == "0"){
+                            continue;
+                        }else{
+                            user->id = tokenLine;
+                        }
+                    }else if(contadortoken==1){
+                        if(tokenLine != "U"){
+                            user = NULL;
+                            break;
+                        }
+                    }else if(contadortoken == 2){
+                        user->group = tokenLine;
+                    }else if(contadortoken == 3){
+                        if(tokenLine == nameUser ){
+                            user->name = tokenLine;
+                        }else{
+                            user = NULL;
+                            break;
+                        }
+                    }else if(contadortoken == 4){
+                        user->pwd = tokenLine;
+                    }else{
+                        break;
+                    }
+                    contadortoken++;
+                }
+            }
+            if(user!=NULL){
+                Grupo *grp = getGrupo(&user->group[0],contentUsers);
+                if(grp!=NULL){
+                    user->group = grp->id;
+                }
+                return user;
+            }
+        }
+    }
+
+    if(user!=NULL){
+        Grupo *grp = getGrupo(&user->group[0],contentUsers);
+        if(grp!=NULL){
+            user->group = grp->id;
+        }
+    }
+
+    return user;
+}
+
+//FUNCION QUE RETORNA EL USUARIO Y LO INSERTA EN EL ARCHIVO
+Usuario *getUsuario(char usr[], char path[], char namePartition[]){
+    char *title;
+    char *filePath=(char*)"/users.txt";
+    string res = BuscarContenidoArchivo(filePath,path,namePartition,&title);
+    return getUsuario(usr,&res[0]);
+}
+
+
+//FUNCION QUE RETORNA EL USUARIO QUE SE BUSCA POR ID
+Usuario *getUsuarioId(char id[], char path[], char namePartition[]){
+    char *title;
+    char *filePath=(char*)"/users.txt";
+    string res = BuscarContenidoArchivo(filePath,path,namePartition,&title);
+    int contadortoken;
+    string idUser(id);
+    Usuario *user = NULL;
+    stringstream ss(res);
+    string token;
+    bool found = false;
+    while(getline(ss, token, '\n')) {
+        if(token!=""){
+            user = new Usuario();
+            contadortoken = 0;
+            stringstream line(token);
+            string tokenLine;
+            while (std::getline(line, tokenLine, ',')) {
+                if(tokenLine!=""){
+                    if(contadortoken == 0){
+                        if(tokenLine == "0"){
+                            continue;
+                        }else{
+                            user->id = tokenLine;
+                            if(tokenLine == idUser ){
+                                found = true;
+                            }
+                        }
+                    }else if(contadortoken==1){
+                        if(tokenLine != "U"){
+                            user = NULL;
+                            break;
+                        }
+                    }else if(contadortoken == 2){
+                        user->group = tokenLine;
+                    }else if(contadortoken == 3){
+                        user->name = tokenLine;
+                    }else if(contadortoken == 4){
+                        user->pwd = tokenLine;
+                    }else{
+                        break;
+                    }
+                    contadortoken++;
+                }
+            }
+            if(user!=NULL && found){
+                return user;
+            }
+        }
+    }
+    if(!found) return NULL;
+    return user;
+}
+
+//FUNCION PARA CREAR UN USUARIO
+Respuesta CrearUsuario(char *path, char *partition, char usr[], char pwd[], char grp[], bool isRecovery){
+    char *title;
+    char *filePath= (char*)"/users.txt";
+    int indexInode = BuscarArchivo(filePath,path,partition,&title);
+    if(indexInode==-1){
+        return ERR_IRRECONOCIBLE;
+    }
+    int startsuperb = -1;
+    SuperBlock *superb = ReadSuperBlock(path,partition,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    string resContent = getContenidoArchivo(indexInode,path,superb);
+    char *content = &resContent[0];
+    Grupo *grpp = getGrupo(grp,content);
+    if(grpp == NULL){
+        return ERR_GRP_NOEX;
+    }
+    int contadorUsuarios = ContarUsuarios(content);
+    Usuario *user = getUsuario(usr,content);
+    if(user != NULL){
+        return ERR_USR_EX;
+    }
+    string newContent = "";
+    int contador = 0;
+    while(resContent[contador]!='\0'){
+        newContent+=resContent[contador];
+        contador++;
+    }
+    newContent+= to_string(contadorUsuarios+1);
+    newContent+=",U,";
+    newContent+=usr;
+    newContent+=",";
+    newContent+=grp;
+    newContent+=",";
+    newContent+=pwd;
+    newContent+="\n";
+    Respuesta r = ReemplazarContenido(indexInode,&newContent[0],path,partition);
+    if(r == CORRECTO && !isRecovery){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = ADDUSUARIO;
+        newj->j_user =usr;
+        newj->j_group = grp;
+        newj->j_content = pwd;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(superb,startsuperb,path,newj);
+    }
+    delete superb;
+    return r;
+}
+
+//FUNCION PARA BORRAR UN USUARIO
+Respuesta BorrarUsuario(char path[], char partition[], char name[], bool isRecovery){
+    char *title;
+    char *filePath=(char*)"/users.txt";
+    int indexInode = BuscarArchivo(filePath,path,partition,&title);
+    if(indexInode==-1){
+        return ERR_IRRECONOCIBLE;
+    }
+    int startSb = -1;
+    SuperBlock *sb = ReadSuperBlock(path,partition,&startSb);
+    if(sb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    string content = getContenidoArchivo(indexInode,path,sb);
+    //if(content!=NULL)return ERROR_UNHANDLED;
+    stringstream ss(content);
+    string token;
+    string newContent="";
+    int contadorToken = 0;
+    bool found = false;
+    bool save=false;
+    while(getline(ss, token, '\n')) {
+        if(!found){
+            stringstream ss2(token);
+            string tokenLine;
+            string newline="";
+            contadorToken = 0;
+            while(getline(ss2, tokenLine, ',')) {
+                if(token!=""){
+                    if(contadorToken == 0){
+                        if(tokenLine != "0"){
+                            newline +="0,";
+                        }else{
+                            newline+=tokenLine;
+                            newline+=",";
+                        }
+                    }else if(contadorToken == 1){
+                        if(tokenLine != "U"){
+                            break;
+                        }else{
+                            newline+="U,";
+                        }
+                    }else if(contadorToken == 2){
+                        newline+=tokenLine;
+                        newline+=",";
+                        if(name == tokenLine){
+                            save = true;
+                            found = true;
+                        }else{
+                            break;
+                        }
+                    }else if(contadorToken == 3){
+                        newline+=tokenLine;
+                        newline+=",";
+                    }else{
+                        newline+=tokenLine;
+                        newline+="\n";
+                    }
+                }
+                contadorToken++;
+            }
+            if(save){
+                newContent+=newline;
+                newContent+="\n";
+            }else{
+                newContent+=token;
+                newContent+="\n";
+            }
+        }else{
+            newContent+=token;
+            newContent+="\n";
+        }
+    }
+    char *my_argument = const_cast<char*> (newContent.c_str());
+    Respuesta r = ReemplazarContenido(indexInode,my_argument,path,partition);
+    if(r == CORRECTO && !isRecovery){
+        //AGREGAR A JOURNAL
+        Journal *newj = new Journal();
+        newj->j_operation = DELUSUARIO;
+        newj->j_user =name;
+        getFecha(newj->j_date);
+        CrearArchivoJournal(sb,startSb,path,newj);
+    }
+    delete sb;
+    return r;
 }

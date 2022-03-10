@@ -7,7 +7,7 @@ enum Tipoparticion {P='P', E='E', L='L', TIPO_ERROR};
 enum Tipocapacidad {FAST, FULL, CAPACIDAD_ERROR};
 enum Tiposistema {EXT2='2', EXT3='3', FS_EXT_ERROR};
 enum Tipostatus {ACTIVO = '1', INACTIVO = '0'};
-enum Tipostatusblock {OCUPADO, LIBRE};
+enum Tipostatusblock {OCUPADO = '1', LIBRE = '0'};
 enum Tiporeporte {
     MBR,
     DISK,
@@ -41,7 +41,12 @@ enum Respuesta {
     ERR_PART_UNMOUNTED,
     ERR_PART_MOUNTED,
     ERR_DIR_NOEX,
-    ERR_LEVEL_FULL
+    ERR_LEVEL_FULL,
+    ERR_GRP_EX,
+    ERR_GRP_NOEX,
+    ERR_USR_EX,
+    ERR_USR_NOEX,
+    ERR_INCORRECT_PWD
 };
 enum TipoComando{
     MKDISK,

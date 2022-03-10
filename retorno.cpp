@@ -225,6 +225,26 @@ void getErrorMsj(Respuesta res){
         {
             cout<<"NO SE PUEDEN CREAR MAS CARPETAS O ARCHIVOS, NO HAY ESPACIO SUFICIENTE... \n";
         }break;
+        case ERR_GRP_EX:
+        {
+            cout<<"ERROR, EL GRUPO YA EXISTE... \n";
+        }break;
+        case ERR_GRP_NOEX:
+        {
+            cout<<"ERROR, EL GRUPO NO EXISTE... \n";
+        }break;
+        case ERR_USR_EX:
+        {
+            cout<<"ERROR, EL USUARIO YA EXISTE... \n";
+        }break;
+        case ERR_USR_NOEX:
+        {
+            cout<<"ERROR, EL USUARIO NO EXISTE... \n";
+        }break;
+        case ERR_INCORRECT_PWD:
+        {
+            cout<<"ERROR, EL PASSWORD ES INCORRECTO... \n";
+        }break;
         default:
         {
             cout<<"ERROR NO IDENTIFICADO... \n";
@@ -298,3 +318,22 @@ char *getPartitionId(char letra, int numero){
 float getDecimalCast(float val){
     return roundf(val * 100) / 100;
 }
+
+//FUNCION QUE VERIFICA QUE LA SESION DEL LOGIN ESTE INICIADA
+bool LoginActivo(){
+    //VALIDAR QUE EXISTA UN USUARIO LOGEADO Y TENGA TODOS SUS ATRIBUTOS SETEADOS
+    if(login_activo->user != NULL){
+        return true;
+    }
+    if(login_activo->path != NULL){
+        return true;
+    }
+    if(login_activo->nomPart != NULL){
+        return true;
+    }
+    if(login_activo->id != NULL){
+        return true;
+    }
+    return false;
+}
+
