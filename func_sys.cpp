@@ -1955,3 +1955,123 @@ Respuesta Edit(char pathFile[], char newCont[], char path[], char namePart[], bo
     delete superb;
     return r;
 }
+
+//--------------------- COMANDO LOSS ---------------------------------
+
+//FUNCION PARA EL COMANDO LOSS
+Respuesta Loss(char path[], char name[]){
+    int startsuperb;
+    SuperBlock *superb = ReadSuperBlock(path,name,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    if(superb->s_filesystem_type == EXT2){
+        return ERR_FILESYSTEM;
+    }
+    //limpiando bitmaps
+    int contador;
+    FILE * arch;
+    arch = fopen (path,"rb+");
+    if (arch==NULL)
+    {
+        cout<<"ERROR AL ABRIR EL DISCO... \n";
+        return ERR_IRRECONOCIBLE;
+    }
+    //LIMPIAR BITMAP DE INODOS
+    fseek(arch, superb->s_bm_inode_start, SEEK_SET);
+    contador=0;
+    while(contador<superb->s_inodes_count){
+        fwrite("\0", sizeof(char), 1, arch);
+        contador++;
+    }
+    //LIMPIAR BITMAP DE BLOQUES
+    fseek(arch, superb->s_bm_block_start, SEEK_SET);
+    contador=0;
+    while(contador<superb->s_blocks_count){
+        fwrite("\0", sizeof(char), 1, arch);
+        contador++;
+    }
+    //LIMPIAR BITMAP DE INODOS
+    fseek(arch, superb->s_bm_inode_start, SEEK_SET);
+    contador=0;
+    while(contador<superb->s_blocks_count){
+        fwrite("\0", sizeof(char), 1, arch);
+        contador++;
+    }
+    //LIMPIAR INODOS
+    fseek(arch, superb->s_inode_start, SEEK_SET);
+    contador=0;
+    while(contador<(superb->s_inodes_count*superb->s_inode_size)){
+        fwrite("\0", sizeof(char), 1, arch);
+        contador++;
+    }
+    //LIMPIAR BLOQUES
+    fseek(arch, superb->s_block_start, SEEK_SET);
+    contador=0;
+    while(contador<(superb->s_blocks_count*superb->s_block_size)){
+        fwrite("\0", sizeof(char), 1, arch);
+        contador++;
+    }
+    //cerrando stream
+    fclose (arch);
+    return CORRECTO;
+}
+
+//----------------- COMANDO RECOVERY ----------------------------
+
+//FUNCION PARA EL COMANDO RECOVERY
+Respuesta Recovery(SuperBlock *superb, int startsuperb, char path[], char namePartition[], char id[]){
+    int startOperations = startsuperb+sizeof(SuperBlock);
+    Formatear(path,namePartition, FULL, EXT3, true);
+    FILE * arch;
+    int contador = 0;
+    arch = fopen (path,"rb+");
+    if (arch==NULL)
+    {
+        cout<<"ERROR AL ABRIR EL DISCO... \n";
+        return ERR_IRRECONOCIBLE;
+    }
+    Journal *journal = (Journal*)malloc(sizeof(Journal));
+    fseek(arch, startOperations, SEEK_SET);
+    while(contador<superb->s_inodes_count){
+        fread(journal,sizeof(Journal),1,arch);
+        if(journal == NULL){
+            return ERR_RECOVERY;
+        }
+        if(journal->j_operation == VACIO){
+            return CORRECTO;
+        }
+        switch (journal->j_operation) {
+            case MAKEDIR:
+                CrearCarpeta(journal->j_boolean,id,journal->j_path,true);
+                break;
+            case MAKEFILE_PATH:
+                CrearArchivo(journal->j_path,journal->j_boolean,journal->j_content,path,namePartition,true);
+                break;
+            case MAKEFILE_SIZE:
+                CrearArchivo(journal->j_path,journal->j_boolean,journal->j_size,path,namePartition,true);
+                break;
+            case ADDGRUPO:
+                CrearGrupo(path,namePartition,journal->j_group,true);
+                break;
+            case RMGRP:
+                BorrarGrupo(path,namePartition,journal->j_group,true);
+                break;
+            case ADDUSUARIO:
+                CrearUsuario(path,namePartition,journal->j_user,journal->j_content,journal->j_group,true);
+                break;
+            case DELUSUARIO:
+                BorrarUsuario(path,namePartition,journal->j_user,true);
+                break;
+            case EDITFILE:
+                Edit(journal->j_path,journal->j_content,path,namePartition,true);
+                break;
+            default:
+                break;
+        }
+
+        contador++;
+    }
+  fclose (arch);
+  return CORRECTO;
+}

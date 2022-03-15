@@ -182,4 +182,10 @@ Respuesta Cat(char[], char[], char[]);
 //FUNCION PARA EL COMANDO EDIT
 Respuesta Edit(char[], char[], char[], char[], bool);
 
+//FUNCION PARA EL COMANDO LOSS
+Respuesta Loss(char[], char[]);
+
+//FUNCION PARA EL COMANDO RECOVERY
+Respuesta Recovery(SuperBlock*, int, char[], char[], char[]);
+
 #endif //FUNC_SYS_H

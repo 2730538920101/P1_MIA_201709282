@@ -46,7 +46,9 @@ enum Respuesta {
     ERR_GRP_NOEX,
     ERR_USR_EX,
     ERR_USR_NOEX,
-    ERR_INCORRECT_PWD
+    ERR_INCORRECT_PWD,
+    ERR_FILESYSTEM,
+    ERR_RECOVERY
 };
 enum TipoComando{
     MKDISK,

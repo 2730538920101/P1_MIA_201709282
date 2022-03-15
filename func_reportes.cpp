@@ -307,3 +307,4 @@ void ReporteExtendidas(FILE *arch, MasterBootRecord *disco, char path[]){
     fputs("</tr>\n", arch);
     fputs("</table>\n", arch);
 }
+

@@ -245,6 +245,14 @@ void getErrorMsj(Respuesta res){
         {
             cout<<"ERROR, EL PASSWORD ES INCORRECTO... \n";
         }break;
+        case ERR_FILESYSTEM:
+        {
+            cout<<"ERROR, EL SISTEMA DE ARCHIVOS NO PUEDE EJECUTAR EL COMANDO... \n";
+        }break;
+        case ERR_RECOVERY:
+        {
+            cout<<"ERROR, EL SISTEMA DE ARCHIVOS NO SE PUDO RESTAURAR COMPLETAMENTE... \n";
+        }break;
         default:
         {
             cout<<"ERROR NO IDENTIFICADO... \n";

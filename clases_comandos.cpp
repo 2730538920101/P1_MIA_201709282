@@ -540,6 +540,33 @@ C_recovery::C_recovery(char id[]){
 //FUNCION EJECUTAR RECOVERY
 void C_recovery::Ejecutar(){
     cout<<"Ejecutando comando RECOVERY... \n ";
+    Discos_Montados *disk = getDiscoMontado(this->id);
+    if(disk == NULL){
+        cout<<"EL DISCO NO HA SIDO MONTADO... \n";
+        return;
+    }
+    Particiones_Montadas *part = getParticionMontada(this->id);
+    if(part == NULL){
+        cout<<"LA PARTICION NO HA SIDO MONTADA... \n";
+        return;
+    }
+    int startsuperb = 0;
+    SuperBlock *superb = ReadSuperBlock(disk->path, part->name, &startsuperb);
+    if(superb == NULL){
+        getErrorMsj(ERR_FILESYSTEM);
+        return;
+    }
+    if(superb->s_filesystem_type == EXT2){
+        getErrorMsj(ERR_FILESYSTEM);
+        return;
+    }
+    Respuesta res = Recovery(superb, startsuperb, disk->path, part->name, this->id);
+    if(res == CORRECTO){
+        cout<<"EL SISTEMA DE ARCHIVOS HA SIDO RECUPERADO EXITOSAMENTE... \n";
+    }else{
+        getErrorMsj(res);
+    }
+    delete superb;
 }
 
 //CREAR LOSS
@@ -551,6 +578,22 @@ C_loss::C_loss(char id[]){
 //FUNCION EJECUTAR LOSS
 void C_loss::Ejecutar(){
     cout<<"Ejecutando comando LOSS... \n ";
+    Discos_Montados *disk = getDiscoMontado(this->id);
+    if(disk == NULL){
+        cout<<"EL DISCO NO HA SIDO MONTADO... \n";
+        return;
+    }
+    Particiones_Montadas *part = getParticionMontada(this->id);
+    if(part == NULL){
+        cout<<"LA PARTICION NO HA SIDO MONTADA... \n";
+        return;
+    }
+    Respuesta res = Loss(disk->path, part->name);
+    if(res = CORRECTO){
+        cout<<"SE ESTA SIMULANDO UN FALLO EN EL SISTEMA... \n";
+    }else{
+        getErrorMsj(res);
+    }
 }
 
 
