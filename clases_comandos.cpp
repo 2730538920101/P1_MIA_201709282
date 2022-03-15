@@ -666,10 +666,22 @@ void C_rep::Ejecutar(){
         case INODE:
         {
             cout<<"REPORTE INODE... "<<endl;
+            Respuesta res = ReporteInodos(disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXISTOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case BLOCK:
         {
             cout<<"REPORTE BLOCK... "<<endl;
+            Respuesta res = ReporteBlocks(disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case JOURNALING:
         {
