@@ -64,4 +64,19 @@ void ReporteTree(char path_report[], char id[]);
 //FUNCION PARA EL REPORTE SB
 void ReporteSb(char[], char[], char[]);
 
+//FUNCION PARA GRAFICAR UN ARCHIVO
+Respuesta graphFile(char *text, char *title,char reportPath[]);
+
+//FUNCION PARA EL REPORTE FILE
+Respuesta ReporteFile(char filePath[], char path[], char partition[], char reportPath[]);
+
+//FUNCION PARA GRAFICAR EL INODO EN EL REPORTE LS
+void graphInodoForLs(TablaInodos* inodo,FILE *fileReport,char path[],char namePart[],SuperBlock *superb,char name[]);
+
+//FUNCION PARA GRAFICAR EL INODO RECURSIVAMENTE EN EL REPORTE LS
+void graphInodoForLsRec(int level,int indexBlock,FILE *fileReport,char path[],char namePart[],SuperBlock *superb,Tipoinodo type);
+
+//FUNCION PARA EL REPORTE LS
+Respuesta ReporteLs(char path[], char name[], char path_report[]);
+
 #endif //FUNC_REPORTES_H

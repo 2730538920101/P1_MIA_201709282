@@ -728,10 +728,22 @@ void C_rep::Ejecutar(){
         case FILE_REP:
         {
             cout<<"REPORTE FILE... "<<endl;
+            Respuesta res = ReporteFile(this->ruta, disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case LS:
         {
             cout<<"REPORTE LS... "<<endl;
+            Respuesta res = ReporteLs(disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         default:
         {

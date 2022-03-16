@@ -1,1 +1,1 @@
-rep -name=MBR -path=/home/archivos/faseU/Disco2.dk -id=820a
+rmdisk -path=/home/archivos/faseU/Disco2.dk

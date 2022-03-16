@@ -1237,3 +1237,213 @@ void ReporteSb(char path[], char name[], char path_report[]){
     string command = "dot -Tpng superb_report.dot -o \""+pathString+"\"";
     system(command.c_str());
 }
+
+
+//FUNCION PARA GRAFICAR UN ARCHIVO
+Respuesta graphFile(char *text, char *title,char reportPath[]){
+    FILE * fileReport;
+    fileReport = fopen ("File_report.dot","w+");
+    if (fileReport==NULL){
+        cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+        return ERR_IRRECONOCIBLE;
+    }
+    fseek(fileReport, 0, SEEK_SET);
+    fputs("digraph di{\n", fileReport);
+    fputs("nodo[label=\"",fileReport);
+    int index = 0;
+        while(text[index]!='\0' && text[index]>0){
+        fprintf(fileReport,"%c", text[index]);
+        if(index%64 == 0 && index!=0){
+            fputs("\n",fileReport);
+        }
+        index++;
+        }
+    fputs("\"\n shape=\"note\"];\n",fileReport);
+    fputs("labelloc=\"t\";\nlabel=\"",fileReport);
+    fputs(title,fileReport);
+    fputs("\";",fileReport);
+    fputs("}\n",fileReport);
+    fclose (fileReport);
+    string pathString(reportPath);
+    string command = "dot -Tpng File_report.dot -o \""+pathString+"\"";
+    system(command.c_str());
+    return CORRECTO;
+}
+
+
+//FUNCION PARA EL REPORTE FILE
+Respuesta ReporteFile(char filePath[], char path[], char partition[], char reportPath[]){
+    char *title=(char*)"";
+    string res = BuscarContenidoArchivo(filePath,path,partition,&title);
+    return graphFile(&res[0],title,reportPath);
+}
+
+//FUNCION PARA GRAFICAR EL INODO EN EL REPORTE LS
+void graphInodoForLs(TablaInodos* inodo,FILE *fileReport,char path[],char namePart[],SuperBlock *superb,char name[]){
+    if(inodo==NULL) return;
+        if(inodo->i_type == IN_DIRECTORY){
+            fputs("<tr>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //permisos
+            fputs(&to_string(inodo->i_perm)[0],fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //usuario
+            Usuario *user = getUsuarioId(&to_string(inodo->i_uid)[0],path,namePart);
+            if(user!=NULL){
+                fputs(&user->name[0], fileReport);
+            }
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //grupo
+            Grupo *grupo = getGrupoId(&to_string(inodo->i_gid)[0],path,namePart);
+            if(grupo!=NULL){
+                fputs(&grupo->name[0], fileReport);
+            }
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //tamaño
+            fputs(&to_string(inodo->i_size)[0],fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //fecha y hora
+            fputs(inodo->i_ctime,fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">Carpeta</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //nombre
+            fputs(name, fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("</tr>\n", fileReport);
+            int indexInodo;
+            for(indexInodo = 0;indexInodo<12;indexInodo++){
+                if(inodo->i_block[indexInodo]!=-1){
+                    if(inodo->i_type == IN_DIRECTORY){
+                        BloquesCarpetas *directory = ReadBloquesCarpetas(path,getBloqueInicial(superb,inodo->i_block[indexInodo]));
+                        if(directory!=NULL){
+                            int indexBlock;
+                            for(indexBlock = 2;indexBlock<4;indexBlock++){
+                                if(directory->b_content[indexBlock].b_inodo!=-1){
+                                    TablaInodos *inodo2 = ReadInodo(path,getInodoInicial(superb,directory->b_content[indexBlock].b_inodo));
+                                    if(inodo2!=NULL){
+                                        graphInodoForLs(inodo2,fileReport,path,namePart,superb,directory->b_content[indexBlock].b_name);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //GRAFICAR INDIRECTOS
+            while(indexInodo<TAM_BLOQUES_INODOS){
+                if(inodo->i_block[indexInodo]!=-1){
+                    graphInodoForLsRec(indexInodo-11,inodo->i_block[indexInodo],fileReport,path,namePart,superb,inodo->i_type);
+                }
+                indexInodo++;
+            }
+        }else{
+            fputs("<tr>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //permisos
+            fputs(&to_string(inodo->i_perm)[0],fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //usuario
+            Usuario *user = getUsuarioId(&to_string(inodo->i_uid)[0],path,namePart);
+            if(user!=NULL){
+                fputs(&user->name[0], fileReport);
+            }
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //grupo
+            Grupo *grupo = getGrupoId(&to_string(inodo->i_gid)[0],path,namePart);
+            if(grupo!=NULL){
+                fputs(&grupo->name[0], fileReport);
+            }
+            fputs("</td>\n", fileReport);fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //tamaño
+            fputs(&to_string(inodo->i_size)[0],fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //fecha y hora
+            fputs(inodo->i_ctime,fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">Archivo</td>\n", fileReport);
+            fputs("<td bgcolor=\"#f99c87\">", fileReport);
+            //nombre
+            fputs(name, fileReport);
+            fputs("</td>\n", fileReport);
+            fputs("</tr>\n", fileReport);
+        }
+}
+
+
+//FUNCION PARA GRAFICAR EL INODO RECURSIVAMENTE EN EL REPORTE LS
+void graphInodoForLsRec(int level,int indexBlock,FILE *fileReport,char path[],char namePart[],SuperBlock *superb,Tipoinodo type){
+    BloquesApuntadores *block = ReadBloquesApuntadores(path,getBloqueInicial(superb,indexBlock));
+    if(block==NULL) return;
+    if(level==1){
+        int indexPointer;
+        for(indexPointer = 0;indexPointer<15;indexPointer++){
+            if(block->b_pointers[indexPointer]!=-1){
+                if(type==IN_DIRECTORY){
+                    TablaInodos *ind = ReadInodo(path,getInodoInicial(superb,block->b_pointers[indexPointer]));
+                    BloquesCarpetas *directory = ReadBloquesCarpetas(path,getBloqueInicial(superb,ind->i_block[0]));
+                    if(directory!=NULL){
+                        graphInodoForLs(ind,fileReport,path,namePart,superb,directory->b_content[0].b_name);
+                    }
+                }
+            }
+        }
+    }else{
+        int indexPointer;
+        for(indexPointer = 0;indexPointer<15;indexPointer++){
+           graphInodoForLsRec(level-1,block->b_pointers[indexPointer],fileReport,path,namePart,superb,type);
+        }
+    }
+}
+
+//FUNCION PARA EL REPORTE LS
+Respuesta ReporteLs(char path[], char name[], char path_report[]){
+    SuperBlock *superb = ReadSuperBlock(path,name);
+    if(superb == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    FILE * arch;
+    arch = fopen (path,"rb+");
+    if (arch==NULL){
+        cout<<"ERROR AL ABRIR EL DISCO...\n";
+        return ERR_IRRECONOCIBLE;
+    }
+    FILE * fileReport;
+    fileReport = fopen ("Ls_report.dot","w+");
+    if(fileReport==NULL){
+        cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+        return ERR_IRRECONOCIBLE;
+    }
+    fseek(fileReport, 0, SEEK_SET);
+    fputs("digraph d{\n", fileReport);
+    fputs("i_3[ shape=plaintext label=<\n", fileReport);
+    fputs("<table>\n", fileReport);
+    fputs("<tr>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Permisos</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Usuario Propietario</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Grupo</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Tamaño</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Fecha y Hora</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Tipo</td>\n", fileReport);
+    fputs("<td bgcolor=\"#f99c87\">Nombre</td>\n", fileReport);
+    fputs("</tr>\n", fileReport);
+    TablaInodos *inodo = ReadInodo(path,getInodoInicial(superb,0));
+    if(inodo!=NULL){
+        graphInodoForLs(inodo,fileReport,path,name,superb,(char*)"/");
+    }
+    fputs("</table>\n>];\n", fileReport);
+    fputs("}\n",fileReport);
+    fclose (fileReport);
+    fclose (arch);
+    string pathString(path_report);
+    string command = "dot -Tpng Ls_report.dot -o \""+pathString+"\"";
+    system(command.c_str());
+    return CORRECTO;
+}
