@@ -52,4 +52,16 @@ void graphBlockFile(BloquesArchivos *block,int initBlock, FILE *arch,int indexIn
 //FUNCION PARA EL REPORTE BLOCKS
 Respuesta ReporteBlocks(char path[], char name[], char path_report[]);
 
+//FUNCION PARA EL REPORTE JOURNAL
+Respuesta ReporteJournal(char path[], char namePart[],char reportPath[]);
+
+//FUNCION PARA LOS REPORTES BM_BLOCK y BM_INODE
+Respuesta ReporteBitmap(int rep, char path[], char name[],char path_rep[]);
+
+//FUNCION PARA EL REPORTE TREE
+void ReporteTree(char path_report[], char id[]);
+
+//FUNCION PARA EL REPORTE SB
+void ReporteSb(char[], char[], char[]);
+
 #endif //FUNC_REPORTES_H

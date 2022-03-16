@@ -686,22 +686,44 @@ void C_rep::Ejecutar(){
         case JOURNALING:
         {
             cout<<"REPORTE JOURNALING... "<<endl;
+            Respuesta res = ReporteJournal(disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case BM_BLOCK:
         {
             cout<<"REPORTE BM_BLOCK... "<<endl;
+            Respuesta res = ReporteBitmap(1,disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case BM_INODE:
         {
             cout<<"REPORTE BM_INODE... "<<endl;
+            Respuesta res = ReporteBitmap(0,disk->path, part->name, this->path);
+            if(res == CORRECTO){
+                cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
+            }else{
+                getErrorMsj(res);
+            }
         }break;
         case TREE:
         {
             cout<<"REPORTE TREE... "<<endl;
+            ReporteTree(this->path, this->id);
+            cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE...\n";
         }break;
         case SB:
         {
             cout<<"REPORTE SB... "<<endl;
+            ReporteSb(disk->path, part->name, this->path);
+            cout<<"EL REPORTE SE HA GENERADO EXITOSAMENTE... \n";
         }break;
         case FILE_REP:
         {

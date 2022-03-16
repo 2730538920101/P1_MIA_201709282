@@ -325,7 +325,7 @@ Respuesta ReporteInodos(char path[], char name[], char path_report[]){
     }
 
     FILE * fileReport;
-    fileReport = fopen ("report_inodes.dot","w+");
+    fileReport = fopen ("Inodes_report.dot","w+");
     if (fileReport==NULL)
     {
         cout<<"ERROR AL CREAR EL ARCHVIVO DOT... \n";
@@ -405,7 +405,7 @@ Respuesta ReporteInodos(char path[], char name[], char path_report[]){
     fclose (fileReport);
     fclose (arch);
     string pathString(path_report);
-    string command = "dot -Tpng report_inodes.dot -o \""+pathString+"\"";//+"/report_mbr.png";
+    string command = "dot -Tpng Inodes_report.dot -o \""+pathString+"\"";//+"/report_mbr.png";
     system(command.c_str());
     return CORRECTO;
 }
@@ -722,7 +722,7 @@ Respuesta ReporteBlocks(char path[], char name[], char path_report[]){
     }
 
     FILE * fileReport;
-    fileReport = fopen ("report_blocks.dot","w");
+    fileReport = fopen ("Blocks_report.dot","w");
     if (fileReport==NULL){
         cout<<"ERROR AL CREAR EL ARCHIVO DOT... \n";
         return ERR_IRRECONOCIBLE;
@@ -767,8 +767,473 @@ Respuesta ReporteBlocks(char path[], char name[], char path_report[]){
     fclose (fileReport);
     fclose (arch);
     string pathString(path_report);
-    string command = "dot -Tpng report_blocks.dot -o \""+pathString+"\"";//+"/report_mbr.png";
+    string command = "dot -Tpng Blocks_report.dot -o \""+pathString+"\"";
+    return CORRECTO;
+}
+
+//FUNCION PARA EL REPORTE JOURNAL
+Respuesta ReporteJournal(char path[], char namePart[],char reportPath[]){
+    int startsuperb;
+    SuperBlock *superb = ReadSuperBlock(path,namePart,&startsuperb);
+    if(superb==NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    FILE * fileReport;
+    fileReport = fopen ("Journal_report.dot","w+");
+    if (fileReport==NULL){
+        cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+         return ERR_IRRECONOCIBLE;
+    }
+    fseek(fileReport, 0, SEEK_SET);
+    fputs("digraph di{\n", fileReport);
+    fputs("i_3[ shape=plaintext label=<\n",fileReport);
+    fputs("<table>\n",fileReport);
+    fputs("<tr><td colspan=\"9\" bgcolor=\"#DAF7A6\">Journal</td></tr>\n",fileReport);
+    fputs("<tr>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Operacion</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Fecha</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Ruta</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Contenido</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Tamaño</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Grupo</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Usuario</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Permisos</td>\n",fileReport);
+    fputs("<td bgcolor=\"#DAF7A6\">Recursivo</td>\n",fileReport);
+    fputs("</tr>\n",fileReport);
+    int startOperations = startsuperb+sizeof(SuperBlock);
+    FILE * arch;
+    int contador = 0;
+    arch = fopen (path,"rb+");
+    if (arch==NULL){
+        cout<<"ERROR AL ABRIR EL DISCO...\n";
+        return CORRECTO;
+    }
+    Journal *journal = (Journal*)malloc(sizeof(Journal));
+    fseek(arch, startOperations, SEEK_SET);
+    while(contador<superb->s_inodes_count){
+        fread(journal,sizeof(Journal),1,arch);
+        if(journal == NULL){
+            return ERR_IRRECONOCIBLE;
+        }
+        switch (journal->j_operation) {
+            case MAKEDIR:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">Mkdir</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_path,fileReport);
+                    fputs("</td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\">-</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(&to_string(journal->j_perms)[0],fileReport);
+                    fputs("</td>\n",fileReport);
+                    if(journal->j_boolean){
+                        fputs("<td bgcolor=\"#DAF7A6\">SI</td>\n",fileReport);
+
+                    }else{
+                        fputs("<td bgcolor=\"#DAF7A6\">NO</td>\n",fileReport);
+                    }
+
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case MAKEFILE_PATH:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">Mkfile</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_path,fileReport);
+                    fputs("</td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_content,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\">-</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(&to_string(journal->j_perms)[0],fileReport);
+                    fputs("</td>\n",fileReport);
+                    if(journal->j_boolean){
+                        fputs("<td bgcolor=\"#DAF7A6\">SI</td>\n",fileReport);
+
+                    }else{
+                        fputs("<td bgcolor=\"#DAF7A6\">NO</td>\n",fileReport);
+                    }
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case MAKEFILE_SIZE:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">Mkfile</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_path,fileReport);
+                    fputs("</td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(&to_string(journal->j_size)[0],fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(&to_string(journal->j_perms)[0],fileReport);
+                    fputs("</td>\n",fileReport);
+                    if(journal->j_boolean){
+                        fputs("<td bgcolor=\"#DAF7A6\">SI</td>\n",fileReport);
+
+                    }else{
+                        fputs("<td bgcolor=\"#DAF7A6\">NO</td>\n",fileReport);
+                    }
+
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case ADDGRUPO:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">mkgrp</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case DELGRUPO:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">rmgrp</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case DELUSUARIO:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">rmusr</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case ADDUSUARIO:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">mkusr</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_content,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                case EDITFILE:
+                {
+                    fputs("<tr>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">mkusr</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\">",fileReport);
+                    fputs(journal->j_date,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_path,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    //contenido
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_content,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    //tamaño
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_group,fileReport);
+                    fputs(" </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> ",fileReport);
+                    fputs(journal->j_user,fileReport);
+                    fputs("</td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("<td bgcolor=\"#DAF7A6\"> - </td>\n",fileReport);
+                    fputs("</tr>\n",fileReport);
+                }
+                    break;
+                default:
+                    contador = superb->s_inodes_count+1;
+                    break;
+            }
+        contador++;
+    }
+
+    fclose (arch);
+    fputs("</table>\n",fileReport);
+    fputs(">];\n",fileReport);
+    fputs("}\n",fileReport);
+    fclose (fileReport);
+    string pathString(reportPath);
+    string command = "dot -Tpng Journal_report.dot -o \""+pathString+"\"";
     system(command.c_str());
     return CORRECTO;
 }
 
+//FUNCION PARA LOS REPORTES BM_BLOCK y BM_INODE
+Respuesta ReporteBitmap(int rep, char path[], char name[],char path_rep[]){
+    SuperBlock *superb = ReadSuperBlock(path,name);
+    if(superb == NULL){
+        return ERR_IRRECONOCIBLE;
+    }
+    FILE * arch;
+    arch = fopen (path,"rb+");
+    if (arch==NULL){
+        cout<<"ERROR AL ABRIR EL DISCO...\n";
+        return ERR_IRRECONOCIBLE;
+    }
+
+    FILE * fileReport;
+    fileReport = fopen (path_rep,"w+");
+    if (fileReport==NULL){
+        cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+        return ERR_IRRECONOCIBLE;
+    }
+    fseek(fileReport, 0, SEEK_SET);
+    if(rep == 0){
+        //reporte de inodos
+        char caracter;
+        int contador = 0;
+        fseek(arch, superb->s_bm_inode_start, SEEK_SET);
+        while(contador<superb->s_inodes_count){
+            fread(&caracter, sizeof(char), 1, arch);
+            fwrite(&caracter, sizeof(char), 1, fileReport);
+            if((contador+1)%20==0 && contador!=0){
+                fwrite("\n", sizeof(char), 1, fileReport);
+            }
+            contador++;
+        }
+    }else{
+        //reporte de bloques
+        char caracter;
+        int contador = 0;
+        fseek(arch, superb->s_bm_block_start, SEEK_SET);
+        while(contador<superb->s_blocks_count){
+            fread(&caracter, sizeof(char), 1, arch);
+            fwrite(&caracter, sizeof(char), 1, fileReport);
+            if((contador+1)%20==0 && contador!=0){
+                fwrite("\n", sizeof(char), 1, fileReport);
+            }
+            contador++;
+        }
+    }
+    fclose (fileReport);
+    fclose (arch);
+    delete superb;
+    return CORRECTO;
+}
+
+//FUNCION PARA EL REPORTE TREE
+void ReporteTree(char path_report[], char id[]){
+    Discos_Montados *disk = getDiscoMontado(id);
+    if(disk == NULL){
+        return;
+    }
+    Particiones_Montadas *partition = getParticionMontada(id);
+    if(partition==NULL){
+        return;
+    }
+    SuperBlock *superb = ReadSuperBlock(disk->path,partition->name);
+    if(superb==NULL){
+        return;
+    }
+    FILE * arch;
+    arch = fopen ("Tree_report.dot","w+");
+    if (arch==NULL){
+        cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+        return;
+    }
+    fseek(arch, 0, SEEK_SET);
+    fputs("digraph G {\n", arch);
+    fputs("rankdir =LR;\n", arch);
+    //graphAllInodes(superb,arch,disk->path);
+    TablaInodos *inodo = ReadInodo(disk->path,getInodoInicial(superb,0));
+    if(inodo!=NULL){
+        graphInodo(inodo,0,arch,disk->path,superb);
+    }
+    fputs("}\n",arch);
+    //cerrando stream
+    fclose (arch);
+    string pathString(path_report);
+    string command = "dot -Tpng Tree_report.dot -o \""+pathString+"\"";
+    system(command.c_str());
+}
+
+
+//FUNCION PARA EL REPORTE superb
+void ReporteSb(char path[], char name[], char path_report[]){
+    SuperBlock *superb = ReadSuperBlock(path,name);
+    if(superb==NULL){
+        return;
+    }
+    FILE * arch;
+    arch = fopen ("superb_report.dot","w+");
+    if (arch==NULL){
+            cout<<"ERROR AL CREAR EL ARCHIVO DOT...\n";
+            return;
+        }
+    fseek(arch, 0, SEEK_SET);
+    fputs("digraph {\ntbl [\nshape=plaintext\n label=<\n", arch);
+    fputs("<table border='0' cellborder='1' cellspacing='0'>\n",arch);
+    fputs("<tr><td colspan=\"3\">",arch);
+    fputs(name,arch);
+    fputs("</td></tr>\n",arch);
+    fputs("<th><td>Nombre</td><td>Valor</td></th>\n",arch);
+    //file system
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_filesystem_type</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_filesystem_type)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //count inodes
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_inodes_count</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_inodes_count)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //count blocks
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_blocks_count</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_blocks_count)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //count free inodes
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_free_inodes_count</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_free_inodes_count)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //count free blocks
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_free_blocks_count</td><td bgcolor=\"#bcf7c1\">",arch);
+    fprintf(arch, "%d", superb->s_free_blocks_count);
+    fputs("</td></tr>\n",arch);
+    //date mount
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_mtime</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(superb->s_mtime,arch);
+    fputs("</td></tr>\n",arch);
+    //date unmount
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_umtime</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(superb->s_umtime,arch);
+    fputs("</td></tr>\n",arch);
+    //count mount
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_mnt_count</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_mnt_count)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //magic
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_magic</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_magic)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //size inode
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_inode_size</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_inode_size)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //size block
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_block_size</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_block_size)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //first free inode
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_firts_ino</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_first_ino)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //first free block
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_first_blo</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_first_blo)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //start bitmap inodes
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_bm_inode_start</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_bm_inode_start)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //start bitmap blocks
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_bm_block_start</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_bm_block_start)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //start inodes
+    fputs("<tr><td bgcolor=\"#b4e0fa\">s_inode_start</td><td bgcolor=\"#b4e0fa\">",arch);
+    fputs(&to_string(superb->s_inode_start)[0],arch);
+    fputs("</td></tr>\n",arch);
+    //start blocks
+    fputs("<tr><td bgcolor=\"#bcf7c1\">s_block_start</td><td bgcolor=\"#bcf7c1\">",arch);
+    fputs(&to_string(superb->s_block_start)[0],arch);
+    fputs("</td></tr>\n",arch);
+    fputs("</table>\n",arch);
+    fputs(">];\n\n", arch);
+    fputs("}\n",arch);
+    //cerrando stream
+    fclose (arch);
+    string pathString(path_report);
+    string command = "dot -Tpng superb_report.dot -o \""+pathString+"\"";
+    system(command.c_str());
+}
