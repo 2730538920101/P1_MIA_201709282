@@ -1,0 +1,142 @@
+digraph di{
+b_0[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="0" colspan="3">Bloque 0</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >/</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">0</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" >/</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">0</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib128">users.txt</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">1</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" port="ib256">home</td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">2</td></tr>
+</table>
+>];
+b_1[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="256">Bloque 1</td></tr>
+<tr><td>1,G,root
+1,U,root,root,123
+2,G,g<br/>rupo1
+3,G,grupo2
+0,G,grupo3
+
+2,<br/>U</td></tr>
+</table>
+>];
+b_2[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="384">Bloque 2</td></tr>
+<tr><td>home/carloscarpetas</td></tr>
+</table>
+>];
+b_2[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="512" colspan="3">Bloque 2</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >home</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">2</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib0">/</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">0</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib384">carlos</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">3</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" port="ib1024">carpetas</td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">8</td></tr>
+</table>
+>];
+b_4[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="896" colspan="3">Bloque 4</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >carlos</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">3</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib256">home</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">2</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib512">archivos</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">4</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" ></td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">-1</td></tr>
+</table>
+>];
+b_5[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="1152" colspan="3">Bloque 5</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >archivos</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">4</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib384">carlos</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">3</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib0">archivo1.txt</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">0</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" port="ib0">archivo2.txt</td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">0</td></tr>
+</table>
+>];
+b_8[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="1536" colspan="3">Bloque 8</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >archivos</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">4</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib384">carlos</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">3</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib0">archivo3.txt</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">0</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" ></td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">-1</td></tr>
+</table>
+>];
+b_6[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="1408">Bloque 6</td></tr>
+<tr><td>012345678901234</td></tr>
+</table>
+>];
+b_7[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="1664">Bloque 7</td></tr>
+<tr><td></td></tr>
+</table>
+>];
+b_9[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="2048">Bloque 9</td></tr>
+<tr><td></td></tr>
+</table>
+>];
+b_10[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="2304" colspan="3">Bloque 10</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >carpetas</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">8</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib256">home</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">2</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" port="ib1152">carpeta1</td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">9</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" port="ib1280">carpeta2</td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">10</td></tr>
+</table>
+>];
+b_11[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="2560" colspan="3">Bloque 11</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >carpeta1</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">9</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib1024">carpetas</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">8</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" ></td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">-1</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" ></td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">-1</td></tr>
+</table>
+>];
+b_12[ shape=plaintext label=< 
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td port="2816" colspan="3">Bloque 12</td></tr>
+<tr><td bgcolor="#e5b7ff">b_name</td><td bgcolor="#e5b7ff" >carpeta2</td></tr>
+<tr><td bgcolor="#e5b7ff">b_inodo</td><td bgcolor="#e5b7ff">10</td></tr>
+<tr><td bgcolor="#c0ffb7">b_name</td><td bgcolor="#c0ffb7" port="ib1024">carpetas</td></tr>
+<tr><td bgcolor="#c0ffb7">b_inodo</td><td bgcolor="#c0ffb7">8</td></tr>
+<tr><td bgcolor="#ffb7c0">b_name</td><td bgcolor="#ffb7c0" ></td></tr>
+<tr><td bgcolor="#ffb7c0">b_inodo</td><td bgcolor="#ffb7c0">-1</td></tr>
+<tr><td bgcolor="#ffd2b7">b_name</td><td bgcolor="#ffd2b7" ></td></tr>
+<tr><td bgcolor="#ffd2b7">b_inodo</td><td bgcolor="#ffd2b7">-1</td></tr>
+</table>
+>];
+}

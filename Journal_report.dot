@@ -1,0 +1,18 @@
+digraph di{
+i_3[ shape=plaintext label=<
+<table>
+<tr><td colspan="9" bgcolor="#DAF7A6">Journal</td></tr>
+<tr>
+<td bgcolor="#DAF7A6">Operacion</td>
+<td bgcolor="#DAF7A6">Fecha</td>
+<td bgcolor="#DAF7A6">Ruta</td>
+<td bgcolor="#DAF7A6">Contenido</td>
+<td bgcolor="#DAF7A6">Tamaño</td>
+<td bgcolor="#DAF7A6">Grupo</td>
+<td bgcolor="#DAF7A6">Usuario</td>
+<td bgcolor="#DAF7A6">Permisos</td>
+<td bgcolor="#DAF7A6">Recursivo</td>
+</tr>
+</table>
+>];
+}

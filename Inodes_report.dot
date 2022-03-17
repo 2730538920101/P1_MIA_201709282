@@ -1,0 +1,310 @@
+digraph {
+i_0[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">0</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_1[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">28</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">664</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">1</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">2</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_2[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 2</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">2</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_3[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 3</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">4</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_4[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 4</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">5</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">8</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_5[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 5</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">15</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">664</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">6</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_6[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 6</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">664</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">7</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_7[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 7</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">0</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">664</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">9</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_8[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 8</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">10</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_9[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 9</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">11</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+i_10[ shape=plaintext label=< 
+<table border="1" cellborder = "0" cellspacing='0'>
+<tr><td colspan="3">Inodo 10</td></tr>
+<tr><td bgcolor="#DAF7A6">i_uid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_gid</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_size</td><td bgcolor="#DAF7A6">-1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_atime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_ctime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_mtime</td><td bgcolor="#DAF7A6">17/03/22 16:02</td></tr>
+<tr><td bgcolor="#DAF7A6">i_type</td><td bgcolor="#DAF7A6">1</td></tr>
+<tr><td bgcolor="#DAF7A6">i_perm</td><td bgcolor="#DAF7A6">777</td></tr>
+<tr><td bgcolor="#FFC300">AD1</td><td  bgcolor="#FFC300">12</td></tr>
+<tr><td bgcolor="#FFC300">AD2</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD3</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD4</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD5</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD6</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD7</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD8</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD9</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD10</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD11</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FFC300">AD12</td><td  bgcolor="#FFC300">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI1</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI2</td><td bgcolor="#FF5733">-1</td></tr>
+<tr><td bgcolor="#FF5733">AI3</td><td bgcolor="#FF5733">-1</td></tr>
+</table>
+>];
+}

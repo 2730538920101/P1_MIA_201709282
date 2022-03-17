@@ -1,1 +1,1 @@
-login -usuario=user1 -password=us1 -id=820a 
+rep -id=820a -path=/home/carlos/reportes/reporte8.png -name=TREE
