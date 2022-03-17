@@ -40,7 +40,7 @@ void CrearArchivoSuperBlock(SuperBlock *superb, char path[], int init){
 }
 
 //FUNCION QUE LEE EL SUPER BLOQUE
-SuperBlock* ReadSuperBlock(char path[], char name[],int *startsuperb){
+SuperBlock *ReadSuperBlock(char path[], char name[],int *startsuperb){
     MasterBootRecord *disco = getDataMBR(path);
     if(disco==NULL){
         cout<<"ERROR AL ABIR EL DISCO... \n";
@@ -57,7 +57,6 @@ SuperBlock* ReadSuperBlock(char path[], char name[],int *startsuperb){
         return NULL;
     }
     SuperBlock *superb = (SuperBlock*)malloc(sizeof(SuperBlock));
-
     fseek(arch, *startsuperb, SEEK_SET);
     fread(superb, sizeof(SuperBlock), 1, arch);
     fclose(arch);

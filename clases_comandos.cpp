@@ -165,7 +165,7 @@ C_unmount::C_unmount(char id[]){
 //FUNCION EJECUTAR UNMOUNT
 void C_unmount::Ejecutar(){
     cout<<"Ejecutando comando UNMOUNT... \n ";
-    Respuesta res = UnmountP(id);
+    Respuesta res = UnmountP(this->id);
     if(res != CORRECTO){
         getErrorMsj(res);
         return;

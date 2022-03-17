@@ -743,26 +743,19 @@ Respuesta UnmountP(char id[]){
         contadorPart++;
     }
     if(existePart){
+        //desmontar disco
+        SuperBlock *sb =ReadSuperBlock(discos_montados[contadorDiscos]->path,
+                                        discos_montados[contadorDiscos]->parts_mounted[contadorPart]->name);
+        if(sb==NULL){
+            return ERR_IRRECONOCIBLE;
+        }
+        sb->s_mnt_count = sb->s_mnt_count+1;
+        getFecha(sb->s_mtime);
+        CrearArchivoSuperBlock(sb,discos_montados[contadorDiscos]->path,discos_montados[contadorDiscos]->parts_mounted[contadorPart]->inicio);
         delete (discos_montados[contadorDiscos])->parts_mounted[contadorPart];
         (discos_montados[contadorDiscos])->parts_mounted[contadorPart] = NULL;
         sizeParts--;
-        if(sizeParts == 0){
-            //desmontar disco
-            SuperBlock *sb =ReadSuperBlock(discos_montados[contadorDiscos]->path,
-                                           discos_montados[contadorDiscos]->parts_mounted[contadorPart]->name);
-            if(sb==NULL){
-                return ERR_IRRECONOCIBLE;
-            }
-            sb->s_mnt_count = sb->s_mnt_count+1;
-            getFecha(sb->s_mtime);
-            CrearArchivoSuperBlock(sb,discos_montados[contadorDiscos]->path,discos_montados[contadorDiscos]->parts_mounted[contadorPart]->inicio);
-
-            while((discos_montados[contadorDiscos])!=NULL){
-                delete discos_montados[contadorDiscos];
-                (discos_montados[contadorDiscos]) = (discos_montados[contadorDiscos+1]);
-            }
-            (discos_montados[contadorDiscos]) = NULL;
-        }
+        
     }else{
         return ERR_PART_UNMOUNTED;
     }
