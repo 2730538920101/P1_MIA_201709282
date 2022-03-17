@@ -646,11 +646,11 @@ void C_rep::Ejecutar(){
         return;
     }
     int ext = 0;
-    string msj;
-    msj = getNameFromPath(this->path, &ext);
-    char *aux = &msj[0];
-    string aux2 = getPathSinNombre(this->path, strlen(aux) + ext);
-    CrearCarpeta(aux2);
+    string ss;
+    ss = getNameFromPath(this->path, &ext);
+    char *chh = &ss[0];
+    string hh = getPathSinNombre(this->path, strlen(chh) + ext)+"/";
+    CrearCarpeta(hh);
     switch(this->reporte){
         case MBR:
         {

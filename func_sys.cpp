@@ -1509,49 +1509,49 @@ Usuario *getUsuario(char usr[], char *contentUsers){
     Usuario *user = NULL;
     stringstream ss(contentUsers);
     string token;
-    while(getline(ss, token, '\n')) {
+    while (getline(ss, token, '\n')) {
         if(token!=""){
             user = new Usuario();
             contadortoken = 0;
             stringstream line(token);
             string tokenLine;
-            while(getline(line, tokenLine, ',')) {
-                if(tokenLine!=""){
-                    if(contadortoken == 0){
-                        if(tokenLine == "0"){
-                            continue;
+               while (getline(line, tokenLine, ',')) {
+                   if(tokenLine!=""){
+                       if(contadortoken == 0){
+                           if(tokenLine == "0"){
+                               continue;
+                           }else{
+                               user->id = tokenLine;
+                           }
+                       }else if(contadortoken==1){
+                           if(tokenLine != "U"){
+                               user = NULL;
+                               break;
+                           }
+                        }else if(contadortoken == 2){
+                           if(tokenLine == nameUser ){
+                               user->name = tokenLine;
+                           }else{
+                               user = NULL;
+                               break;
+                           }
+                        }else if(contadortoken == 3){
+                           user->group = tokenLine;
+                        }else if(contadortoken == 4){
+                           user->pwd = tokenLine;
                         }else{
-                            user->id = tokenLine;
+                           break;
                         }
-                    }else if(contadortoken==1){
-                        if(tokenLine != "U"){
-                            user = NULL;
-                            break;
-                        }
-                    }else if(contadortoken == 2){
-                        user->group = tokenLine;
-                    }else if(contadortoken == 3){
-                        if(tokenLine == nameUser ){
-                            user->name = tokenLine;
-                        }else{
-                            user = NULL;
-                            break;
-                        }
-                    }else if(contadortoken == 4){
-                        user->pwd = tokenLine;
-                    }else{
-                        break;
+                        contadortoken++;
                     }
-                    contadortoken++;
                 }
-            }
-            if(user!=NULL){
-                Grupo *grp = getGrupo(&user->group[0],contentUsers);
-                if(grp!=NULL){
-                    user->group = grp->id;
+                if(user!=NULL){
+                    Grupo *grp = getGrupo(&user->group[0],contentUsers);
+                    if(grp!=NULL){
+                        user->group = grp->id;
+                    }
+                    return user;
                 }
-                return user;
-            }
         }
     }
 
@@ -1561,7 +1561,6 @@ Usuario *getUsuario(char usr[], char *contentUsers){
             user->group = grp->id;
         }
     }
-
     return user;
 }
 

@@ -1,1 +1,1 @@
-pause
+login -usuario=user1 -password=us1 -id=820a 

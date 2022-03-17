@@ -139,6 +139,7 @@ void CrearCarpeta(string path){
         com[strlen(com)+1] = '\0';
         system(com);
     }
+    closedir(carpeta);
 }
 
 
