@@ -10,7 +10,7 @@ int columna = 0;
 %option noyywrap
 %option caseless
 
-coment          #[^'\n']*\n
+coment          (#.*\n?)
 mkdisk          "MKDISK"
 rmdisk          "RMDISK"
 fdisk           "FDISK"
@@ -72,6 +72,7 @@ igual           [=]
 
 
 %%
+{coment}                { }
 {cadena}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_CADENA;}
 {numero}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NUMERO;}
 {identificador}         {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IDENTIFICADOR;}
@@ -142,8 +143,8 @@ igual           [=]
 "3FS"                   {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_EXT3;}
 {igual}                 {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_IGUAL;}
 {nombre}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
-{coment}                {}
-[[:blank:]]             {}
+"\n"			 { }
+[[:blank:]]		 { }
 .                       {std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
 
 %%

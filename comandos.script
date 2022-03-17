@@ -1,1 +1,1 @@
-rmdisk -path=/home/archivos/faseU/Disco2.dk
+unmount -id=820a

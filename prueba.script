@@ -1,0 +1,63 @@
+#ARCHIVO DE PRUEBA
+# Prueba MKDISK
+MKDISK -size=3000 -unit=K -path=/home/user/Disco1.dk
+mkDisk -path=/home/user/Disco2.dk -unit=K -size=3000
+mkDisk -size=5000 -path="/home/mis discos/Disco3.dk" -unit=K 
+mkDisk -size=10 -path="/home/mis discos/Disco4.dk" 
+# Prueba RMDISK
+rmdisk -path="/home/mis discos/Disco4.dk"
+# Prueba FDISK
+# DISCO 1
+fdisk -size=300 -path=/home/user/Disco1.dk -name=Particion1
+fdisk -type=E -size=200 -path=/home/user/Disco1.dk -name=Particion2
+fdisk -size=300 -unit=B -path=/home/user/Disco1.dk -name=Particion3 -type=L
+fdisk -size=500 -unit=B -path=/home/user/Disco1.dk -name=Particion4 -type=L
+fdisk -size=300 -path=/home/user/Disco1.dk -name=Particion5
+# DISCO 2
+fdisk -size=300 -path=/home/user/Disco2.dk -name=Particion1
+fdisk -type=E -size=200 -path=/home/user/Disco2.dk -name=Particion2
+fdisk -size=300 -unit=B -path=/home/user/Disco2.dk -name=Particion3 -type=L
+fdisk -size=500 -unit=B -path=/home/user/Disco2.dk -name=Particion4 -type=L
+fdisk -size=300 -path=/home/user/Disco2.dk -name=Particion5
+# DISCO 3
+fdisk -size=300 -path="/home/mis discos/Disco3.dk" -name=Particion1 -unit=k
+fdisk -size=300 -path="/home/mis discos/Disco3.dk" -name=Particion2 -unit=B
+fdisk -size=300 -path="/home/mis discos/Disco3.dk" -name=Particion3
+# PRUEBA DELETE
+fdisk -name=Particion1 -delete=full -path="/home/mis discos/Disco3.dk"
+# PRUEBA ADD
+FDISK -add=5 -unit=B -path="/home/mis discos/Disco3.dk" -name=Particion3
+# PRUEBA MOUNT
+mount -path=/home/user/Disco1.dk -name=Particion1
+mount -path=/home/user/Disco2.dk -name=Particion5
+mount -path="/home/mis discos/Disco3.dk" -name=Particion2
+# REPORTE MBR
+rep -id=820a -path=/home/carlos/reportes/reporte1.png -name=mbr
+# REPORTE DISK
+rep -id=820b -path=/home/carlos/reportes/reporte2.png -name=DISK
+# PRUEBA PAUSE
+pause
+# PRUEBA UNMOUNT
+#unmount -id=820a
+# PRUEBA MKFS
+mkfs -type=fast -id=820a -fs=2fs
+mkfs -type=full -id=820b -fs=3fs
+pause
+# PRUEBA LOGIN
+login -usuario=root -password=123 -id=820a
+# PRUEBA MKGRP
+mkgrp -name=grupo1
+mkgrp -name=grupo2
+mkgrp -name=grupo3
+# PRUEBA RMGRP
+rmgrp -name=grupo3
+# PRUEBA MKUSR
+mkusr -usuario=user1 -pwd=us1 -grp=grupo1
+mkusr -usuario=user2 -pwd=us2 -grp=grupo2
+# PRUEBA RMUSR
+rmusr -usuario=user2
+pause
+# PRUEBA LOGOUT
+logout
+login -usuario=user1 -password=us1 -id=820a
+pause

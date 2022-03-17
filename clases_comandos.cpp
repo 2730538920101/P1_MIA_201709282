@@ -655,7 +655,6 @@ void C_rep::Ejecutar(){
         case MBR:
         {
             cout<<"REPORTE MBR... "<<endl;
-            ReadDisk(this->path);
             ReporteMasterBootRecord(disk->path, this->path);
         }break;
         case DISK:

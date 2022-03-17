@@ -2210,7 +2210,7 @@ yyreduce:
 
   case 83:
 #line 458 "sintactico.y"
-                                 {
+                                 {        
                             (yyval.fit) = BF;
                         }
 #line 2217 "sintactico.cpp"
@@ -2449,3 +2449,5 @@ yyreturn:
 #endif
   return yyresult;
 }
+#line 463 "sintactico.y"
+

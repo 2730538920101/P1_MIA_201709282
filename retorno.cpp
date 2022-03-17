@@ -42,7 +42,8 @@ string getNameFromPath(char *path, int *position){
         nom.erase(0, pos + delimitador.length());
     }
     //marcar el final del string para ubicar el nombre
-    int posf = nom.find(".");
+    int posf = -1;
+    posf = nom.find(".");
     if(posf > 0){
         //obtener el tamano completo del nombre
         int sizecomp = strlen(nom.c_str());

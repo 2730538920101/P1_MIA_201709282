@@ -455,7 +455,9 @@ ajustes:                TOK_FIRST{
                         |TOK_WORST{
                             $$ = WF;
                         }
-                        |TOK_BEST{
+                        |TOK_BEST{        
                             $$ = BF;
                         }
 ;
+
+%%
