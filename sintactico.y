@@ -12,8 +12,11 @@ extern int yylineno;
 extern int columna;
 extern char *yytext;
 
-void yyerror(const char* msj){    
-    std::cout<<"ERROR SINTACTICO EN: "<<msj<<" "<<yytext<< std::endl;
+int yyerror(const char* msj){
+    if(strcmp(yytext," ") == 1){    
+    	std::cout<<"ERROR SINTACTICO EN: "<<msj<<" "<<yytext<< std::endl;
+    }
+    return 0;
 }
 
 %}

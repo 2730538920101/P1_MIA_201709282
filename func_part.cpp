@@ -68,7 +68,6 @@ Respuesta genPrimaria(long tam, Tipofit fit, char name[], MasterBootRecord *disc
     int inicio;
     //UBICAR LA DIRECCION DE INICIO DE ESCRITURA PARA LA PARTICION
     Respuesta res = getDireccionInicio(disco, (Tipofit)disco->disk_fit, tam, &inicio);
-    cout<<inicio<<endl;
     if(res != CORRECTO){
         return res;
     }

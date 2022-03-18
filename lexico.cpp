@@ -1294,12 +1294,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 148 "lexico.l"
+#line 149 "lexico.l"
 {std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 150 "lexico.l"
+#line 151 "lexico.l"
 ECHO;
 	YY_BREAK
 #line 1306 "lexico.cpp"
@@ -2307,6 +2307,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 150 "lexico.l"
+#line 151 "lexico.l"
+
 
 

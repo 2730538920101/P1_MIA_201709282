@@ -145,6 +145,8 @@ igual           [=]
 {nombre}                {columna = columna + strlen(yylval.entrada); strcpy(yylval.entrada, yytext); return TOK_NOMBRE;}
 "\n"			 { }
 [[:blank:]]		 { }
+
 .                       {std::cout<<yytext<<"ERROR LEXICO"<< std::endl;}
 
 %%
+
