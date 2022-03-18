@@ -318,6 +318,7 @@ param:                  TOK_PATH TOK_IGUAL TOK_RUTA_R{
                         }
                         |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
                             $$ = new Parametro(ID);
+                            $3[3] = tolower($3[3]);
                             strcpy($$->text, $3);
                         }
                         |TOK_TYPE TOK_IGUAL capacidades{

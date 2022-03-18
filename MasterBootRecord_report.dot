@@ -6,8 +6,8 @@ shape=plaintext
 <tr><td colspan="3">DISCO DURO</td></tr>
 <th><td>NOMBRE</td><td>VALOR</td></th>
 <tr><td bgcolor="lightblue">mbr_tamaño</td><td bgcolor="lightblue">3072000</td></tr>
-<tr><td bgcolor="lightblue">mbr_Fecha_creación</td><td bgcolor="lightblue">17/03/22 22:55</td></tr>
-<tr><td bgcolor="lightblue">mbr_disk_signature</td><td bgcolor="lightblue">347</td></tr>
+<tr><td bgcolor="lightblue">mbr_Fecha_creación</td><td bgcolor="lightblue">18/03/22 16:20</td></tr>
+<tr><td bgcolor="lightblue">mbr_disk_signature</td><td bgcolor="lightblue">181</td></tr>
 <tr><td bgcolor="lightblue">mbr_disk_fit</td><td bgcolor="lightblue">F</td></tr>
 <tr><td colspan="2" bgcolor="#bcf7c1">Particion1</td></tr>
 <tr><td bgcolor="#bcf7c1">part_status</td><td bgcolor="#bcf7c1">1</td></tr>

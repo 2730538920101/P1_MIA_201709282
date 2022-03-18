@@ -618,11 +618,11 @@ static const yytype_int16 yyrline[] =
      185,   188,   191,   194,   197,   200,   203,   206,   209,   212,
      215,   218,   221,   224,   227,   230,   233,   236,   239,   242,
      245,   248,   251,   254,   257,   262,   270,   275,   279,   283,
-     287,   292,   297,   301,   305,   310,   315,   319,   323,   327,
-     331,   335,   339,   343,   347,   351,   355,   359,   363,   367,
-     371,   375,   379,   383,   387,   391,   395,   399,   403,   407,
-     411,   417,   420,   423,   428,   431,   434,   439,   442,   447,
-     450,   455,   458,   461
+     287,   292,   297,   301,   305,   310,   315,   319,   324,   328,
+     332,   336,   340,   344,   348,   352,   356,   360,   364,   368,
+     372,   376,   380,   384,   388,   392,   396,   400,   404,   408,
+     412,   418,   421,   424,   429,   432,   435,   440,   443,   448,
+     451,   456,   459,   462
 };
 #endif
 
@@ -1903,324 +1903,325 @@ yyreduce:
 #line 319 "sintactico.y"
                                                            {
                             (yyval.PARAM) = new Parametro(ID);
+                            (yyvsp[0].entrada)[3] = tolower((yyvsp[0].entrada)[3]);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1909 "sintactico.cpp"
+#line 1910 "sintactico.cpp"
     break;
 
   case 48:
-#line 323 "sintactico.y"
+#line 324 "sintactico.y"
                                                        {
                             (yyval.PARAM) = new Parametro(FORMATO);
                             (yyval.PARAM)->capacidad = (yyvsp[0].capacidad);
                         }
-#line 1918 "sintactico.cpp"
+#line 1919 "sintactico.cpp"
     break;
 
   case 49:
-#line 327 "sintactico.y"
+#line 328 "sintactico.y"
                                                   {
                             (yyval.PARAM) = new Parametro(FS);
                             (yyval.PARAM)->sistema = FS_EXT_ERROR;
                         }
-#line 1927 "sintactico.cpp"
+#line 1928 "sintactico.cpp"
     break;
 
   case 50:
-#line 331 "sintactico.y"
+#line 332 "sintactico.y"
                                                          {
                             (yyval.PARAM) = new Parametro(USUARIO);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1936 "sintactico.cpp"
+#line 1937 "sintactico.cpp"
     break;
 
   case 51:
-#line 335 "sintactico.y"
+#line 336 "sintactico.y"
                                                          {
                             (yyval.PARAM) = new Parametro(USUARIO);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 1945 "sintactico.cpp"
+#line 1946 "sintactico.cpp"
     break;
 
   case 52:
-#line 339 "sintactico.y"
+#line 340 "sintactico.y"
                                                           {
                             (yyval.PARAM) = new Parametro(PASSWORD);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1954 "sintactico.cpp"
+#line 1955 "sintactico.cpp"
     break;
 
   case 53:
-#line 343 "sintactico.y"
+#line 344 "sintactico.y"
                                                           {
                             (yyval.PARAM) = new Parametro(PASSWORD);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1963 "sintactico.cpp"
+#line 1964 "sintactico.cpp"
     break;
 
   case 54:
-#line 347 "sintactico.y"
+#line 348 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(PWD);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1972 "sintactico.cpp"
+#line 1973 "sintactico.cpp"
     break;
 
   case 55:
-#line 351 "sintactico.y"
+#line 352 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(PWD);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1981 "sintactico.cpp"
+#line 1982 "sintactico.cpp"
     break;
 
   case 56:
-#line 355 "sintactico.y"
+#line 356 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(GRP);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 1990 "sintactico.cpp"
+#line 1991 "sintactico.cpp"
     break;
 
   case 57:
-#line 359 "sintactico.y"
+#line 360 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(GRP);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 1999 "sintactico.cpp"
+#line 2000 "sintactico.cpp"
     break;
 
   case 58:
-#line 363 "sintactico.y"
+#line 364 "sintactico.y"
                                                      {
                             (yyval.PARAM) = new Parametro(UGO);
                             (yyval.PARAM)->num = getNumero((yyvsp[0].entrada));
                         }
-#line 2008 "sintactico.cpp"
+#line 2009 "sintactico.cpp"
     break;
 
   case 59:
-#line 367 "sintactico.y"
+#line 368 "sintactico.y"
                               {
                             (yyval.PARAM) = new Parametro(R);
                             (yyval.PARAM)->r_flag = true;
                         }
-#line 2017 "sintactico.cpp"
+#line 2018 "sintactico.cpp"
     break;
 
   case 60:
-#line 371 "sintactico.y"
+#line 372 "sintactico.y"
                               {
                             (yyval.PARAM) = new Parametro(PP);
                             (yyval.PARAM)->p_flag = true;
                         }
-#line 2026 "sintactico.cpp"
+#line 2027 "sintactico.cpp"
     break;
 
   case 61:
-#line 375 "sintactico.y"
+#line 376 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(CONT);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2035 "sintactico.cpp"
+#line 2036 "sintactico.cpp"
     break;
 
   case 62:
-#line 379 "sintactico.y"
+#line 380 "sintactico.y"
                                                            {
                             (yyval.PARAM) = new Parametro(CONTENIDO);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2044 "sintactico.cpp"
+#line 2045 "sintactico.cpp"
     break;
 
   case 63:
-#line 383 "sintactico.y"
+#line 384 "sintactico.y"
                                                            {
                             (yyval.PARAM) = new Parametro(CONTENIDO);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 2053 "sintactico.cpp"
+#line 2054 "sintactico.cpp"
     break;
 
   case 64:
-#line 387 "sintactico.y"
+#line 388 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(CONT);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 2062 "sintactico.cpp"
+#line 2063 "sintactico.cpp"
     break;
 
   case 65:
-#line 391 "sintactico.y"
+#line 392 "sintactico.y"
                                                          {
                             (yyval.PARAM) = new Parametro(DESTINO);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2071 "sintactico.cpp"
+#line 2072 "sintactico.cpp"
     break;
 
   case 66:
-#line 395 "sintactico.y"
+#line 396 "sintactico.y"
                                                          {
                             (yyval.PARAM) = new Parametro(DESTINO);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 2080 "sintactico.cpp"
+#line 2081 "sintactico.cpp"
     break;
 
   case 67:
-#line 399 "sintactico.y"
+#line 400 "sintactico.y"
                                                        {
                             (yyval.PARAM) = new Parametro(FILEN);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2089 "sintactico.cpp"
+#line 2090 "sintactico.cpp"
     break;
 
   case 68:
-#line 403 "sintactico.y"
+#line 404 "sintactico.y"
                                                        {
                             (yyval.PARAM) = new Parametro(FILEN);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 2098 "sintactico.cpp"
+#line 2099 "sintactico.cpp"
     break;
 
   case 69:
-#line 407 "sintactico.y"
+#line 408 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(RUTA);
                             strcpy((yyval.PARAM)->text, getCadenaSinComillas((yyvsp[0].entrada)).c_str());
                         }
-#line 2107 "sintactico.cpp"
+#line 2108 "sintactico.cpp"
     break;
 
   case 70:
-#line 411 "sintactico.y"
+#line 412 "sintactico.y"
                                                       {
                             (yyval.PARAM) = new Parametro(RUTA);
                             strcpy((yyval.PARAM)->text, (yyvsp[0].entrada));
                         }
-#line 2116 "sintactico.cpp"
+#line 2117 "sintactico.cpp"
     break;
 
   case 71:
-#line 417 "sintactico.y"
+#line 418 "sintactico.y"
                               {
                             (yyval.unit) = K;
                         }
-#line 2124 "sintactico.cpp"
+#line 2125 "sintactico.cpp"
     break;
 
   case 72:
-#line 420 "sintactico.y"
+#line 421 "sintactico.y"
                                {
                             (yyval.unit) = M;
                         }
-#line 2132 "sintactico.cpp"
+#line 2133 "sintactico.cpp"
     break;
 
   case 73:
-#line 423 "sintactico.y"
+#line 424 "sintactico.y"
                                   {
                             (yyval.unit) = B;
                         }
-#line 2140 "sintactico.cpp"
+#line 2141 "sintactico.cpp"
     break;
 
   case 74:
-#line 428 "sintactico.y"
+#line 429 "sintactico.y"
                                     {
                             (yyval.tipo) = P;
                         }
-#line 2148 "sintactico.cpp"
+#line 2149 "sintactico.cpp"
     break;
 
   case 75:
-#line 431 "sintactico.y"
+#line 432 "sintactico.y"
                                       {
                             (yyval.tipo) = E;
                         }
-#line 2156 "sintactico.cpp"
+#line 2157 "sintactico.cpp"
     break;
 
   case 76:
-#line 434 "sintactico.y"
+#line 435 "sintactico.y"
                                    {
                             (yyval.tipo) = L;
                         }
-#line 2164 "sintactico.cpp"
+#line 2165 "sintactico.cpp"
     break;
 
   case 77:
-#line 439 "sintactico.y"
+#line 440 "sintactico.y"
                                 {
                             (yyval.capacidad) = FAST;
                         }
-#line 2172 "sintactico.cpp"
+#line 2173 "sintactico.cpp"
     break;
 
   case 78:
-#line 442 "sintactico.y"
+#line 443 "sintactico.y"
                                  {
                             (yyval.capacidad) = FULL;
                         }
-#line 2180 "sintactico.cpp"
+#line 2181 "sintactico.cpp"
     break;
 
   case 79:
-#line 447 "sintactico.y"
+#line 448 "sintactico.y"
                                 {
                             (yyval.sistema) = EXT2;
                         }
-#line 2188 "sintactico.cpp"
+#line 2189 "sintactico.cpp"
     break;
 
   case 80:
-#line 450 "sintactico.y"
+#line 451 "sintactico.y"
                                  {
                             (yyval.sistema) = EXT3;
                         }
-#line 2196 "sintactico.cpp"
+#line 2197 "sintactico.cpp"
     break;
 
   case 81:
-#line 455 "sintactico.y"
+#line 456 "sintactico.y"
                                  {
                             (yyval.fit) = FF;
                         }
-#line 2204 "sintactico.cpp"
+#line 2205 "sintactico.cpp"
     break;
 
   case 82:
-#line 458 "sintactico.y"
+#line 459 "sintactico.y"
                                   {
                             (yyval.fit) = WF;
                         }
-#line 2212 "sintactico.cpp"
+#line 2213 "sintactico.cpp"
     break;
 
   case 83:
-#line 461 "sintactico.y"
+#line 462 "sintactico.y"
                                  {        
                             (yyval.fit) = BF;
                         }
-#line 2220 "sintactico.cpp"
+#line 2221 "sintactico.cpp"
     break;
 
 
-#line 2224 "sintactico.cpp"
+#line 2225 "sintactico.cpp"
 
       default: break;
     }
@@ -2452,5 +2453,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 466 "sintactico.y"
+#line 467 "sintactico.y"
 
